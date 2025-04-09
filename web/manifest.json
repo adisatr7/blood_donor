@@ -1,6 +1,6 @@
 {
-    "name": "blood_donor_form",
-    "short_name": "blood_donor_form",
+    "name": "blood_donor",
+    "short_name": "blood_donor",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
