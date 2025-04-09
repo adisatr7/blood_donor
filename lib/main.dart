@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:blood_donor/core/app_routes.dart';
+import 'package:blood_donor/views/login_view.dart';
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  // Initialize the app and routing
+  runApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+      getPages: [
+        GetPage(
+          name: AppRoutes.login,
+          page: () => LoginView(),
         ),
-      ),
-    );
-  }
+      ],
+      initialRoute: AppRoutes.login,
+    ),
+  );
 }
