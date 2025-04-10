@@ -25,7 +25,6 @@ class TextInput extends StatelessWidget {
       children: [
         // Label for the text field
         Text(label, style: AppTextStyles.body),
-        const SizedBox(height: 8),
 
         // Textbox container
         Container(
