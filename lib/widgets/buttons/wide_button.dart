@@ -35,6 +35,7 @@ class WideButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
+            elevation: 2,
           ),
           child:
               isLoading.value
