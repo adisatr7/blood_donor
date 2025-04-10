@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:blood_donor/core/theme.dart';
 
@@ -7,6 +8,7 @@ class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final bool isPassword;
   final String? placeholder;
+  final bool isNumeric;
 
   const TextInput({
     super.key,
@@ -14,6 +16,7 @@ class TextInput extends StatelessWidget {
     required this.controller,
     this.isPassword = false,
     this.placeholder,
+    this.isNumeric = false,
   });
 
   @override
@@ -42,6 +45,10 @@ class TextInput extends StatelessWidget {
                 obscureText: obscureText.value,
                 style: AppTextStyles.body,
                 textAlignVertical: isPassword ? TextAlignVertical.center : null,
+                keyboardType:
+                    isNumeric ? TextInputType.number : TextInputType.text,
+                inputFormatters:
+                    isNumeric ? [FilteringTextInputFormatter.digitsOnly] : null,
                 decoration: InputDecoration(
                   fillColor: AppColors.secondary,
                   border: InputBorder.none,
