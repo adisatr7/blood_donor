@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppColors {
   static const Color primary = Color(0xFFFF7272);
@@ -50,4 +51,24 @@ class AppStyles {
     offset: Offset(0, 2),
     blurRadius: 3,
   );
+}
+
+class AppViewTransition extends CustomTransition {
+  @override
+  Widget buildTransition(
+    BuildContext context,
+    Curve? curve,
+    Alignment? alignment,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(1, 0), // Slide from right
+        end: Offset.zero,
+      ).animate(CurvedAnimation(parent: animation, curve: Curves.easeIn)),
+      child: child,
+    );
+  }
 }
