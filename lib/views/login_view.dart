@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blood_donor/controllers/login_controller.dart';
 import 'package:blood_donor/core/theme.dart';
-import 'package:blood_donor/widgets/text_input.dart';
-import 'package:blood_donor/widgets/wide_button.dart';
+import 'package:blood_donor/widgets/inputs/text_input.dart';
+import 'package:blood_donor/widgets/buttons/wide_button.dart';
 
 class LoginView extends StatelessWidget {
   final LoginController controller = Get.put(LoginController());
