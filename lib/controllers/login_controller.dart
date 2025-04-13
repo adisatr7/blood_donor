@@ -26,7 +26,7 @@ class LoginController extends GetxController {
     await simulateWait();
 
     // Fetch user from the database
-    User? user = await _userService.getUserByNikAndPassword(nik, password);
+    User? user = await _userService.getByNikAndPassword(nik, password);
     isLoading.value = false;
 
     // If user not found, show error message
