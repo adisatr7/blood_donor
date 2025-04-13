@@ -4,8 +4,8 @@ class User {
   final int id;
   final String nik;
   final String name;
-  final String email;
   final String password;
+  final String birthPlace;
   final DateTime birthDate;
   final String gender;
   final String job;
@@ -25,8 +25,8 @@ class User {
     this.id = 0,
     required this.nik,
     required this.name,
-    required this.email,
     required this.password,
+    required this.birthPlace,
     required this.birthDate,
     this.gender = '',
     this.job = '',
@@ -45,10 +45,6 @@ class User {
       throw ArgumentError('Invalid NIK format');
     }
 
-    if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
-      throw ArgumentError('Invalid email format');
-    }
-
     if (birthDate.isAfter(DateTime.now())) {
       throw ArgumentError('Birth date cannot be in the future');
     }
@@ -59,8 +55,8 @@ class User {
       id: map['id'] as int,
       nik: map['nik'] as String,
       name: map['name'] as String,
-      email: map['email'] as String,
       password: map['password'] as String,
+      birthPlace: map['birthPlace'] as String,
       birthDate: map['birthDate'] as DateTime,
       gender: map['gender'] as String,
       job: map['job'] as String,
@@ -82,8 +78,8 @@ class User {
       'id': id,
       'nik': nik,
       'name': name,
-      'email': email,
       'password': password,
+      'birthPlace': birthPlace,
       'birthDate': birthDate,
       'gender': gender,
       'job': job,

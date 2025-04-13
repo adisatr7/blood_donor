@@ -12,13 +12,13 @@ class UserService {
     return await db.insert('users', user.toMap());
   }
 
-  /// Get a user by email and password.
-  Future<User?> getUserByNikAndPassword(String email, String password) async {
+  /// Get a user by NIK and password.
+  Future<User?> getUserByNikAndPassword(String nik, String password) async {
     final db = await DatabaseHelper.instance.database;
     final maps = await db.query(
       'users',
-      where: 'email = ? AND password = ?',
-      whereArgs: [email, password],
+      where: 'nik = ? AND password = ?',
+      whereArgs: [nik, password],
     );
 
     if (maps.isNotEmpty) {
@@ -35,9 +35,17 @@ class UserService {
 
     if (maps.isNotEmpty) {
       return User.fromMap(maps.first);
-    } else {
-      return null;
     }
+
+    return null;
+  }
+
+  /// Check if a user exists by NIK.
+  Future<bool> isUserExist(String nik) async {
+    final db = await DatabaseHelper.instance.database;
+    final maps = await db.query('users', where: 'nik = ?', whereArgs: [nik]);
+
+    return maps.isNotEmpty;
   }
 
   /// Update a user in the database.

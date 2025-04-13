@@ -40,8 +40,8 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nik TEXT NOT NULL,
         name TEXT NOT NULL,
-        email TEXT NOT NULL,
         password TEXT NOT NULL,
+        birthPlace TEXT NOT NULL,
         birthDate TEXT NOT NULL,
         gender TEXT,
         job TEXT,
@@ -125,6 +125,21 @@ class DatabaseHelper {
       'start_time': '09:00',
       'end_time': '18:00',
     });
+  }
+
+  /// Clear the database by deleting the database file
+  Future<void> clearDatabase() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, 'app.db');
+
+    // Close the database if it's open
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
+
+    // Delete the database file
+    await deleteDatabase(path);
   }
 
   /// Close the database connection

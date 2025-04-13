@@ -32,6 +32,18 @@ class AppTextStyles {
     color: AppColors.black,
   );
 
+  static const TextStyle bodyBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppColors.black,
+  );
+
+  static const TextStyle bodyBoldPrimary = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primary,
+  );
+
   static const TextStyle bodyWhite = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
