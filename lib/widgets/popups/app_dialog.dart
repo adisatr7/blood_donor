@@ -47,9 +47,7 @@ void showAppDialog({
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 child: Text(
                   confirmText,
-                  style: AppTextStyles.bodyBold.copyWith(
-                    color: AppColors.primary,
-                  ),
+                  style: AppTextStyles.bodyBoldPrimary,
                 ),
               ),
             ),
