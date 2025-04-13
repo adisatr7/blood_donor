@@ -13,7 +13,7 @@ class UserService {
   }
 
   /// Get a user by NIK and password.
-  Future<User?> getUserByNikAndPassword(String nik, String password) async {
+  Future<User?> getByNikAndPassword(String nik, String password) async {
     final db = await DatabaseHelper.instance.database;
     final maps = await db.query(
       'users',
@@ -29,7 +29,7 @@ class UserService {
   }
 
   /// Get a user by ID.
-  Future<User?> getUserById(int id) async {
+  Future<User?> getById(int id) async {
     final db = await DatabaseHelper.instance.database;
     final maps = await db.query('users', where: 'id = ?', whereArgs: [id]);
 
@@ -41,7 +41,7 @@ class UserService {
   }
 
   /// Check if a user exists by NIK.
-  Future<bool> isUserExist(String nik) async {
+  Future<bool> isExist(String nik) async {
     final db = await DatabaseHelper.instance.database;
     final maps = await db.query('users', where: 'nik = ?', whereArgs: [nik]);
 
@@ -49,7 +49,7 @@ class UserService {
   }
 
   /// Update a user in the database.
-  Future<int> updateUser(User user) async {
+  Future<int> update(User user) async {
     final db = await DatabaseHelper.instance.database;
     return await db.update(
       'users',
@@ -60,7 +60,7 @@ class UserService {
   }
 
   /// Delete a user from the database.
-  Future<int> deleteUser(int id) async {
+  Future<int> delete(int id) async {
     final db = await DatabaseHelper.instance.database;
     return await db.delete('users', where: 'id = ?', whereArgs: [id]);
   }
