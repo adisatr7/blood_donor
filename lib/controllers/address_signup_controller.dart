@@ -25,7 +25,7 @@ class AddressSignUpController extends GetxController {
   final TextEditingController villageController = TextEditingController();
   final TextEditingController districtController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
-  final TextEditingController provinceController = TextEditingController();
+  final RxString province = ''.obs;
 
   final isLoading = false.obs;
 
@@ -69,7 +69,7 @@ class AddressSignUpController extends GetxController {
       village: village,
       district: district,
       city: city,
-      province: province,
+      province: province.value,
     );
 
     int response = await _userService.insertUser(updatedUser);
