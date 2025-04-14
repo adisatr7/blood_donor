@@ -6,6 +6,8 @@ import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/views/login_view.dart';
 import 'package:blood_donor/views/signup_view.dart';
+import 'package:blood_donor/views/address_signup_view.dart';
+import 'package:blood_donor/views/home_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,8 @@ void main() {
       getPages: [
         GetPage(name: AppRoutes.login, page: () => LoginView()),
         GetPage(name: AppRoutes.signUp, page: () => SignUpView()),
+        GetPage(name: AppRoutes.addressSignUp, page: () => AddressSignUpView()),
+        GetPage(name: AppRoutes.home, page: () => const HomeView()),
       ],
       initialRoute: AppRoutes.login,
     ),
