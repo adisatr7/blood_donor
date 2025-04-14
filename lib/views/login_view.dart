@@ -47,6 +47,7 @@ class LoginView extends StatelessWidget {
               },
               isLoading: controller.isLoading,
             ),
+            const SizedBox(height: 12),
 
             // Signup prompt
             Text.rich(
