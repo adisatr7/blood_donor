@@ -1,4 +1,4 @@
-import 'package:blood_donor/enums/province.dart';
+import 'package:blood_donor/constants/province.dart';
 
 class User {
   final int id;
@@ -19,7 +19,7 @@ class User {
   final String village;
   final String district;
   final String city;
-  final Province? province;
+  final String province;
 
   User({
     this.id = 0,
@@ -39,7 +39,7 @@ class User {
     this.village = '',
     this.district = '',
     this.city = '',
-    this.province,
+    this.province = '',
   }) {
     if (!RegExp(r'^[0-9]{16}$').hasMatch(nik)) {
       throw ArgumentError('Invalid NIK format');
@@ -48,9 +48,44 @@ class User {
     if (birthDate.isAfter(DateTime.now())) {
       throw ArgumentError('Birth date cannot be in the future');
     }
+
+    if (weightKg < 0) {
+      throw ArgumentError('Weight cannot be negative');
+    }
+
+    if (heightCm < 0) {
+      throw ArgumentError('Height cannot be negative');
+    }
+
+    if (!Province.isValid(province)) {
+      throw ArgumentError('Invalid province name');
+    }
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
+    if (map['id'] == null) {
+      throw ArgumentError('ID cannot be null');
+    }
+    if (map['nik'] == null) {
+      throw ArgumentError('NIK cannot be null');
+    }
+    if (map['name'] == null) {
+      throw ArgumentError('Name cannot be null');
+    }
+    if (map['password'] == null) {
+      throw ArgumentError('Password cannot be null');
+    }
+    if (map['birthPlace'] == null) {
+      throw ArgumentError('Birth place cannot be null');
+    }
+    if (map['birthDate'] == null) {
+      throw ArgumentError('Birth date cannot be null');
+    }
+
+    if (!Province.isValid(map['province'])) {
+      throw ArgumentError('Invalid province name');
+    }
+
     return User(
       id: map['id'] as int,
       nik: map['nik'] as String,
@@ -69,7 +104,7 @@ class User {
       village: map['village'] as String,
       district: map['district'] as String,
       city: map['city'] as String,
-      province: map['province'] as Province,
+      province: map['province'] as String,
     );
   }
 
