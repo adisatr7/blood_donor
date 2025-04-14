@@ -1,9 +1,10 @@
-import 'package:blood_donor/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:blood_donor/services/user_service.dart';
 import 'package:blood_donor/models/user.dart';
 import 'package:blood_donor/utils/simulate_wait.dart';
+import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
 class AddressSignUpController extends GetxController {
@@ -14,14 +15,14 @@ class AddressSignUpController extends GetxController {
   void onInit() {
     super.onInit();
 
-    userId = int.parse(Get.parameters['userId']!);
+    userId = int.parse(Get.parameters['userId'] ?? '0');
   }
 
   final UserService _userService = UserService.instance;
 
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController noRtController = TextEditingController();
-  final TextEditingController noRwController = TextEditingController();
+  final TextEditingController rtController = TextEditingController();
+  final TextEditingController rwController = TextEditingController();
   final TextEditingController villageController = TextEditingController();
   final TextEditingController districtController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -32,12 +33,11 @@ class AddressSignUpController extends GetxController {
   /// Save the address data to the database
   Future<void> submit() async {
     String address = addressController.text.trim();
-    String noRtString = noRtController.text.trim(); // Needs to convert to int
-    String noRwString = noRwController.text.trim(); // Needs to convert to int
+    String noRtString = rtController.text.trim(); // Needs to convert to int
+    String noRwString = rwController.text.trim(); // Needs to convert to int
     String village = villageController.text.trim();
     String district = districtController.text.trim();
     String city = cityController.text.trim();
-    String province = provinceController.text.trim();
 
     // Simulate API call delay
     isLoading.value = true;
