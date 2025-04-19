@@ -22,7 +22,7 @@ class EditProfileView extends StatelessWidget {
       backButtonLabel: 'Batal',
       // Footer: Sign Up Button
       footer: WideButton(
-        label: 'Daftar',
+        label: 'Simpan',
         onPressed: controller.submit,
         isLoading: controller.isLoading,
       ),
