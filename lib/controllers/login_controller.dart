@@ -14,7 +14,6 @@ class LoginController extends GetxController {
 
   final TextEditingController nikController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final RxBool obscureText = true.obs;
   final isLoading = false.obs;
 
   /// Login method to authenticate the user
