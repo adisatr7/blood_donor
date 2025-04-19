@@ -1,10 +1,11 @@
-import 'package:blood_donor/widgets/inputs/select_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blood_donor/controllers/signup_controller.dart';
 import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
+import 'package:blood_donor/widgets/inputs/photo_picker.dart';
 import 'package:blood_donor/widgets/inputs/text_input.dart';
 import 'package:blood_donor/widgets/inputs/date_input.dart';
+import 'package:blood_donor/widgets/inputs/select_input.dart';
 import 'package:blood_donor/widgets/buttons/wide_button.dart';
 
 class SignUpView extends StatelessWidget {
@@ -26,6 +27,9 @@ class SignUpView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Photo Picker
+          PhotoPicker(selectedImage: controller.selectedImage),
+
           // TextInput: NIK
           TextInput(
             label: 'NIK',

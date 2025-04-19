@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +10,7 @@ import 'package:blood_donor/core/app_routes.dart';
 class SignUpController extends GetxController {
   final UserService _userService = UserService.instance;
 
+  final Rx<File?> selectedImage = Rx<File?>(null);
   final TextEditingController nikController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
