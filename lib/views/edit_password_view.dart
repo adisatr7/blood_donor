@@ -29,7 +29,7 @@ class EditPasswordView extends StatelessWidget {
           // TextInput: Password
           TextInput(
             label: 'Kata Sandi Lama',
-            placeholder: 'Masukkan minimal 8 digit...',
+            placeholder: 'Masukkan kata sandi lama...',
             isPassword: true,
             controller: controller.oldPasswordController,
           ),
