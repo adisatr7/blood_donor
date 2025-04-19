@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:blood_donor/controllers/signup_controller.dart';
+import 'package:blood_donor/controllers/edit_profile_controller.dart';
 import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/widgets/inputs/photo_picker.dart';
 import 'package:blood_donor/widgets/inputs/text_input.dart';
@@ -9,10 +9,10 @@ import 'package:blood_donor/widgets/inputs/date_input.dart';
 import 'package:blood_donor/widgets/inputs/select_input.dart';
 import 'package:blood_donor/widgets/buttons/wide_button.dart';
 
-class SignUpView extends StatelessWidget {
-  final SignUpController controller = Get.put(SignUpController());
+class EditProfileView extends StatelessWidget {
+  EditProfileView({super.key});
 
-  SignUpView({super.key});
+  final EditProfileController controller = Get.put(EditProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SignUpView extends StatelessWidget {
       // Footer: Sign Up Button
       footer: WideButton(
         label: 'Daftar',
-        onPressed: controller.signUp,
+        onPressed: controller.submit,
         isLoading: controller.isLoading,
       ),
       child: Column(
@@ -44,24 +44,6 @@ class SignUpView extends StatelessWidget {
             label: 'Nama Lengkap',
             placeholder: 'Masukkan nama sesuai KTP...',
             controller: controller.nameController,
-          ),
-          const SizedBox(height: 16),
-
-          // TextInput: Password
-          TextInput(
-            label: 'Kata Sandi',
-            placeholder: 'Masukkan minimal 8 digit...',
-            isPassword: true,
-            controller: controller.passwordController,
-          ),
-          const SizedBox(height: 16),
-
-          // TextInput: Confirm Password
-          TextInput(
-            label: 'Ulangi Kata Sandi',
-            placeholder: 'Masukkankan ulang kata sandi...',
-            isPassword: true,
-            controller: controller.confirmPasswordController,
           ),
           const SizedBox(height: 16),
 

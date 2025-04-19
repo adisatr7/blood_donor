@@ -8,6 +8,8 @@ import 'package:blood_donor/views/login_view.dart';
 import 'package:blood_donor/views/signup_view.dart';
 import 'package:blood_donor/views/address_signup_view.dart';
 import 'package:blood_donor/views/home_view.dart';
+import 'package:blood_donor/views/settings_view.dart';
+import 'package:blood_donor/views/edit_profile_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,7 @@ void main() {
         GetPage(name: AppRoutes.addressSignUp, page: () => AddressSignUpView()),
         GetPage(name: AppRoutes.home, page: () => HomeView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
+        GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
       ],
       initialRoute: AppRoutes.login,
     ),
