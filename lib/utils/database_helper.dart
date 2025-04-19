@@ -23,13 +23,23 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, fileName);
 
-    return await openDatabase(path, version: 1, onCreate: _onCreate);
+    return await openDatabase(path, version: 2, onCreate: _onCreate, onUpgrade: _onUpgrade);
   }
 
   /// Handle database creation
   Future _onCreate(Database db, int version) async {
     await _createTables(db);
     await _insertDummyData(db);
+  }
+
+  /// Handle database upgrades
+  Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Add the `profilePicture` column to the `users` table
+      await db.execute('''
+        ALTER TABLE users ADD COLUMN profilePicture TEXT
+      ''');
+    }
   }
 
   /// Create the database tables
@@ -41,6 +51,7 @@ class DatabaseHelper {
         nik TEXT NOT NULL,
         name TEXT NOT NULL,
         password TEXT NOT NULL,
+        profilePicture TEXT,
         birthPlace TEXT NOT NULL,
         birthDate TEXT NOT NULL,
         gender TEXT,
