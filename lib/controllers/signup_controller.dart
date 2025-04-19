@@ -14,10 +14,7 @@ class SignUpController extends GetxController {
   final TextEditingController nikController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final RxBool obscurePassword = true.obs;
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-  final RxBool obscureConfirmPassword = true.obs;
+  final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController birthPlaceController = TextEditingController();
   final Rx<DateTime> birthDate = Rx<DateTime>(DateTime.now());
   final TextEditingController jobController = TextEditingController();
