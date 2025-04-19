@@ -17,7 +17,7 @@ class EditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Pendaftaran Akun',
+      title: 'Perbarui Data Diri',
       showBackButton: true,
       backButtonLabel: 'Batal',
       // Footer: Sign Up Button

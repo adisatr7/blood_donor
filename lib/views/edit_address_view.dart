@@ -16,7 +16,7 @@ class EditAddressView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Alamat Domisili',
+      title: 'Perbarui Alamat',
       showBackButton: true,
       backButtonLabel: 'Batal',
       // Footer: Buttons
