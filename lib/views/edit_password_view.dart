@@ -14,7 +14,7 @@ class EditPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Pendaftaran Akun',
+      title: 'Ubah Kata Sandi',
       showBackButton: true,
       backButtonLabel: 'Batal',
       // Footer: Sign Up Button
