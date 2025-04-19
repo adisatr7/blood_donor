@@ -5,6 +5,7 @@ class User {
   final String nik;
   final String name;
   final String password;
+  final String profilePicture;
   final String birthPlace;
   final DateTime birthDate;
   final String gender;
@@ -28,6 +29,7 @@ class User {
     required this.password,
     required this.birthPlace,
     required this.birthDate,
+    this.profilePicture = '',
     this.gender = '',
     this.job = '',
     this.weightKg = 0,
