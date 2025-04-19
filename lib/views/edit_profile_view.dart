@@ -19,6 +19,7 @@ class EditProfileView extends StatelessWidget {
     return AppScaffold(
       title: 'Pendaftaran Akun',
       showBackButton: true,
+      backButtonLabel: 'Batal',
       // Footer: Sign Up Button
       footer: WideButton(
         label: 'Daftar',
