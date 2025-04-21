@@ -28,7 +28,6 @@ class LoginView extends StatelessWidget {
               placeholder: 'Masukkan NIK...',
               controller: controller.nikController,
             ),
-            const SizedBox(height: 16),
 
             // TextInput: Password
             TextInput(
@@ -37,7 +36,7 @@ class LoginView extends StatelessWidget {
               isPassword: true,
               controller: controller.passwordController,
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 18),
 
             // Button: Login
             WideButton(

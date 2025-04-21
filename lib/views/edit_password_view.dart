@@ -33,7 +33,6 @@ class EditPasswordView extends StatelessWidget {
             isPassword: true,
             controller: controller.oldPasswordController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Password
           TextInput(
@@ -42,7 +41,6 @@ class EditPasswordView extends StatelessWidget {
             isPassword: true,
             controller: controller.newPasswordController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Confirm Password
           TextInput(
@@ -51,7 +49,6 @@ class EditPasswordView extends StatelessWidget {
             isPassword: true,
             controller: controller.confirmPasswordController,
           ),
-          const SizedBox(height: 16),
         ],
       ),
     );

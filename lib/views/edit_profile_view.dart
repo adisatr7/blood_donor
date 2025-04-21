@@ -38,7 +38,6 @@ class EditProfileView extends StatelessWidget {
             placeholder: 'Masukkan NIK...',
             controller: controller.nikController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Full Name
           TextInput(
@@ -46,7 +45,6 @@ class EditProfileView extends StatelessWidget {
             placeholder: 'Masukkan nama sesuai KTP...',
             controller: controller.nameController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -70,7 +68,6 @@ class EditProfileView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
 
           // SelectInput: Gender
           SelectInput(
@@ -85,7 +82,6 @@ class EditProfileView extends StatelessWidget {
             placeholder: 'Masukkan pekerjaan Anda...',
             controller: controller.jobController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -111,7 +107,6 @@ class EditProfileView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
 
           // SelectInput: Blood Type
           SelectInput(
