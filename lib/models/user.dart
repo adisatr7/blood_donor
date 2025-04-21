@@ -132,4 +132,32 @@ class User {
       'province': province,
     };
   }
+
+  /// Merges blood type and rhesus into a single string. (e.g., 'A' and 'Positif' becomes 'A+')
+  static String mergeBloodType(String bloodType, String rhesus) {
+    if (bloodType.isEmpty || (rhesus != 'Positif' && rhesus != 'Negatif')) {
+      throw ArgumentError('Invalid blood type or rhesus value');
+    }
+
+    String rhesusSymbol = (rhesus == 'Positif') ? '+' : '-';
+    return '$bloodType$rhesusSymbol';
+  }
+
+  /// Splits merged blood type into blood type and rhesus. (e.g., 'A+' becomes ['A', 'Positif'])
+  static List<String> splitBloodType(String mergedBloodType) {
+    if (mergedBloodType.length < 2) {
+      throw ArgumentError('Invalid merged blood type format');
+    }
+
+    String bloodType = mergedBloodType.substring(0, mergedBloodType.length - 1);
+    String rhesusSymbol = mergedBloodType.substring(mergedBloodType.length - 1);
+
+    if (!['A', 'B', 'AB', 'O'].contains(bloodType) ||
+        !['+', '-'].contains(rhesusSymbol)) {
+      throw ArgumentError('Invalid merged blood type format');
+    }
+
+    String rhesus = (rhesusSymbol == '+') ? 'Positif' : 'Negatif';
+    return [bloodType, rhesus];
+  }
 }
