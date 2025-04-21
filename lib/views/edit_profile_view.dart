@@ -119,6 +119,13 @@ class EditProfileView extends StatelessWidget {
             options: ['A', 'B', 'AB', 'O'],
             selectedValue: controller.bloodType,
           ),
+
+          // SelectInput: Rhesus
+          SelectInput(
+            label: 'Rhesus',
+            options: ['Positif', 'Negatif'],
+            selectedValue: controller.rhesus,
+          ),
         ],
       ),
     );

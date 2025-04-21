@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:blood_donor/services/user_service.dart';
+import 'package:blood_donor/models/user.dart';
 import 'package:blood_donor/utils/simulate_wait.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
@@ -20,6 +21,7 @@ class SignUpController extends GetxController {
   final TextEditingController jobController = TextEditingController();
   final RxString gender = ''.obs;
   final RxString bloodType = ''.obs;
+  final RxString rhesus = ''.obs;
   final TextEditingController weightKgController = TextEditingController();
   final TextEditingController heightCmController = TextEditingController();
 
@@ -36,6 +38,8 @@ class SignUpController extends GetxController {
 
     String weightKg = weightKgController.text.trim();
     String heightCm = heightCmController.text.trim();
+
+    String bloodTypeMerged = User.mergeBloodType(bloodType.value, rhesus.value);
 
     // Simulate API call delay
     isLoading.value = true;
