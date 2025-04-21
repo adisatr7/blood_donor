@@ -39,7 +39,6 @@ class EditAddressView extends StatelessWidget {
             placeholder: 'Jalan Sesame 123...',
             controller: controller.addressController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -65,7 +64,6 @@ class EditAddressView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Village
           TextInput(
@@ -73,7 +71,6 @@ class EditAddressView extends StatelessWidget {
             placeholder: 'Masukkan nama kelurahan/desa...',
             controller: controller.villageController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: District
           TextInput(
@@ -81,7 +78,6 @@ class EditAddressView extends StatelessWidget {
             placeholder: 'Masukkan nama kecamatan...',
             controller: controller.districtController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: City
           TextInput(
@@ -89,7 +85,6 @@ class EditAddressView extends StatelessWidget {
             placeholder: 'Masukkan nama kabupaten/kota...',
             controller: controller.cityController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Province
           Dropdown(

@@ -37,7 +37,6 @@ class SignUpView extends StatelessWidget {
             placeholder: 'Masukkan NIK...',
             controller: controller.nikController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Full Name
           TextInput(
@@ -45,7 +44,6 @@ class SignUpView extends StatelessWidget {
             placeholder: 'Masukkan nama sesuai KTP...',
             controller: controller.nameController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Password
           TextInput(
@@ -54,7 +52,6 @@ class SignUpView extends StatelessWidget {
             isPassword: true,
             controller: controller.passwordController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Confirm Password
           TextInput(
@@ -63,7 +60,6 @@ class SignUpView extends StatelessWidget {
             isPassword: true,
             controller: controller.confirmPasswordController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -87,7 +83,6 @@ class SignUpView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
 
           // SelectInput: Gender
           SelectInput(
@@ -102,7 +97,6 @@ class SignUpView extends StatelessWidget {
             placeholder: 'Masukkan pekerjaan Anda...',
             controller: controller.jobController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -128,7 +122,7 @@ class SignUpView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          
 
           // SelectInput: Blood Type
           SelectInput(

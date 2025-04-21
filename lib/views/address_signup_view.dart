@@ -27,6 +27,7 @@ class AddressSignUpView extends StatelessWidget {
             onPressed: controller.submit,
             isLoading: controller.isLoading,
           ),
+          const SizedBox(height: 6),
 
           // Button: Skip
           WideButton(
@@ -46,7 +47,6 @@ class AddressSignUpView extends StatelessWidget {
             placeholder: 'Jalan Sesame 123...',
             controller: controller.addressController,
           ),
-          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -72,7 +72,6 @@ class AddressSignUpView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Village
           TextInput(
@@ -80,7 +79,6 @@ class AddressSignUpView extends StatelessWidget {
             placeholder: 'Masukkan nama kelurahan/desa...',
             controller: controller.villageController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: District
           TextInput(
@@ -88,7 +86,6 @@ class AddressSignUpView extends StatelessWidget {
             placeholder: 'Masukkan nama kecamatan...',
             controller: controller.districtController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: City
           TextInput(
@@ -96,7 +93,6 @@ class AddressSignUpView extends StatelessWidget {
             placeholder: 'Masukkan nama kabupaten/kota...',
             controller: controller.cityController,
           ),
-          const SizedBox(height: 16),
 
           // TextInput: Province
           Dropdown(

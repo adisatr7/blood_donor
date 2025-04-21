@@ -31,27 +31,25 @@ class SelectInput extends StatelessWidget {
             children: [
               for (int i = 0; i < options.length; i++) ...[
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: WideButton(
-                      label: options[i],
-                      type:
-                          selectedValue.value == options[i]
-                              ? ButtonType.primary
-                              : ButtonType.secondary,
-                      onPressed: () {
-                        selectedValue.value = options[i];
-                        if (onChanged != null) {
-                          onChanged!(options[i]);
-                        }
-                      },
-                    ),
+                  child: WideButton(
+                    label: options[i],
+                    type:
+                        selectedValue.value == options[i]
+                            ? ButtonType.primary
+                            : ButtonType.secondary,
+                    onPressed: () {
+                      selectedValue.value = options[i];
+                      if (onChanged != null) {
+                        onChanged!(options[i]);
+                      }
+                    },
                   ),
                 ),
                 if (i != options.length - 1) const SizedBox(width: 16),
               ],
             ],
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
