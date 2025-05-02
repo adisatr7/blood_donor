@@ -7,6 +7,7 @@ class SelectInput extends StatelessWidget {
   final String label;
   final List<String> options;
   final RxString selectedValue;
+  final bool allowDeselect;
   final void Function(String)? onChanged;
 
   const SelectInput({
@@ -14,6 +15,7 @@ class SelectInput extends StatelessWidget {
     required this.label,
     required this.options,
     required this.selectedValue,
+    this.allowDeselect = false,
     this.onChanged,
   });
 
@@ -38,9 +40,16 @@ class SelectInput extends StatelessWidget {
                             ? ButtonType.primary
                             : ButtonType.secondary,
                     onPressed: () {
-                      selectedValue.value = options[i];
+                      // Toggle selection based on allowDeselect
+                      if (selectedValue.value == options[i] && allowDeselect) {
+                        selectedValue.value = '';
+                      } else {
+                        selectedValue.value = options[i];
+                      }
+
+                      // Trigger onChanged callback if provided
                       if (onChanged != null) {
-                        onChanged!(options[i]);
+                        onChanged!(selectedValue.value);
                       }
                     },
                   ),
