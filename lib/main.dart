@@ -12,6 +12,7 @@ import 'package:blood_donor/views/settings_view.dart';
 import 'package:blood_donor/views/edit_profile_view.dart';
 import 'package:blood_donor/views/edit_address_view.dart';
 import 'package:blood_donor/views/edit_password_view.dart';
+import 'package:blood_donor/views/questionare_form_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,7 @@ void main() {
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),
         GetPage(name: AppRoutes.editPassword, page: () => EditPasswordView()),
+        GetPage(name: AppRoutes.questionareForm,page: () => QuestionnaireFormView()),
       ],
       initialRoute: AppRoutes.login,
     ),
