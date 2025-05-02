@@ -9,6 +9,7 @@ class WideButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final ButtonType type;
   final RxBool isLoading;
+  final RxBool isDisabled;
 
   WideButton({
     super.key,
@@ -16,7 +17,9 @@ class WideButton extends StatelessWidget {
     this.onPressed,
     this.type = ButtonType.primary,
     RxBool? isLoading,
-  }) : isLoading = isLoading ?? false.obs;
+    RxBool? isDisabled,
+  })  : isLoading = isLoading ?? false.obs,
+        isDisabled = isDisabled ?? false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +31,10 @@ class WideButton extends StatelessWidget {
       width: double.infinity, // To stretch the button across the screen
       child: Obx(
         () => ElevatedButton(
-          onPressed: isLoading.value ? null : onPressed,
+          onPressed: (isLoading.value || isDisabled.value) ? null : onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: bgColor,
-            disabledBackgroundColor: bgColor,
+            disabledBackgroundColor: isDisabled.value ? AppColors.gray : bgColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
