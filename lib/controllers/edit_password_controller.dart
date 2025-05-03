@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'package:blood_donor/services/user_service.dart';
 import 'package:blood_donor/core/theme.dart';
-import 'package:blood_donor/utils/simulate_wait.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
 class EditPasswordController extends GetxController {
@@ -51,7 +50,6 @@ class EditPasswordController extends GetxController {
 
     // Simulate API call delay
     isLoading.value = true;
-    await simulateWait();
 
     // TODO: Actually implement edit password function!
 

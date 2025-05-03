@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'package:blood_donor/services/user_service.dart';
 import 'package:blood_donor/models/user.dart';
-import 'package:blood_donor/utils/simulate_wait.dart';
 import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
@@ -46,7 +45,6 @@ class EditAddressController extends GetxController {
 
     // Simulate API call delay
     isLoading.value = true;
-    await simulateWait();
 
     // TODO: Implement the actual update function in UserService
 

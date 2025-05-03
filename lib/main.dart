@@ -1,3 +1,4 @@
+import 'package:blood_donor/views/debug_screen_selector_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,7 @@ void main() {
       customTransition: AppViewTransition(),
       transitionDuration: const Duration(milliseconds: 300),
       getPages: [
+        GetPage(name: AppRoutes.debug,page: () => const DebugScreenSelectorView()),
         GetPage(name: AppRoutes.login, page: () => LoginView()),
         GetPage(name: AppRoutes.signUp, page: () => SignUpView()),
         GetPage(name: AppRoutes.addressSignUp, page: () => AddressSignUpView()),
@@ -37,7 +39,7 @@ void main() {
         GetPage(name: AppRoutes.editPassword, page: () => EditPasswordView()),
         GetPage(name: AppRoutes.questionareForm,page: () => QuestionnaireFormView()),
       ],
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.debug,
     ),
   );
 }

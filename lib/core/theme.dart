@@ -21,7 +21,7 @@ class AppTextStyles {
   );
 
   static const TextStyle subheading = TextStyle(
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
   );

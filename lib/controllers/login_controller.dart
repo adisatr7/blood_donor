@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import 'package:blood_donor/services/user_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
-import 'package:blood_donor/utils/simulate_wait.dart';
 import 'package:blood_donor/models/user.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
@@ -23,7 +22,6 @@ class LoginController extends GetxController {
 
     // Simulate API call delay
     isLoading.value = true;
-    await simulateWait();
 
     // Fetch user from the database
     User? user = await _userService.getByNikAndPassword(nik, password);

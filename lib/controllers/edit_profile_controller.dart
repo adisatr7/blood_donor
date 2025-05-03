@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import 'package:blood_donor/services/user_service.dart';
 import 'package:blood_donor/models/user.dart';
-import 'package:blood_donor/utils/simulate_wait.dart';
 
 class EditProfileController extends GetxController {
   // Retrieve the user ID from the URL parameters via `onInit` method
@@ -54,7 +53,6 @@ class EditProfileController extends GetxController {
 
     // Simulate API call delay
     isLoading.value = true;
-    await simulateWait();
 
     // TODO: Actually implement update profile function!
 
