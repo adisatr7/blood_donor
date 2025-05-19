@@ -1,7 +1,7 @@
 name: blood_donor
-description: "A new Flutter project."
+description: "An app to help volunteers find blood donors in their area."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: ^3.7.2
