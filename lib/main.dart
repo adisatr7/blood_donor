@@ -16,12 +16,11 @@ import 'package:blood_donor/views/edit_password_view.dart';
 import 'package:blood_donor/views/questionare_form_view.dart';
 
 void main() async {
-  // Load environment variables from .env file
-  await dotenv.load(fileName: '.env');
-
   // Ensure that the Flutter engine is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Load environment variables from .env file
+  await dotenv.load(fileName: '.env');
   // Register global controllers
   Get.put(GlobalController(), permanent: true);
 
