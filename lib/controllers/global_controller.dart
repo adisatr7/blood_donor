@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:blood_donor/models/user.dart';
+import 'package:blood_donor/models/db/user.dart';
 
 class GlobalController extends GetxController {
   final Rxn<User> _currentUser = Rxn<User>();

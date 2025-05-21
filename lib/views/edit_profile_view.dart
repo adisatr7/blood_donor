@@ -30,7 +30,7 @@ class EditProfileView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Photo Picker
-          PhotoPicker(selectedImage: controller.selectedImage),
+          PhotoPicker(selectedPhoto: controller.selectedImage),
 
           // TextInput: NIK
           TextInput(

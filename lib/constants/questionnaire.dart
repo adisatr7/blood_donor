@@ -1,4 +1,4 @@
-import 'package:blood_donor/models/questionnaire.dart';
+import 'package:blood_donor/models/db/questionnaire.dart';
 
 List<Questionnaire> questionnaires = [
   Questionnaire(

@@ -1,5 +1,5 @@
-import 'package:blood_donor/models/user.dart';
-import 'package:blood_donor/models/location.dart';
+import 'package:blood_donor/models/db/user.dart';
+import 'package:blood_donor/models/db/location.dart';
 import 'package:blood_donor/constants/appointment_status.dart';
 
 class Appointment {
