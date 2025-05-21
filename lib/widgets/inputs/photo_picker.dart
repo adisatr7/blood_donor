@@ -8,13 +8,13 @@ import 'package:blood_donor/core/theme.dart';
 
 class PhotoPicker extends StatelessWidget {
   final String label;
-  final Rx<File?> selectedImage;
+  final Rx<File?> selectedPhoto;
   final double size;
 
   const PhotoPicker({
     super.key,
     this.label = 'Tekan untuk mengunggah',
-    required this.selectedImage,
+    required this.selectedPhoto,
     this.size = 92.0,
   });
 
@@ -26,7 +26,7 @@ class PhotoPicker extends StatelessWidget {
     );
 
     if (pickedFile != null) {
-      selectedImage.value = File(pickedFile.path);
+      selectedPhoto.value = File(pickedFile.path);
     }
   }
 
@@ -48,15 +48,15 @@ class PhotoPicker extends StatelessWidget {
                 borderRadius: BorderRadius.circular(1000),
                 boxShadow: [AppStyles.cardShadow],
                 image:
-                    selectedImage.value != null
+                    selectedPhoto.value != null
                         ? DecorationImage(
-                          image: FileImage(selectedImage.value!),
+                          image: FileImage(selectedPhoto.value!),
                           fit: BoxFit.cover,
                         )
                         : null,
               ),
               child:
-                  selectedImage.value == null
+                  selectedPhoto.value == null
                       ? Center(
                         child: Icon(
                           Icons.person_rounded,
