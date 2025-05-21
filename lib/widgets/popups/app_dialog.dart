@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+
 import 'package:blood_donor/core/theme.dart';
 
 void showAppDialog({
@@ -45,15 +47,24 @@ void showAppDialog({
               child: Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                child: Text(
-                  confirmText,
-                  style: AppTextStyles.bodyBoldPrimary,
-                ),
+                child: Text(confirmText, style: AppTextStyles.bodyBoldPrimary),
               ),
             ),
           ],
         ),
       ),
     ),
+  );
+}
+
+/// Method untuk menampilkan dialog error
+void showAppError(String title, DioException e) {
+  showAppDialog(
+    title: title,
+    message:
+        // Tampilkan pesan error dari response
+        e.response?.data['error'] ??
+        // Jika tidak ada, tampilkan error class
+        e.toString(),
   );
 }
