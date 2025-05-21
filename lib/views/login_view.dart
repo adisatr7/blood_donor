@@ -22,14 +22,14 @@ class LoginView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // TextInput: NIK
+            // ⬇️ Kolom input NIK
             TextInput(
               label: 'NIK',
               placeholder: 'Masukkan NIK...',
               controller: controller.nikController,
             ),
 
-            // TextInput: Password
+            // ⬇️ Kolom input Password
             TextInput(
               label: 'Kata Sandi',
               placeholder: 'Masukkan kata sandi...',
@@ -38,36 +38,31 @@ class LoginView extends StatelessWidget {
             ),
             const SizedBox(height: 18),
 
-            // Button: Login
+            // ⬇️ Tombol Login
             WideButton(
               label: 'Masuk',
-              onPressed: () {
-                controller.login();
-              },
+              onPressed: controller.handleLogin,
               isLoading: controller.isLoading,
             ),
             const SizedBox(height: 12),
 
-            // Signup prompt
+            // ⬇️ Komponen berisi text-text di bawah tombol Login
             Text.rich(
               TextSpan(
-                text: 'Belum punya akun? ',
+                text: 'Belum punya akun? ', // 💬 Text biasa
                 style: AppTextStyles.body,
                 children: [
                   TextSpan(
-                    text: 'Daftar Sekarang',
-                    style: AppTextStyles.bodyBold,
+                    text: 'Daftar Sekarang', // 💬 Text yang bisa diklik
+                    style: AppTextStyles.bodyBoldPrimary,
+                    // 🔗 Apa yang terjadi saat diklik
                     recognizer:
-                        TapGestureRecognizer()
-                          ..onTap = () {
-                            controller.goToSignUpPage();
-                          },
+                        TapGestureRecognizer()..onTap = controller.handleSignup,
                   ),
                   TextSpan(text: '!', style: AppTextStyles.body),
                 ],
               ),
-              textAlign: TextAlign.center,
-              style: AppTextStyles.body.copyWith(color: AppColors.primary),
+              textAlign: TextAlign.center, // 🖊️ Agar text di tengah
             ),
           ],
         ),
