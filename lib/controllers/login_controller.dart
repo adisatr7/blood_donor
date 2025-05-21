@@ -26,7 +26,7 @@ class LoginController extends GetxController {
     // Cek apakah inputan NIK dan password terlalu pendek
     // - NIK: minimal 16 karakter
     // - Password: minimal 8 karakter
-    bool isInputTooShort = nikController.text.length < 16 && passwordController.text.length < 8;
+    bool isInputTooShort = nikController.text.length < 16 || passwordController.text.length < 8;
 
     // Jika ada salah satu saja yang `true`, maka tombol Login akan dimatikan
     return (isInputEmpty || isInputTooShort).obs;
