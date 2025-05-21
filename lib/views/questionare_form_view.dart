@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:blood_donor/controllers/questionare_form_controller.dart';
-import 'package:blood_donor/models/questionnaire.dart';
+import 'package:blood_donor/models/db/questionnaire.dart';
 import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/widgets/inputs/select_input.dart';

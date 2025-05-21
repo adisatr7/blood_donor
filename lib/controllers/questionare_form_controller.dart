@@ -1,5 +1,5 @@
 import 'package:blood_donor/constants/questionnaire.dart';
-import 'package:blood_donor/models/questionnaire.dart';
+import 'package:blood_donor/models/db/questionnaire.dart';
 import 'package:get/get.dart';
 
 class QuestionnaireFormController extends GetxController {

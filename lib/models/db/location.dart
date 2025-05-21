@@ -1,4 +1,4 @@
-import 'package:blood_donor/models/time_range.dart';
+import 'package:blood_donor/models/types/time_range.dart';
 
 class Location {
   final int id;
