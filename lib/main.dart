@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,11 @@ import 'package:blood_donor/views/edit_address_view.dart';
 import 'package:blood_donor/views/edit_password_view.dart';
 import 'package:blood_donor/views/questionare_form_view.dart';
 
-void main() {
+void main() async {
+  // Load environment variables from .env file
+  await dotenv.load(fileName: '.env');
+
+  // Ensure that the Flutter engine is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
   // Register global controllers
