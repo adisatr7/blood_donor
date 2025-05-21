@@ -165,7 +165,7 @@ class User {
   /// enumerasi yang digunakan di MySQL.
   /// - 'Laki-laki' = 'MALE'
   /// - 'Perempuan' = 'FEMALE'
-  static String genderStringToEnum(genderString) {
+  static String genderStringToEnum(String genderString) {
     switch (genderString) {
       case 'Laki-laki':
         return 'MALE';
