@@ -49,6 +49,7 @@ class ApiClient {
       Get.offAllNamed(AppRoutes.login);
       // Jangan lanjutkan request
       handler.reject(error);
+      return;
     }
     // Jika error disebabkan karena hal lain, lanjutkan request agar
     // error handling diurus oleh controller
