@@ -20,7 +20,7 @@ class LoginController extends GetxController {
 
   /// Method untuk mengecek apakah kolom inputan sudah valid. Untuk dipasangkan
   /// ke prop `onChanged` pada kolom inputan yang wajib diisi
-  void validateInput(String value) {
+  void validateInput(String _) {
     // Cek apakah inputan NIK dan password kosong
     bool isEmpty = nikController.text.isEmpty || passwordController.text.isEmpty;
 
