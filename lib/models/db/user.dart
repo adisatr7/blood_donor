@@ -140,12 +140,14 @@ class User {
     };
   }
 
-  FormData toFormData() {
+  Future<FormData> toFormData() async {
     return FormData.fromMap({
       'nik': nik,
       'name': name,
       'password': password,
-      'profilePicture': profilePicture,
+      'profilePicture': (profilePicture != null && profilePicture!.path.isNotEmpty)
+          ? await MultipartFile.fromFile(profilePicture!.path)
+          : null,
       'birthPlace': birthPlace,
       'birthDate': birthDate.toIso8601String(),
       'gender': gender,

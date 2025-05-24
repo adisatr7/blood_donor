@@ -7,7 +7,7 @@ class SignupRequest {
 
   SignupRequest({required this.user});
 
-  FormData toFormData() {
-    return user.toFormData();
+  Future<FormData> toFormData() async {
+    return await user.toFormData();
   }
 }
