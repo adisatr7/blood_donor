@@ -27,6 +27,7 @@ class LoginView extends StatelessWidget {
               label: 'NIK',
               placeholder: 'Masukkan NIK...',
               controller: controller.nikController,
+              onChanged: controller.validateInput,
             ),
 
             // ⬇️ Kolom input Password
@@ -35,6 +36,7 @@ class LoginView extends StatelessWidget {
               placeholder: 'Masukkan kata sandi...',
               isPassword: true,
               controller: controller.passwordController,
+              onChanged: controller.validateInput,
             ),
             const SizedBox(height: 18),
 
@@ -43,6 +45,7 @@ class LoginView extends StatelessWidget {
               label: 'Masuk',
               onPressed: controller.handleLogin,
               isLoading: controller.isLoading,
+              isDisabled: controller.isLoginDisabled,
             ),
             const SizedBox(height: 12),
 
