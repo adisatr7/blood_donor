@@ -9,6 +9,7 @@ class TextInput extends StatelessWidget {
   final bool isPassword;
   final String? placeholder;
   final bool isNumeric;
+  final ValueChanged<String>? onChanged;
 
   const TextInput({
     super.key,
@@ -17,6 +18,7 @@ class TextInput extends StatelessWidget {
     this.isPassword = false,
     this.placeholder,
     this.isNumeric = false,
+    this.onChanged,
   });
 
   @override
@@ -49,6 +51,7 @@ class TextInput extends StatelessWidget {
                     isNumeric ? TextInputType.number : TextInputType.text,
                 inputFormatters:
                     isNumeric ? [FilteringTextInputFormatter.digitsOnly] : null,
+                onChanged: onChanged,
                 decoration: InputDecoration(
                   fillColor: AppColors.secondary,
                   border: InputBorder.none,
