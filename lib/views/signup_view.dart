@@ -9,10 +9,10 @@ import 'package:blood_donor/widgets/inputs/date_input.dart';
 import 'package:blood_donor/widgets/inputs/select_input.dart';
 import 'package:blood_donor/widgets/buttons/wide_button.dart';
 
-class SignUpView extends StatelessWidget {
-  final SignUpController controller = Get.put(SignUpController());
+class SignupView extends StatelessWidget {
+  final SignupController controller = Get.put(SignupController());
 
-  SignUpView({super.key});
+  SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +22,23 @@ class SignUpView extends StatelessWidget {
       // Footer: Sign Up Button
       footer: WideButton(
         label: 'Daftar',
-        onPressed: controller.signUp,
+        onPressed: controller.handleSignup,
         isLoading: controller.isLoading,
+        isDisabled: controller.isSubmitDisabled,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Photo Picker
-          PhotoPicker(selectedImage: controller.selectedImage),
+          PhotoPicker(selectedPhoto: controller.selectedPhoto),
 
           // TextInput: NIK
           TextInput(
             label: 'NIK',
             placeholder: 'Masukkan NIK...',
+            isNumeric: true,
             controller: controller.nikController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Full Name
@@ -43,6 +46,7 @@ class SignUpView extends StatelessWidget {
             label: 'Nama Lengkap',
             placeholder: 'Masukkan nama sesuai KTP...',
             controller: controller.nameController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Password
@@ -51,6 +55,7 @@ class SignUpView extends StatelessWidget {
             placeholder: 'Masukkan minimal 8 digit...',
             isPassword: true,
             controller: controller.passwordController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Confirm Password
@@ -59,6 +64,7 @@ class SignUpView extends StatelessWidget {
             placeholder: 'Masukkankan ulang kata sandi...',
             isPassword: true,
             controller: controller.confirmPasswordController,
+            onChanged: controller.validateInput,
           ),
 
           Row(
@@ -78,7 +84,7 @@ class SignUpView extends StatelessWidget {
                 child: DateInput(
                   label: 'Tanggal Lahir',
                   placeholder: 'DD/MM/YYYY',
-                  selectedDate: controller.birthDate,
+                  selectedDate: controller.birthDateController,
                 ),
               ),
             ],
@@ -122,7 +128,6 @@ class SignUpView extends StatelessWidget {
               ),
             ],
           ),
-          
 
           // SelectInput: Blood Type
           SelectInput(
@@ -136,6 +141,7 @@ class SignUpView extends StatelessWidget {
             label: 'Rhesus',
             options: ['Positif', 'Negatif'],
             selectedValue: controller.rhesus,
+            allowDeselect: true,
           ),
         ],
       ),

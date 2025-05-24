@@ -26,6 +26,7 @@ class LoginView extends StatelessWidget {
             TextInput(
               label: 'NIK',
               placeholder: 'Masukkan NIK...',
+              isNumeric: true,
               controller: controller.nikController,
               onChanged: controller.validateInput,
             ),
