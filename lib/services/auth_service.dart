@@ -32,10 +32,9 @@ class AuthService {
   /// Daftar akun baru ke server dengan data pengguna.
   Future<SignupResponse> signup(SignupRequest request) async {
     // Kirim request ke server
-    // TODO: Tambahkan handler untuk upload foto profil
     final response = await _apiClient.post(
       '/auth/signup',
-      data: request.toJson(),
+      data: request.toFormData(),
     );
 
     // Handle error jika request gagal

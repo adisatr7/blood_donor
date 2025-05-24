@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
+
 import 'package:blood_donor/constants/province.dart';
 
 class User {
@@ -5,7 +8,7 @@ class User {
   final String nik;
   final String name;
   final String password;
-  final String profilePicture;
+  final File? profilePicture;
   final String birthPlace;
   final DateTime birthDate;
   final String gender; // 'Laki-laki' atau 'Perempuan'
@@ -30,7 +33,7 @@ class User {
     required this.password,
     required this.birthPlace,
     required this.birthDate,
-    this.profilePicture = '',
+    this.profilePicture,
     this.gender = '',
     this.job = '',
     this.weightKg = 0,
@@ -61,7 +64,7 @@ class User {
       throw ArgumentError('Height cannot be negative');
     }
 
-    if (!Province.isValid(province)) {
+    if (province.isNotEmpty && !Province.isValid(province)) {
       throw ArgumentError('Invalid province name');
     }
   }
@@ -120,7 +123,7 @@ class User {
       'name': name,
       'password': password,
       'birthPlace': birthPlace,
-      'birthDate': birthDate,
+      'birthDate': birthDate.toIso8601String(),
       'gender': gender,
       'job': job,
       'weightKg': weightKg,
@@ -137,8 +140,8 @@ class User {
     };
   }
 
-  Map<String, dynamic> toSignupJson() {
-    return {
+  FormData toFormData() {
+    return FormData.fromMap({
       'nik': nik,
       'name': name,
       'password': password,
@@ -158,7 +161,7 @@ class User {
       'district': district,
       'city': city,
       'province': province,
-    };
+    });
   }
 
   /// Method static untuk konversi gender string (Laki-laki/Perempuan) ke
