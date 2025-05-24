@@ -109,7 +109,10 @@ class SignupController extends GetxController {
       // Periksa apakah pendaftaran berhasil
       if (!signupRes.success) {
         // Jika gagal, tampilkan pesan error dan hentikan proses
-        showAppError('Gagal Mendaftarkan Akun', 'Pendaftaran tidak berhasil. Silakan coba lagi.');
+        showAppDialog(
+          title: 'Gagal Mendaftarkan Akun',
+          message: 'Pendaftaran tidak berhasil. Silakan coba lagi.',
+        );
         return;
       }
       // Jika pendaftaran berhasil, lakukan login untuk mendapatkan JWT token
