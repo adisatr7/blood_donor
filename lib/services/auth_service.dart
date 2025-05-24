@@ -34,7 +34,7 @@ class AuthService {
     // Kirim request ke server
     final response = await _apiClient.post(
       '/auth/signup',
-      data: request.toFormData(),
+      data: await request.toFormData(),
     );
 
     // Handle error jika request gagal
