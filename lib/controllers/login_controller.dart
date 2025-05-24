@@ -15,21 +15,22 @@ class LoginController extends GetxController {
 
   final TextEditingController nikController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final isLoading = false.obs;
+  final RxBool isLoginDisabled = true.obs;
+  final RxBool isLoading = false.obs;
 
-  /// Boolean method untuk dipasangkan pasangkan ke prop `isDisabled` pada
-  /// tombol Login untuk mematikan tombol jika inputan NIK dan password tidak valid
-  RxBool isLoginButtonDisabled() {
+  /// Method untuk mengecek apakah kolom inputan sudah valid. Untuk dipasangkan
+  /// ke prop `onChanged` pada kolom inputan yang wajib diisi
+  void validateInput(String value) {
     // Cek apakah inputan NIK dan password kosong
-    bool isInputEmpty = nikController.text.isEmpty || passwordController.text.isEmpty;
+    bool isEmpty = nikController.text.isEmpty || passwordController.text.isEmpty;
 
     // Cek apakah inputan NIK dan password terlalu pendek
     // - NIK: minimal 16 karakter
     // - Password: minimal 8 karakter
-    bool isInputTooShort = nikController.text.length < 16 || passwordController.text.length < 8;
+    bool isTooShort = nikController.text.length < 16 || passwordController.text.length < 8;
 
     // Jika ada salah satu saja yang `true`, maka tombol Login akan dimatikan
-    return (isInputEmpty || isInputTooShort).obs;
+    isLoginDisabled.value = (isEmpty || isTooShort);
   }
 
   /// Method handler untuk dipasangkan ke tombol Login
