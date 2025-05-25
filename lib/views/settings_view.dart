@@ -10,6 +10,26 @@ class SettingsView extends StatelessWidget {
 
   final SettingsController controller = Get.put(SettingsController());
 
+  /// Builder untuk widget button agar tidak perlu atur style berulang-ulang
+  Widget _buildButton({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+    Color iconColor = AppColors.black,
+    TextStyle textStyle = AppTextStyles.body,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: iconColor),
+      title: Text(title, style: textStyle),
+      onTap: onTap,
+    );
+  }
+
+  /// Builder untuk widget divider agar tidak perlu atur style berulang-ulang
+  Widget _buildDivider() {
+    return const Divider(height: 1, thickness: 1, color: AppColors.gray);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -21,38 +41,45 @@ class SettingsView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Button: Edit Profile
-          ListTile(
-            leading: Icon(
-              Icons.manage_accounts_rounded,
-              color: AppColors.black,
-            ),
-            title: Text('Perbarui Data Diri', style: AppTextStyles.body),
+          // Tombol ubah profil
+          _buildButton(
+            icon: Icons.manage_accounts_rounded,
+            title: 'Perbarui Data Diri',
             onTap: controller.goToEditProfile,
           ),
-          const Divider(height: 1, thickness: 1, color: AppColors.gray),
+          _buildDivider(),
 
-          // Button: Edit Address
-          ListTile(
-            leading: Icon(Icons.edit_location_rounded, color: AppColors.black),
-            title: Text('Perbarui Alamat', style: AppTextStyles.body),
+          // Tombol ubah alamat
+          _buildButton(
+            icon: Icons.location_on_rounded,
+            title: 'Perbarui Alamat',
             onTap: controller.goToEditAddress,
           ),
-          const Divider(height: 1, thickness: 1, color: AppColors.gray),
+          _buildDivider(),
 
-          // Button: Edit Password
-          ListTile(
-            leading: Icon(Icons.key_rounded, color: AppColors.black),
-            title: Text('Ubah kata Sandi', style: AppTextStyles.body),
+          // Tombol ubah kata sandi
+          _buildButton(
+            icon: Icons.key_rounded,
+            title: 'Ubah Kata Sandi',
             onTap: controller.goToEditPassword,
           ),
-          const Divider(height: 1, thickness: 1, color: AppColors.gray),
+          _buildDivider(),
+
+          // Tombol tentang PMI
+          _buildButton(
+            icon: Icons.info_outline_rounded,
+            title: 'Tentang PMI',
+            onTap: controller.goToAbout,
+          ),
+          _buildDivider(),
 
           // Button: Logout
-          ListTile(
-            leading: Icon(Icons.logout, color: AppColors.danger),
-            title: Text('Keluar', style: AppTextStyles.bodyDanger),
+          _buildButton(
+            icon: Icons.logout,
+            title: 'Keluar',
             onTap: controller.handleLogout,
+            iconColor: AppColors.danger,
+            textStyle: AppTextStyles.bodyDanger,
           ),
         ],
       ),

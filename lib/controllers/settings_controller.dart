@@ -7,19 +7,24 @@ import 'package:blood_donor/core/theme.dart';
 class SettingsController extends GetxController {
   final AuthService _authService = AuthService.instance;
 
-  /// Go to edit profile
+  /// Method untuk dipasangkan ke tombol ubah profil
   void goToEditProfile() {
     Get.toNamed(AppRoutes.editProfile);
   }
 
-  /// Go to address settings
+  /// Method untuk dipasangkan ke tombol ubah alamat
   void goToEditAddress() {
     Get.toNamed(AppRoutes.editAddress);
   }
 
-  /// Go to change password
+  /// Method untuk dipasangkan ke tombol ubah kata sandi
   void goToEditPassword() {
     Get.toNamed(AppRoutes.editPassword);
+  }
+
+  /// Method untuk dipasangkan ke tombol tentang PMI
+  void goToAbout() {
+    Get.toNamed(AppRoutes.about);
   }
 
   /// Method untuk dipasangkan ke tombol Logout
