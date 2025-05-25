@@ -60,7 +60,7 @@ class AppointmentCard extends StatelessWidget {
                 width: 8,
                 height: double.infinity,
                 decoration: BoxDecoration(
-                  color: _getStatusTextStyle(appointment.status).color,
+                  color: _getStatusTextStyle().color,
                   borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(8),
                   ),
@@ -89,7 +89,7 @@ class AppointmentCard extends StatelessWidget {
                       // Status kunjungan
                       Text(
                         appointment.statusString,
-                        style: _getStatusTextStyle(appointment.status),
+                        style: _getStatusTextStyle(),
                       ),
                     ],
                   ),
