@@ -34,8 +34,8 @@ class Location {
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
       time: TimeRange(
-        start: DateTime.parse(map['start_time'] as String),
-        end: DateTime.parse(map['end_time'] as String),
+        start: DateTime.parse(map['startTime'] as String),
+        end: DateTime.parse(map['endTime'] as String),
       ),
     );
   }
@@ -47,8 +47,8 @@ class Location {
       latitude: json['latitude'] as double,
       longitude: json['longitude'] as double,
       time: TimeRange(
-        start: DateTime.parse(json['start_time'] as String),
-        end: DateTime.parse(json['end_time'] as String),
+        start: DateTime.parse(json['startTime'] as String),
+        end: DateTime.parse(json['endTime'] as String),
       ),
     );
   }
@@ -59,8 +59,8 @@ class Location {
       'name': name,
       'latitude': latitude,
       'longitude': longitude,
-      'start_time': time.startTimeString,
-      'end_time': time.endTimeString,
+      'startTime': time.startTimeString,
+      'endTime': time.endTimeString,
     };
   }
 }

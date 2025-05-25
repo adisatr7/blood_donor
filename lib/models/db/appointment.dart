@@ -4,23 +4,17 @@ import 'package:blood_donor/constants/appointment_status.dart';
 
 class Appointment {
   final int id;
-  final User user;
+  final int userId;
   final Location location;
-  final DateTime time;
   final String status;
 
   Appointment({
     this.id = 0,
-    required this.user,
+    required this.userId,
     required this.location,
-    required this.time,
     required this.status,
   }) {
-    if (time.isBefore(DateTime.now())) {
-      throw ArgumentError('Appointment time cannot be in the past');
-    }
-
-    if (user.id <= 0) {
+    if (userId <= 0) {
       throw ArgumentError('Invalid user ID');
     }
 
@@ -31,12 +25,6 @@ class Appointment {
     if (status.isEmpty) {
       throw ArgumentError('Status cannot be empty');
     }
-
-    if (status != AppointmentStatus.scheduled &&
-        status != AppointmentStatus.attended &&
-        status != AppointmentStatus.missed) {
-      throw ArgumentError('Invalid appointment status');
-    }
   }
 
   factory Appointment.fromMap(Map<String, dynamic> map) {
@@ -44,11 +32,8 @@ class Appointment {
     if (map['id'] == null) {
       throw ArgumentError('ID cannot be null');
     }
-    if (map['user'] == null || map['location'] == null) {
-      throw ArgumentError('User or location cannot be null');
-    }
-    if (map['time'] == null || map['status'] == null) {
-      throw ArgumentError('Time or status cannot be null');
+    if (map['location'] == null) {
+      throw ArgumentError('Location cannot be null');
     }
 
     // Validate status values
@@ -60,19 +45,26 @@ class Appointment {
 
     return Appointment(
       id: map['id'] as int,
-      user: User.fromMap(map['user'] as Map<String, dynamic>),
+      userId: map['userId'] as int,
       location: Location.fromMap(map['location'] as Map<String, dynamic>),
-      time: DateTime.parse(map['time'] as String),
       status: map['status'] as String,
+    );
+  }
+
+  factory Appointment.fromJson(Map<String, dynamic> json) {
+    return Appointment(
+      id: json['id'] as int? ?? 0,
+      userId: json['userId'] as int,
+      location: Location.fromJson(json['Location'] as Map<String, dynamic>),
+      status: json['status'] as String,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'user': user.toMap(),
+      'userId': userId,
       'location': location.toMap(),
-      'time': time.toIso8601String(),
       'status': status,
     };
   }

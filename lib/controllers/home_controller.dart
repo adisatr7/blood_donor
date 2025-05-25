@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
 
-import 'package:blood_donor/models/db/location.dart';
-import 'package:blood_donor/models/types/time_range.dart';
-
-import 'package:blood_donor/services/profile_service.dart';
-import 'package:blood_donor/services/appointment_service.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/models/db/appointment.dart';
+import 'package:blood_donor/services/profile_service.dart';
+import 'package:blood_donor/services/appointment_service.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
 class HomeController extends GetxController {
