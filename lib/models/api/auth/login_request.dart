@@ -4,12 +4,12 @@ class LoginRequest {
 
   LoginRequest({this.nik, this.password});
 
-  LoginRequest.fromJson(Map<String, dynamic> json) {
-    nik = json['nik'];
-    password = json['password'];
+  LoginRequest.fromMap(Map<String, dynamic> map) {
+    nik = map['nik'];
+    password = map['password'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {'nik': nik, 'password': password};
   }
 }

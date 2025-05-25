@@ -4,12 +4,12 @@ class BaseResponse {
 
   BaseResponse({required this.success, this.error});
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) {
+  factory BaseResponse.fromMap(Map<String, dynamic> map) {
     return BaseResponse(
-      success: json['success'] ?? false,
-      error: json['error'],
+      success: map['success'] ?? false,
+      error: map['error'],
     );
   }
 
-  Map<String, dynamic> toJson() => {'success': success, 'error': error};
+  Map<String, dynamic> toMap() => {'success': success, 'error': error};
 }

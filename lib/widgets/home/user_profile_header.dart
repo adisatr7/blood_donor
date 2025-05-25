@@ -24,7 +24,7 @@ class UserProfileHeader extends StatelessWidget {
             radius: 28,
             backgroundColor: Colors.grey[300],
             backgroundImage: NetworkImage(
-              (currentUser.value?.profilePicture?.path?.isNotEmpty ?? false)
+              (currentUser.value?.profilePicture?.path.isNotEmpty ?? false)
                   ? currentUser.value!.profilePicture!.path
                   : 'https://ui-avatars.com/api/?name=User&background=cccccc&color=ffffff',
             ),

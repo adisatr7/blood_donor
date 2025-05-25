@@ -17,7 +17,7 @@ class AuthService {
     // Kirim request ke server
     final response = await _apiClient.post(
       '/auth/login',
-      data: request.toJson(),
+      data: request.toMap(),
     );
 
     // Handle error jika request gagal
@@ -31,7 +31,7 @@ class AuthService {
     _storageClient.write('token', response.data['token']);
 
     // Return data response ke controller
-    return LoginResponse.fromJson(response.data);
+    return LoginResponse.fromMap(response.data);
   }
 
   /// Daftar akun baru ke server dengan data pengguna.
@@ -53,7 +53,7 @@ class AuthService {
     _storageClient.write('token', response.data['token']);
 
     // Return data response ke controller
-    return SignupResponse.fromJson(response.data);
+    return SignupResponse.fromMap(response.data);
   }
 
   /// Logout dari server dengan menghapus token yang tersimpan.

@@ -5,14 +5,14 @@ class LoginResponse extends BaseResponse {
 
   LoginResponse({required super.success, required this.token, super.error});
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-    success: json['success'] as bool,
-    token: json['token'] as String,
-    error: json['error'] as String?,
+  factory LoginResponse.fromMap(Map<String, dynamic> map) => LoginResponse(
+    success: map['success'] as bool,
+    token: map['token'] as String,
+    error: map['error'] as String?,
   );
 
   @override
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
     'token': token,
     'success': success,
     'error': error,
