@@ -23,9 +23,11 @@ class UserProfileHeader extends StatelessWidget {
           CircleAvatar(
             radius: 28,
             backgroundColor: Colors.grey[300],
-            backgroundImage: (currentUser.value?.profilePicture?.path?.isNotEmpty ?? false)
-                ? NetworkImage(currentUser.value!.profilePicture!.path!)
-                : AssetImage('assets/images/placeholder.png') as ImageProvider,
+            backgroundImage: NetworkImage(
+              (currentUser.value?.profilePicture?.path?.isNotEmpty ?? false)
+                  ? currentUser.value!.profilePicture!.path
+                  : 'https://ui-avatars.com/api/?name=User&background=cccccc&color=ffffff',
+            ),
           ),
 
           // Text group berisi nama user dan golongan darah
@@ -41,6 +43,7 @@ class UserProfileHeader extends StatelessWidget {
                     currentUser.value?.name ?? '',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
+
                   // 🩸 Golongan Darah
                   RichText(
                     text: TextSpan(
