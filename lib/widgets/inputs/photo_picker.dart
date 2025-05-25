@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:blood_donor/core/theme.dart';
@@ -9,14 +8,18 @@ import 'package:blood_donor/core/theme.dart';
 class PhotoPicker extends StatelessWidget {
   final String label;
   final Rx<File?> selectedPhoto;
+  final RxString initialPhotoUrl;
   final double size;
+  final void Function(File?)? onChanged; // <-- Added
 
-  const PhotoPicker({
+  PhotoPicker({
     super.key,
     this.label = 'Tekan untuk mengunggah',
     required this.selectedPhoto,
+    RxString? initialPhotoUrl,
     this.size = 92.0,
-  });
+    this.onChanged,
+  }) : initialPhotoUrl = initialPhotoUrl ?? ''.obs;
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -26,7 +29,11 @@ class PhotoPicker extends StatelessWidget {
     );
 
     if (pickedFile != null) {
-      selectedPhoto.value = File(pickedFile.path);
+      final file = File(pickedFile.path);
+      selectedPhoto.value = file;
+      if (onChanged != null) {
+        onChanged!(file);
+      }
     }
   }
 
@@ -38,8 +45,21 @@ class PhotoPicker extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: _pickImage,
-          child: Obx(
-            () => Container(
+          child: Obx(() {
+            DecorationImage? image;
+            if (selectedPhoto.value != null) {
+              image = DecorationImage(
+                image: FileImage(selectedPhoto.value!),
+                fit: BoxFit.cover,
+              );
+            } else if (initialPhotoUrl.value.isNotEmpty) {
+              image = DecorationImage(
+                image: NetworkImage(initialPhotoUrl.value),
+                fit: BoxFit.cover,
+              );
+            }
+
+            return Container(
               width: size,
               height: size,
               decoration: BoxDecoration(
@@ -47,16 +67,10 @@ class PhotoPicker extends StatelessWidget {
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(1000),
                 boxShadow: [AppStyles.cardShadow],
-                image:
-                    selectedPhoto.value != null
-                        ? DecorationImage(
-                          image: FileImage(selectedPhoto.value!),
-                          fit: BoxFit.cover,
-                        )
-                        : null,
+                image: image,
               ),
               child:
-                  selectedPhoto.value == null
+                  (selectedPhoto.value == null && initialPhotoUrl.value.isEmpty)
                       ? Center(
                         child: Icon(
                           Icons.person_rounded,
@@ -65,8 +79,8 @@ class PhotoPicker extends StatelessWidget {
                         ),
                       )
                       : null,
-            ),
-          ),
+            );
+          }),
         ),
         const SizedBox(height: 8),
         Text(label, style: AppTextStyles.bodyGray),

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'dart:io';
 
 import 'package:blood_donor/core/api_client.dart';
 import 'package:blood_donor/models/db/user.dart';
@@ -24,9 +25,9 @@ class ProfileService {
   }
 
   /// Update data profil pengguna di server (bukan foto profil)
-  Future<User> updateProfile(User user) async {
-    // Kirim request PUT ke server dengan data pengguna
-    final response = await _apiClient.put('/profile', data: user.toMap());
+  Future<User> updateProfile(User request) async {
+    // Kirim request PATCH ke server dengan data terbaru sebagai request
+    final response = await _apiClient.patch('/profile', data: request.toMap());
 
     // Handle error jika request gagal
     if (response.data == null || response.data['success'] == false) {
@@ -35,7 +36,34 @@ class ProfileService {
       );
     }
 
-    // Kembalikan data profil yang telah diperbarui
+    // Serahkan profil profil terbaru ke Controller
     return User.fromMap(response.data['data']);
   }
+
+  /// Update foto profil pengguna di server
+  Future<User> updateProfilePicture(File imageFile) async {
+    // Buat FormData untuk mengirim file gambar
+    final request = FormData.fromMap({
+      'profilePicture': await MultipartFile.fromFile(imageFile.path),
+    });
+
+    // Kirim request PATCH ke server dengan FormData
+    final response = await _apiClient.patch(
+      '/profile/update-profile-picture',
+      data: request,
+    );
+
+    // Handle error jika request gagal
+    if (response.data == null || response.data['success'] == false) {
+      throw Exception(
+        'Gagal memperbarui foto profil dengan status code: ${response.statusCode}: ${response.data}',
+      );
+    }
+
+    // Serahkan data profil terbaru ke Controller
+    return User.fromMap(response.data['data']);
+  }
+
+  // TODO: Handle ganti alamat
+  // TODO: Handle ganti password
 }
