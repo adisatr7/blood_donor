@@ -1,6 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/core/app_routes.dart';
@@ -8,6 +9,7 @@ import 'package:blood_donor/views/login_view.dart';
 import 'package:blood_donor/views/signup_view.dart';
 import 'package:blood_donor/views/address_signup_view.dart';
 import 'package:blood_donor/views/home_view.dart';
+import 'package:blood_donor/views/about_view.dart';
 import 'package:blood_donor/views/settings_view.dart';
 import 'package:blood_donor/views/edit_profile_view.dart';
 import 'package:blood_donor/views/edit_address_view.dart';
@@ -21,6 +23,8 @@ void main() async {
   // Load environment variables from .env file
   await dotenv.load(fileName: '.env');
 
+  await initializeDateFormatting('id_ID', null);
+
   // Initialize the app and routing
   runApp(
     GetMaterialApp(
@@ -30,8 +34,10 @@ void main() async {
       getPages: [
         GetPage(name: AppRoutes.login, page: () => LoginView()),
         GetPage(name: AppRoutes.signup, page: () => SignupView()),
-        GetPage(name: AppRoutes.addressSignup, page: () => AddressSignUpView()),
+        GetPage(name: AppRoutes.addressSignup, page: () => AddressSignupView()),
         GetPage(name: AppRoutes.home, page: () => HomeView()),
+        GetPage(name: AppRoutes.about, page: () => AboutView()),
+        GetPage(name: AppRoutes.questionareForm, page: () => QuestionnaireFormView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),

@@ -7,6 +7,7 @@ class AppRoutes {
   static const String questionareForm = '/questionare-form';
   static const String appointmentDetail = '/appointments/'; // Param wajib: `appointmentId`
 
+  static const String about = '/about';
   static const String settings = '/settings';
   static const String editProfile = '$settings/edit-profile';
   static const String editAddress = '$settings/edit-address';
