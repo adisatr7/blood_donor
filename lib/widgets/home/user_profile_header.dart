@@ -23,9 +23,9 @@ class UserProfileHeader extends StatelessWidget {
           CircleAvatar(
             radius: 28,
             backgroundColor: Colors.grey[300],
-            backgroundImage: NetworkImage(
-              currentUser.value?.profilePicture?.path ?? '',
-            ),
+            backgroundImage: (currentUser.value?.profilePicture?.path?.isNotEmpty ?? false)
+                ? NetworkImage(currentUser.value!.profilePicture!.path!)
+                : AssetImage('assets/images/placeholder.png') as ImageProvider,
           ),
 
           // Text group berisi nama user dan golongan darah
