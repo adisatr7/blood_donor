@@ -1,7 +1,12 @@
 import 'package:get/get.dart';
+
+import 'package:blood_donor/services/auth_service.dart';
 import 'package:blood_donor/core/app_routes.dart';
+import 'package:blood_donor/core/theme.dart';
 
 class SettingsController extends GetxController {
+  final AuthService _authService = AuthService.instance;
+
   /// Go to edit profile
   void goToEditProfile() {
     Get.toNamed(AppRoutes.editProfile);
@@ -17,10 +22,22 @@ class SettingsController extends GetxController {
     Get.toNamed(AppRoutes.editPassword);
   }
 
-  /// Logout the user
-  void logout() {
-    // TODO: Implement logout logic here
-    // For example, clear user session and navigate to login screen
-    // Get.offAllNamed(AppRoutes.login);
+  /// Method untuk dipasangkan ke tombol Logout
+  void handleLogout() {
+    // Hapus token dari penyimpanan lokal
+    _authService.logout();
+    // Kembalikan user ke halaman login
+    Get.offAllNamed(AppRoutes.login);
+
+    // Tampilkan pemberitahuan logout
+    Get.snackbar(
+      'Terima Kasih Telah Menggunakan Aplikasi Ini',
+      'Anda telah berhasil keluar dari akun Anda.',
+      snackPosition: SnackPosition.TOP,
+      duration: Duration(seconds: 2),
+      colorText: AppColors.black,
+      backgroundColor: AppColors.white,
+      boxShadows: [AppStyles.cardShadow],
+    );
   }
 }

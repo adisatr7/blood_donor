@@ -1,11 +1,14 @@
 class AppRoutes {
   static const String login = '/login';
-  static const String signUp = '/signup';
-  static const String addressSignUp = '/address-signup';
+  static const String signup = '/signup';
+  static const String addressSignup = '/address-signup'; // Param wajib: `userId`
   static const String home = '/home';
-  static const String settings = '/settings';
-  static const String editProfile = '$settings/edit-profile'; // TODO: Use url param for user ID
-  static const String editAddress = '$settings/edit-address'; // TODO: Use url param for user ID
-  static const String editPassword = '$settings/edit-password'; // TODO: Use url param for user ID
+  static const String map = '/map';
   static const String questionareForm = '/questionare-form';
+  static const String appointmentDetail = '/appointments/'; // Param wajib: `appointmentId`
+
+  static const String settings = '/settings';
+  static const String editProfile = '$settings/edit-profile';
+  static const String editAddress = '$settings/edit-address';
+  static const String editPassword = '$settings/edit-password';
 }
