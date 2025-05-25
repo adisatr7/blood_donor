@@ -1,20 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/auth_service.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/models/api/auth/signup_request.dart';
 import 'package:blood_donor/models/api/auth/signup_response.dart';
-import 'package:blood_donor/models/api/auth/login_request.dart';
-import 'package:blood_donor/models/api/auth/login_response.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
 class SignupController extends GetxController {
-  final GetStorage _storageClient = GetStorage();
   final AuthService _authService = AuthService.instance;
 
   final Rx<File?> selectedPhoto = Rx<File?>(null);
@@ -83,7 +79,7 @@ class SignupController extends GetxController {
       String rhesusEnum = User.rhesusStringToEnum(rhesus.value);
 
       // Siapkan request payload untuk dikirim ke server
-      final SignupRequest signupReq = SignupRequest(
+      final SignupRequest request = SignupRequest(
         user: User(
           nik: nik,
           name: name,
@@ -104,27 +100,10 @@ class SignupController extends GetxController {
       isLoading.value = true;
 
       // Jalankan method signup dari AuthService
-      final SignupResponse signupRes = await _authService.signup(signupReq);
+      final SignupResponse response = await _authService.signup(request);
 
-      // Periksa apakah pendaftaran berhasil
-      if (!signupRes.success) {
-        // Jika gagal, tampilkan pesan error dan hentikan proses
-        showAppDialog(
-          title: 'Gagal Mendaftarkan Akun',
-          message: 'Pendaftaran tidak berhasil. Silakan coba lagi.',
-        );
-        return;
-      }
-      // Jika pendaftaran berhasil, lakukan login untuk mendapatkan JWT token
-      final LoginRequest loginReq = LoginRequest(nik: nik, password: password);
-      final LoginResponse loginRes = await _authService.login(loginReq);
-
-      // Ambil JWT token dari data response login dan simpan ke penyimpanan lokal
-      final String token = loginRes.token;
-      _storageClient.write('token', token);
-
-      // Lanjut ke halaman input alamat
-      _goToAddressSignup(signupRes.userId);
+      // Jika pendaftaran berhasil, lanjut ke halaman input alamat
+      _goToAddressSignup(response.userId);
     } on DioException catch (e) {
       // Jika terjadi error, tampilkan pesan error
       showAppError('Gagal Mendaftarkan Akun', e);
