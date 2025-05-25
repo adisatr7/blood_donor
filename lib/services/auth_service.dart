@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:blood_donor/core/api_client.dart';
 import 'package:blood_donor/models/api/auth/login_request.dart';
@@ -8,6 +9,7 @@ import 'package:blood_donor/models/api/auth/signup_response.dart';
 
 class AuthService {
   static final AuthService instance = AuthService();
+  static final GetStorage _storageClient = GetStorage();
   late final Dio _apiClient = ApiClient.instance;
 
   /// Login ke server dengan NIK dan password.
@@ -24,6 +26,9 @@ class AuthService {
         'Login gagal dengan status code: ${response.statusCode}: ${response.data}',
       );
     }
+
+    // Simpan token ke penyimpanan lokal
+    _storageClient.write('token', response.data['token']);
 
     // Return data response ke controller
     return LoginResponse.fromJson(response.data);
@@ -44,7 +49,17 @@ class AuthService {
       );
     }
 
+    // Simpan token ke penyimpanan lokal
+    _storageClient.write('token', response.data['token']);
+
     // Return data response ke controller
     return SignupResponse.fromJson(response.data);
+  }
+
+  /// Logout dari server dengan menghapus token yang tersimpan.
+  /// Ini akan menghapus token dari penyimpanan lokal sehingga pengguna
+  /// harus login kembali untuk mengakses aplikasi
+  void logout() {
+    _storageClient.remove('token'); // Hapus token dari penyimpanan lokal
   }
 }

@@ -52,7 +52,7 @@ class SettingsView extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout, color: AppColors.danger),
             title: Text('Keluar', style: AppTextStyles.bodyDanger),
-            onTap: controller.logout,
+            onTap: controller.handleLogout,
           ),
         ],
       ),
