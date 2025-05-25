@@ -56,6 +56,12 @@ class AppTextStyles {
     color: AppColors.gray,
   );
 
+  static const TextStyle bodyGrayBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppColors.gray,
+  );
+
   static const TextStyle bodyDanger = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,

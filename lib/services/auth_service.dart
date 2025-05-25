@@ -10,7 +10,7 @@ import 'package:blood_donor/models/api/auth/signup_response.dart';
 class AuthService {
   static final AuthService instance = AuthService();
   static final GetStorage _storageClient = GetStorage();
-  late final Dio _apiClient = ApiClient.instance;
+  final Dio _apiClient = ApiClient.instance;
 
   /// Login ke server dengan NIK dan password.
   Future<LoginResponse> login(LoginRequest request) async {
