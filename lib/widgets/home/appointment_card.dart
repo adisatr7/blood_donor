@@ -29,7 +29,7 @@ class AppointmentCard extends StatelessWidget {
 
   /// Method internal untuk mendapatkan style text, digunakan agar kode tidak
   /// kepanjangan dan lebih mudah dibaca
-  TextStyle _getStatusTextStyle(String status) {
+  TextStyle _getStatusTextStyle() {
     return AppTextStyles.bodyBold.copyWith(
       color:
           appointment.statusString == AppointmentStatus.attended
