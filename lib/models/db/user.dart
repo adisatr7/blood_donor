@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:blood_donor/constants/province.dart';
 
@@ -7,7 +9,7 @@ class User {
   final int id;
   final String nik;
   final String name;
-  final String password;
+  final String? password;
   final File? profilePicture;
   final String birthPlace;
   final DateTime birthDate;
@@ -30,7 +32,7 @@ class User {
     this.id = 0,
     required this.nik,
     required this.name,
-    required this.password,
+    this.password,
     required this.birthPlace,
     required this.birthDate,
     this.profilePicture,
@@ -97,7 +99,7 @@ class User {
       id: map['id'] as int,
       nik: map['nik'] as String,
       name: map['name'] as String,
-      password: map['password'] as String,
+      password: map['password'],
       birthPlace: map['birthPlace'] as String,
       birthDate: map['birthDate'] as DateTime,
       gender: map['gender'] as String,
@@ -113,6 +115,30 @@ class User {
       district: map['district'] as String,
       city: map['city'] as String,
       province: map['province'] as String,
+    );
+  }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'] as int? ?? 0,
+      nik: json['nik'] as String,
+      name: json['name'] as String,
+      birthPlace: json['birthPlace'] as String,
+      birthDate: DateTime.parse(json['birthDate'] as String),
+      profilePicture: _getProfilePicture(json['profilePicture']),
+      gender: genderEnumToString(json['gender']),
+      job: json['job'] as String? ?? '',
+      weightKg: (json['weightKg'] as num?)?.toDouble() ?? 0,
+      heightCm: (json['heightCm'] as num?)?.toDouble() ?? 0,
+      bloodType: json['bloodType'] as String? ?? '',
+      rhesus: rhesusEnumToString(json['rhesus']),
+      address: json['address'] as String? ?? '',
+      rt: json['rt'] as int? ?? 0,
+      rw: json['rw'] as int? ?? 0,
+      village: json['village'] as String? ?? '',
+      district: json['district'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      province: json['province'] as String? ?? '',
     );
   }
 
@@ -145,9 +171,10 @@ class User {
       'nik': nik,
       'name': name,
       'password': password,
-      'profilePicture': (profilePicture != null && profilePicture!.path.isNotEmpty)
-          ? await MultipartFile.fromFile(profilePicture!.path)
-          : null,
+      'profilePicture':
+          profilePicture != null && profilePicture!.path.isNotEmpty
+              ? await MultipartFile.fromFile(profilePicture!.path)
+              : null,
       'birthPlace': birthPlace,
       'birthDate': birthDate.toIso8601String(),
       'gender': gender,
@@ -226,31 +253,35 @@ class User {
     }
   }
 
-  // /// Merges blood type and rhesus into a single string. (e.g., 'A' and 'Positif' becomes 'A+')
-  // static String mergeBloodType(String bloodType, String rhesus) {
-  //   if (bloodType.isEmpty || (rhesus != 'Positif' && rhesus != 'Negatif')) {
-  //     throw ArgumentError('Invalid blood type or rhesus value');
-  //   }
+  /// Getter untuk mengambil golongan darah dan rhesus dalam satu string (cth: B+)
+  String get mergedBloodType {
+    if (bloodType.isEmpty || (rhesus != 'Positif' && rhesus != 'Negatif')) {
+      throw ArgumentError('Invalid blood type or rhesus value');
+    }
 
-  //   String rhesusSymbol = (rhesus == 'Positif') ? '+' : '-';
-  //   return '$bloodType$rhesusSymbol';
-  // }
+    String rhesusSymbol = (rhesus == 'Positif') ? '+' : '-';
+    return '$bloodType$rhesusSymbol';
+  }
 
-  // /// Splits merged blood type into blood type and rhesus. (e.g., 'A+' becomes ['A', 'Positif'])
-  // static List<String> splitBloodType(String mergedBloodType) {
-  //   if (mergedBloodType.length < 2) {
-  //     throw ArgumentError('Invalid merged blood type format');
-  //   }
+  /// Method internal untuk mendapatkan file gambar profil dari URL atau path.
+  static File? _getProfilePicture(String? profilePictureUrl) {
+    // Jika URL atau path kosong, berikan nilai `null`
+    if (profilePictureUrl == null || profilePictureUrl.isEmpty) {
+      return null;
+    }
 
-  //   String bloodType = mergedBloodType.substring(0, mergedBloodType.length - 1);
-  //   String rhesusSymbol = mergedBloodType.substring(mergedBloodType.length - 1);
+    // Jika ada URL, tambahkan prefix API_URL dari .env
+    final String uri =
+        Uri.parse('${dotenv.env['API_URL']}$profilePictureUrl').toString();
+    if (Uri.tryParse(uri)?.isAbsolute ?? false) {
+      return File(uri);
+    }
 
-  //   if (!['A', 'B', 'AB', 'O'].contains(bloodType) ||
-  //       !['+', '-'].contains(rhesusSymbol)) {
-  //     throw ArgumentError('Invalid merged blood type format');
-  //   }
-
-  //   String rhesus = (rhesusSymbol == '+') ? 'Positif' : 'Negatif';
-  //   return [bloodType, rhesus];
-  // }
+    // Jika URL tidak valid, tampilkan pesan error
+    showAppDialog(
+      title: 'Gagal Memuat Foto Profil',
+      message: 'URL foto profil tidak benar: $uri',
+    );
+    return null;
+  }
 }
