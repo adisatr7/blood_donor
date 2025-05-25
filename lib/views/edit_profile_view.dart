@@ -23,14 +23,18 @@ class EditProfileView extends StatelessWidget {
       // Footer: Sign Up Button
       footer: WideButton(
         label: 'Simpan',
-        onPressed: controller.submit,
+        onPressed: controller.handleSubmit,
         isLoading: controller.isLoading,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // Photo Picker
-          PhotoPicker(selectedPhoto: controller.selectedImage),
+          PhotoPicker(
+            selectedPhoto: controller.selectedImage,
+            initialPhotoUrl: controller.currentProfilePictureUrl,
+            onChanged: controller.handleUpdatePicture,
+          ),
 
           // TextInput: NIK
           TextInput(
