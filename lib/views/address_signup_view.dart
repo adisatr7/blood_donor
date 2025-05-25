@@ -24,7 +24,7 @@ class AddressSignUpView extends StatelessWidget {
           // Button: Submit
           WideButton(
             label: 'Simpan',
-            onPressed: controller.submit,
+            onPressed: controller.handleSubmit,
             isLoading: controller.isLoading,
           ),
           const SizedBox(height: 6),

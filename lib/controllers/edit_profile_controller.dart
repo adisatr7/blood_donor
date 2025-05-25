@@ -3,10 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:blood_donor/services/user_service.dart';
-import 'package:blood_donor/models/user.dart';
-import 'package:blood_donor/utils/simulate_wait.dart';
-
 class EditProfileController extends GetxController {
   // Retrieve the user ID from the URL parameters via `onInit` method
   late final int userId;
@@ -17,8 +13,6 @@ class EditProfileController extends GetxController {
 
     userId = int.parse(Get.parameters['userId'] ?? '0');
   }
-
-  final UserService _userService = UserService.instance;
 
   final Rx<File?> selectedImage = Rx<File?>(null);
   final TextEditingController nikController = TextEditingController();
@@ -41,24 +35,6 @@ class EditProfileController extends GetxController {
 
   /// Save new user data to the database
   Future<void> submit() async {
-    // Get all the input values
-    String nik = nikController.text.trim();
-    String name = nameController.text.trim();
-    String birthPlace = birthPlaceController.text.trim();
-    String job = jobController.text.trim();
-
-    String weightKg = weightKgController.text.trim();
-    String heightCm = heightCmController.text.trim();
-
-    String bloodTypeMerged = User.mergeBloodType(bloodType.value, rhesus.value);
-
-    // Simulate API call delay
-    isLoading.value = true;
-    await simulateWait();
-
-    // TODO: Actually implement update profile function!
-
-    isLoading.value = false;
-    Get.back(); // Navigate back to the previous page
+    // TODO: Implement the logic to save the user data
   }
 }

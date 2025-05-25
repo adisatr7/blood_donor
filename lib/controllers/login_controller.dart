@@ -7,7 +7,6 @@ import 'package:blood_donor/services/auth_service.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/models/api/auth/login_request.dart';
-import 'package:blood_donor/models/api/auth/login_response.dart';
 
 class LoginController extends GetxController {
   final GetStorage _storageClient = GetStorage();

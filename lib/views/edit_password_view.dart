@@ -20,7 +20,7 @@ class EditPasswordView extends StatelessWidget {
       // Footer: Sign Up Button
       footer: WideButton(
         label: 'Simpan',
-        onPressed: controller.signUp,
+        onPressed: controller.handleSubmit,
         isLoading: controller.isLoading,
       ),
       child: Column(

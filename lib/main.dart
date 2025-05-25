@@ -32,8 +32,8 @@ void main() async {
       transitionDuration: const Duration(milliseconds: 300),
       getPages: [
         GetPage(name: AppRoutes.login, page: () => LoginView()),
-        GetPage(name: AppRoutes.signUp, page: () => SignUpView()),
-        GetPage(name: AppRoutes.addressSignUp, page: () => AddressSignUpView()),
+        GetPage(name: AppRoutes.signup, page: () => SignupView()),
+        GetPage(name: AppRoutes.addressSignup, page: () => AddressSignUpView()),
         GetPage(name: AppRoutes.home, page: () => HomeView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),

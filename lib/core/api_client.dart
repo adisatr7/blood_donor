@@ -9,7 +9,7 @@ class ApiClient {
   static final Dio instance =
       Dio(
           BaseOptions(
-            baseUrl: dotenv.env['API_URL'] ?? '',
+            baseUrl: '${dotenv.env['API_URL']}/api/v1',
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
           ),
