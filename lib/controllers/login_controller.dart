@@ -22,12 +22,14 @@ class LoginController extends GetxController {
   /// ke prop `onChanged` pada kolom inputan yang wajib diisi
   void validateInput(String _) {
     // Cek apakah inputan NIK dan password kosong
-    bool isEmpty = nikController.text.isEmpty || passwordController.text.isEmpty;
+    bool isEmpty =
+        nikController.text.isEmpty || passwordController.text.isEmpty;
 
     // Cek apakah inputan NIK dan password terlalu pendek
     // - NIK: minimal 16 karakter
     // - Password: minimal 8 karakter
-    bool isTooShort = nikController.text.length < 16 || passwordController.text.length < 8;
+    bool isTooShort =
+        nikController.text.length < 16 || passwordController.text.length < 8;
 
     // Jika ada salah satu saja yang `true`, maka tombol Login akan dimatikan
     isLoginDisabled.value = (isEmpty || isTooShort);
@@ -46,12 +48,8 @@ class LoginController extends GetxController {
       // Siapkan request payload untuk dikirim ke server
       final LoginRequest request = LoginRequest(nik: nik, password: password);
 
-      // Kirim request ke server dan terima response data
-      final LoginResponse response = await _authService.login(request);
-
-      // Ambil JWT token dari response data dan simpan ke penyimpanan lokal
-      final String token = response.token;
-      _storageClient.write('token', token);
+      // Kirim request ke server
+      await _authService.login(request);
 
       // Jika login berhasil, buka halaman utama (Home)
       _goToHomePage();
@@ -71,7 +69,7 @@ class LoginController extends GetxController {
 
   /// Method internal untuk membuka halaman Sign Up (Daftar Akun)
   void _goToSignupPage() {
-    Get.toNamed(AppRoutes.signUp);
+    Get.toNamed(AppRoutes.signup);
   }
 
   /// Method internal untuk membuka halaman utama (Home)
