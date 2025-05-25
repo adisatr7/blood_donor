@@ -76,4 +76,17 @@ class Appointment {
       'status': status,
     };
   }
+
+  String get statusString {
+    switch (status) {
+      case 'SCHEDULED':
+        return AppointmentStatus.scheduled;
+      case 'ATTENDED':
+        return AppointmentStatus.attended;
+      case 'MISSED':
+        return AppointmentStatus.missed;
+      default:
+        return 'ERROR';
+    }
+  }
 }
