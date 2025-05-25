@@ -72,73 +72,26 @@ class User {
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
-    if (map['id'] == null) {
-      throw ArgumentError('ID cannot be null');
-    }
-    if (map['nik'] == null) {
-      throw ArgumentError('NIK cannot be null');
-    }
-    if (map['name'] == null) {
-      throw ArgumentError('Name cannot be null');
-    }
-    if (map['password'] == null) {
-      throw ArgumentError('Password cannot be null');
-    }
-    if (map['birthPlace'] == null) {
-      throw ArgumentError('Birth place cannot be null');
-    }
-    if (map['birthDate'] == null) {
-      throw ArgumentError('Birth date cannot be null');
-    }
-
-    if (!Province.isValid(map['province'])) {
-      throw ArgumentError('Invalid province name');
-    }
-
     return User(
-      id: map['id'] as int,
+      id: map['id'] as int? ?? 0,
       nik: map['nik'] as String,
       name: map['name'] as String,
-      password: map['password'],
       birthPlace: map['birthPlace'] as String,
-      birthDate: map['birthDate'] as DateTime,
-      gender: map['gender'] as String,
-      job: map['job'] as String,
-      weightKg: map['weightKg'] as double,
-      heightCm: map['heightCm'] as double,
-      bloodType: map['bloodType'] as String,
-      rhesus: map['rhesus'] as String,
-      address: map['address'] as String,
-      rt: map['rt'] as int,
-      rw: map['rw'] as int,
-      village: map['village'] as String,
-      district: map['district'] as String,
-      city: map['city'] as String,
-      province: map['province'] as String,
-    );
-  }
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'] as int? ?? 0,
-      nik: json['nik'] as String,
-      name: json['name'] as String,
-      birthPlace: json['birthPlace'] as String,
-      birthDate: DateTime.parse(json['birthDate'] as String),
-      profilePicture: _getProfilePicture(json['profilePicture']),
-      gender: genderEnumToString(json['gender']),
-      job: json['job'] as String? ?? '',
-      weightKg: (json['weightKg'] as num?)?.toDouble() ?? 0,
-      heightCm: (json['heightCm'] as num?)?.toDouble() ?? 0,
-      bloodType: json['bloodType'] as String? ?? '',
-      rhesus: rhesusEnumToString(json['rhesus']),
-      address: json['address'] as String? ?? '',
-      rt: json['rt'] as int? ?? 0,
-      rw: json['rw'] as int? ?? 0,
-      village: json['village'] as String? ?? '',
-      district: json['district'] as String? ?? '',
-      city: json['city'] as String? ?? '',
-      province: json['province'] as String? ?? '',
+      birthDate: DateTime.parse(map['birthDate'] as String),
+      profilePicture: _getProfilePicture(map['profilePicture']),
+      gender: genderEnumToString(map['gender']),
+      job: map['job'] as String? ?? '',
+      weightKg: (map['weightKg'] as num?)?.toDouble() ?? 0,
+      heightCm: (map['heightCm'] as num?)?.toDouble() ?? 0,
+      bloodType: map['bloodType'] as String? ?? '',
+      rhesus: rhesusEnumToString(map['rhesus']),
+      address: map['address'] as String? ?? '',
+      rt: map['rt'] as int? ?? 0,
+      rw: map['rw'] as int? ?? 0,
+      village: map['village'] as String? ?? '',
+      district: map['district'] as String? ?? '',
+      city: map['city'] as String? ?? '',
+      province: map['province'] as String? ?? '',
     );
   }
 

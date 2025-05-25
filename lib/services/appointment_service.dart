@@ -20,6 +20,6 @@ class AppointmentService {
 
     // Ambil data sesi kunjungan untuk diserahkan ke Controller
     final List<dynamic> data = response.data['data'];
-    return data.map((e) => Appointment.fromJson(e)).toList();
+    return data.map((e) => Appointment.fromMap(e)).toList();
   }
 }

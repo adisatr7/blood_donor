@@ -20,6 +20,22 @@ class ProfileService {
     }
 
     // Ambil data profil pengguna untuk diserahkan ke Controller
-    return User.fromJson(response.data['data']);
+    return User.fromMap(response.data['data']);
+  }
+
+  /// Update data profil pengguna di server (bukan foto profil)
+  Future<User> updateProfile(User user) async {
+    // Kirim request PUT ke server dengan data pengguna
+    final response = await _apiClient.put('/profile', data: user.toMap());
+
+    // Handle error jika request gagal
+    if (response.data == null || response.data['success'] == false) {
+      throw Exception(
+        'Gagal memperbarui profil dengan status code: ${response.statusCode}: ${response.data}',
+      );
+    }
+
+    // Kembalikan data profil yang telah diperbarui
+    return User.fromMap(response.data['data']);
   }
 }

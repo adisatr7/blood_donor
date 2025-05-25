@@ -27,35 +27,11 @@ class Appointment {
   }
 
   factory Appointment.fromMap(Map<String, dynamic> map) {
-    // Validate the map before creating an Appointment object
-    if (map['id'] == null) {
-      throw ArgumentError('ID cannot be null');
-    }
-    if (map['location'] == null) {
-      throw ArgumentError('Location cannot be null');
-    }
-
-    // Validate status values
-    if (map['status'] != AppointmentStatus.scheduled &&
-        map['status'] != AppointmentStatus.attended &&
-        map['status'] != AppointmentStatus.missed) {
-      throw ArgumentError('Invalid appointment status');
-    }
-
     return Appointment(
-      id: map['id'] as int,
+      id: map['id'] as int? ?? 0,
       userId: map['userId'] as int,
-      location: Location.fromMap(map['location'] as Map<String, dynamic>),
+      location: Location.fromMap(map['Location'] as Map<String, dynamic>),
       status: map['status'] as String,
-    );
-  }
-
-  factory Appointment.fromJson(Map<String, dynamic> json) {
-    return Appointment(
-      id: json['id'] as int? ?? 0,
-      userId: json['userId'] as int,
-      location: Location.fromJson(json['Location'] as Map<String, dynamic>),
-      status: json['status'] as String,
     );
   }
 
