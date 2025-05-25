@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/core/theme.dart';
 
-class HomeUserHeader extends StatelessWidget {
+class UserProfileHeader extends StatelessWidget {
   final Rxn<User> currentUser;
   final VoidCallback onGearIconPress;
 
-  const HomeUserHeader({
+  const UserProfileHeader({
     super.key,
     required this.currentUser,
     required this.onGearIconPress,
