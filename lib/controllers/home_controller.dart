@@ -14,11 +14,7 @@ class HomeController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await fetchAppointments();
-  }
-
-  Future<void> fetchAppointments() async {
-    appointments.value = await _appointmentService.getAppointments();
+    await _fetchAppointments();
   }
 
   void goToSettings() {
@@ -27,5 +23,9 @@ class HomeController extends GetxController {
 
   void goToMap() {
     Get.toNamed(AppRoutes.map);
+  }
+
+  Future<void> _fetchAppointments() async {
+    appointments.value = await _appointmentService.getAppointments();
   }
 }
