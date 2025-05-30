@@ -25,6 +25,7 @@ class EditProfileView extends StatelessWidget {
         label: 'Simpan',
         onPressed: controller.handleSubmit,
         isLoading: controller.isLoading,
+        isDisabled: controller.isSubmitDisabled,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -41,6 +42,7 @@ class EditProfileView extends StatelessWidget {
             label: 'NIK',
             placeholder: 'Masukkan NIK...',
             controller: controller.nikController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Full Name
@@ -48,6 +50,7 @@ class EditProfileView extends StatelessWidget {
             label: 'Nama Lengkap',
             placeholder: 'Masukkan nama sesuai KTP...',
             controller: controller.nameController,
+            onChanged: controller.validateInput,
           ),
 
           Row(
@@ -58,6 +61,7 @@ class EditProfileView extends StatelessWidget {
                   label: 'Tempat Lahir',
                   placeholder: 'Kota kelahiran...',
                   controller: controller.birthPlaceController,
+                  onChanged: controller.validateInput,
                 ),
               ),
               const SizedBox(width: 16),
@@ -78,6 +82,7 @@ class EditProfileView extends StatelessWidget {
             label: 'Jenis Kelamin',
             options: ['Laki-laki', 'Perempuan'],
             selectedValue: controller.gender,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Job
@@ -95,6 +100,7 @@ class EditProfileView extends StatelessWidget {
                   label: 'Berat Badan',
                   placeholder: 'Berat badan (kg)...',
                   controller: controller.weightKgController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -106,6 +112,7 @@ class EditProfileView extends StatelessWidget {
                   label: 'Tinggi Badan',
                   placeholder: 'Tinggi badan (cm)...',
                   controller: controller.heightCmController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -117,6 +124,7 @@ class EditProfileView extends StatelessWidget {
             label: 'Golongan Darah',
             options: ['A', 'B', 'AB', 'O'],
             selectedValue: controller.bloodType,
+            onChanged: controller.validateInput,
           ),
 
           // SelectInput: Rhesus
@@ -124,6 +132,7 @@ class EditProfileView extends StatelessWidget {
             label: 'Rhesus',
             options: ['Positif', 'Negatif'],
             selectedValue: controller.rhesus,
+            onChanged: controller.validateInput,
           ),
         ],
       ),
