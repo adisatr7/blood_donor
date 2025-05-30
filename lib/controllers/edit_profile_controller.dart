@@ -1,15 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/profile_service.dart';
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/theme.dart';
 
 class EditProfileController extends GetxController {
   final ProfileService _profileService = ProfileService.instance;
+  final GlobalController global = Get.find<GlobalController>();
 
   final Rx<File?> selectedImage = Rx<File?>(null);
   final RxString currentProfilePictureUrl = ''.obs;
@@ -25,30 +27,28 @@ class EditProfileController extends GetxController {
   final TextEditingController weightKgController = TextEditingController();
   final TextEditingController heightCmController = TextEditingController();
 
-  final isLoading = false.obs;
+  final RxBool isSubmitDisabled = true.obs;
+  final RxBool isLoading = false.obs;
 
   @override
-  void onInit() {
-    super.onInit();
-    _fetchUserData(); // Ambil data dari server untuk mengisi form dengan data saat ini
+  void onReady() {
+    super.onReady();
+    _populateTextInputs(); // Isi inputan dengan data user saat ini
   }
 
-  /// Method internal untuk mengambil data pengguna dari server
-  Future<void> _fetchUserData() async {
-    final User user = await _profileService.getProfile();
-
-    // Isi TextController dengan data pengguna saat ini
-    currentProfilePictureUrl.value = user.profilePicture!.path;
-    nikController.text = user.nik;
-    nameController.text = user.name;
-    birthPlaceController.text = user.birthPlace;
-    birthDate.value = user.birthDate;
-    jobController.text = user.job;
-    gender.value = user.gender;
-    bloodType.value = user.bloodType;
-    rhesus.value = user.rhesus;
-    weightKgController.text = user.weightKg.toString();
-    heightCmController.text = user.heightCm.toString();
+  /// Method untuk mengecek apakah kolom inputan sudah valid. Untuk dipasangkan
+  /// ke prop `onChanged` pada kolom inputan yang wajib diisi Jika ada salah satu
+  /// saja yang kosong, maka tombol Simpan akan dimatikan
+  void validateInput(String _) {
+    isSubmitDisabled.value =
+        nikController.text.isEmpty ||
+        nameController.text.isEmpty ||
+        birthPlaceController.text.isEmpty ||
+        gender.value.isEmpty ||
+        bloodType.value.isEmpty ||
+        rhesus.value.isEmpty ||
+        weightKgController.text.isEmpty ||
+        heightCmController.text.isEmpty;
   }
 
   /// Method untuk handle update foto profil
@@ -87,6 +87,8 @@ class EditProfileController extends GetxController {
       // Jika ada error, tampilkan notifikasi error
       showAppError('Gagal Memperbarui Foto Profil', e);
     } finally {
+      // Update data user di GlobalController
+      global.refreshCurrentUser();
       // Selesaikan animasi loading
       isLoading.value = false;
     }
@@ -95,19 +97,18 @@ class EditProfileController extends GetxController {
   /// Method untuk handle tombol submit
   Future<void> handleSubmit() async {
     try {
-      // Siapkan request data
-      final User request = User(
-        nik: nikController.text,
-        name: nameController.text,
-        birthPlace: birthPlaceController.text,
-        birthDate: birthDate.value,
-        job: jobController.text,
-        gender: User.genderStringToEnum(gender.value),
-        bloodType: bloodType.value,
-        rhesus: User.rhesusStringToEnum(rhesus.value),
-        weightKg: double.tryParse(weightKgController.text) ?? 0,
-        heightCm: double.tryParse(heightCmController.text) ?? 0,
-      );
+      // Siapkan request untuk dikirim ke server
+      final User request = global.currentUser.value!;
+      request.nik = nikController.text;
+      request.name = nameController.text;
+      request.birthPlace = birthPlaceController.text;
+      request.birthDate = birthDate.value;
+      request.job = jobController.text;
+      request.gender = gender.value;
+      request.bloodType = bloodType.value;
+      request.rhesus = rhesus.value;
+      request.weightKg = double.tryParse(weightKgController.text) ?? 0;
+      request.heightCm = double.tryParse(heightCmController.text) ?? 0;
 
       // Mulai animasi loading
       isLoading.value = true;
@@ -132,8 +133,29 @@ class EditProfileController extends GetxController {
       // Jika ada error, tampilkan notifikasi error
       showAppError('Gagal Memperbarui Data Diri', e);
     } finally {
+      // Update data user di GlobalController
+      global.refreshCurrentUser();
       // Selesai animasi loading
       isLoading.value = false;
     }
+  }
+
+  /// Method internal untuk mengisi TextController dengan data user dari GlobalController
+  Future<void> _populateTextInputs() async {
+    // Ambil data user yang sedang login dari GlobalController
+    final User user = global.currentUser.value!;
+
+    // Isi TextController dengan data user saat ini
+    currentProfilePictureUrl.value = user.profilePicture!.path;
+    nikController.text = user.nik;
+    nameController.text = user.name;
+    birthPlaceController.text = user.birthPlace;
+    birthDate.value = user.birthDate;
+    jobController.text = user.job;
+    gender.value = user.gender;
+    bloodType.value = user.bloodType;
+    rhesus.value = user.rhesus;
+    weightKgController.text = user.weightKg.toString();
+    heightCmController.text = user.heightCm.toString();
   }
 }
