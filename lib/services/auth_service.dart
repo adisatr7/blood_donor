@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:blood_donor/core/api_client.dart';
-import 'package:blood_donor/models/api/auth/login_request.dart';
-import 'package:blood_donor/models/api/auth/login_response.dart';
-import 'package:blood_donor/models/api/auth/signup_request.dart';
-import 'package:blood_donor/models/api/auth/signup_response.dart';
+import 'package:blood_donor/models/api/login_request.dart';
+import 'package:blood_donor/models/api/login_response.dart';
+import 'package:blood_donor/models/api/signup_request.dart';
+import 'package:blood_donor/models/api/signup_response.dart';
 
 class AuthService {
   static final AuthService instance = AuthService();
