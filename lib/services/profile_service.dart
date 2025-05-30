@@ -76,7 +76,7 @@ class ProfileService {
     // Handle error jika request gagal
     if (response.data == null || response.data['success'] == false) {
       throw Exception(
-        'Gagal memperbarui foto profil dengan status code: ${response.statusCode}: ${response.data}',
+        'Gagal memperbarui kata sandi dengan status code: ${response.statusCode}: ${response.data}',
       );
     }
   }
