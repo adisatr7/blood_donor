@@ -20,12 +20,29 @@ class EditAddressController extends GetxController {
   final TextEditingController cityController = TextEditingController();
   final RxString province = ''.obs;
 
+  final isSubmitDisabled = true.obs;
   final isLoading = false.obs;
 
   @override
   void onReady() {
     super.onReady();
     _populateTextInputs(); // Isi inputan dengan data user saat ini
+  }
+
+  /// Method untuk mengecek apakah semua inputan sudah diisi
+  void validateInput(String _) {
+    // Cek apakah semua inputan wajib diisi
+    bool isEmpty =
+        addressController.text.isEmpty ||
+        rtController.text.isEmpty ||
+        rwController.text.isEmpty ||
+        villageController.text.isEmpty ||
+        districtController.text.isEmpty ||
+        cityController.text.isEmpty ||
+        province.value.isEmpty;
+
+    // Jika ada yang kosong, maka tombol Submit akan dimatikan
+    isSubmitDisabled.value = isEmpty;
   }
 
   /// Method untuk menyimpan alamat baru ke database

@@ -27,6 +27,7 @@ class EditAddressView extends StatelessWidget {
             label: 'Simpan',
             onPressed: controller.handleSubmit,
             isLoading: controller.isLoading,
+            isDisabled: controller.isSubmitDisabled,
           ),
         ],
       ),
@@ -38,6 +39,7 @@ class EditAddressView extends StatelessWidget {
             label: 'Alamat',
             placeholder: 'Jalan Sesame 123...',
             controller: controller.addressController,
+            onChanged: controller.validateInput,
           ),
 
           Row(
@@ -48,6 +50,7 @@ class EditAddressView extends StatelessWidget {
                   label: 'Nomor RT',
                   placeholder: 'RT 001',
                   controller: controller.rtController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -59,6 +62,7 @@ class EditAddressView extends StatelessWidget {
                   label: 'Nomor RW',
                   placeholder: 'RW 001...',
                   controller: controller.rwController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -70,6 +74,7 @@ class EditAddressView extends StatelessWidget {
             label: 'Kelurahan/Desa',
             placeholder: 'Masukkan nama kelurahan/desa...',
             controller: controller.villageController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: District
@@ -77,12 +82,14 @@ class EditAddressView extends StatelessWidget {
             label: 'Kecamatan',
             placeholder: 'Masukkan nama kecamatan...',
             controller: controller.districtController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: City
           TextInput(
             label: 'Kabupaten/Kota',
             placeholder: 'Masukkan nama kabupaten/kota...',
+            onChanged: controller.validateInput,
             controller: controller.cityController,
           ),
 
@@ -92,6 +99,7 @@ class EditAddressView extends StatelessWidget {
             placeholder: 'Pilih provinsi...',
             options: Province.list,
             selectedValue: controller.province,
+            onChanged: controller.validateInput,
           ),
         ],
       ),
