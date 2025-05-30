@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
         children: [
           // 🧑‍🦳 Info tentang user dan tombol pengaturan
           UserProfileHeader(
-            currentUser: controller.currentUser,
+            currentUser: controller.global.currentUser,
             onIconPress: controller.goToSettings,
           ),
           const SizedBox(height: 12),

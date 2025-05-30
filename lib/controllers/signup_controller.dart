@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/auth_service.dart';
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/models/api/auth/signup_request.dart';
 import 'package:blood_donor/models/api/auth/signup_response.dart';
@@ -12,6 +13,7 @@ import 'package:blood_donor/core/app_routes.dart';
 
 class SignupController extends GetxController {
   final AuthService _authService = AuthService.instance;
+  final GlobalController _globalController = Get.find<GlobalController>();
 
   final Rx<File?> selectedPhoto = Rx<File?>(null);
   final TextEditingController nikController = TextEditingController();
@@ -102,7 +104,10 @@ class SignupController extends GetxController {
       // Jalankan method signup dari AuthService
       final SignupResponse response = await _authService.signup(request);
 
-      // Jika pendaftaran berhasil, lanjut ke halaman input alamat
+      // Jika berhasil, simpan data user ke GlobalController
+      _globalController.refreshCurrentUser();
+
+      // Lanjut ke halaman input alamat
       _goToAddressSignup(response.userId);
     } on DioException catch (e) {
       // Jika terjadi error, tampilkan pesan error

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/views/login_view.dart';
@@ -17,13 +18,17 @@ import 'package:blood_donor/views/edit_password_view.dart';
 import 'package:blood_donor/views/questionare_form_view.dart';
 
 void main() async {
-  // Ensure that the Flutter engine is initialized
+  // Pastikan binding Flutter sudah diinisialisasi sebelum memanggil fungsi lain
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load environment variables from .env file
+  // Muat data dari file `.env`
   await dotenv.load(fileName: '.env');
 
+  // Atur format tanggal untuk bahasa Indonesia
   await initializeDateFormatting('id_ID', null);
+
+  // Inisiasi GlobalController agar data user dapat diakses di seluruh halaman di aplikasi
+  Get.put(GlobalController(), permanent: true);
 
   // Initialize the app and routing
   runApp(
