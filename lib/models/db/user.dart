@@ -7,26 +7,26 @@ import 'package:blood_donor/constants/province.dart';
 
 class User {
   final int id;
-  final String nik;
-  final String name;
-  final String? password;
-  final File? profilePicture;
-  final String birthPlace;
-  final DateTime birthDate;
-  final String gender; // 'Laki-laki' atau 'Perempuan'
-  final String job;
-  final double weightKg;
-  final double heightCm;
-  final String bloodType;
-  final String rhesus;
+  String nik;
+  String name;
+  String? password;
+  File? profilePicture;
+  String birthPlace;
+  DateTime birthDate;
+  String gender; // 'Laki-laki' atau 'Perempuan'
+  String job;
+  double weightKg;
+  double heightCm;
+  String bloodType;
+  String rhesus;
 
-  final String address;
-  final int rt;
-  final int rw;
-  final String village;
-  final String district;
-  final String city;
-  final String province;
+  String address;
+  int rt;
+  int rw;
+  String village;
+  String district;
+  String city;
+  String province;
 
   User({
     this.id = 0,
@@ -103,12 +103,12 @@ class User {
       'password': password,
       'birthPlace': birthPlace,
       'birthDate': birthDate.toIso8601String(),
-      'gender': gender,
+      'gender': User.genderStringToEnum(gender),
       'job': job,
       'weightKg': weightKg,
       'heightCm': heightCm,
       'bloodType': bloodType,
-      'rhesus': rhesus,
+      'rhesus': User.rhesusStringToEnum(rhesus),
       'address': address,
       'rt': rt,
       'rw': rw,
