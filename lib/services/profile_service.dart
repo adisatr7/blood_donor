@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:blood_donor/core/api_client.dart';
 import 'package:blood_donor/models/db/user.dart';
+import 'package:blood_donor/models/api/edit_password_request.dart';
 
 class ProfileService {
   static final ProfileService instance = ProfileService();
@@ -64,6 +65,19 @@ class ProfileService {
     return User.fromMap(response.data['data']);
   }
 
-  // TODO: Handle ganti alamat
-  // TODO: Handle ganti password
+  /// Ubah dan simpan kata sandi user ke database
+  Future<void> updatePassword(EditPasswordRequest request) async {
+    // Kirim request PATCH ke server
+    final response = await _apiClient.patch(
+      '/profile/edit-password',
+      data: request.toMap(),
+    );
+
+    // Handle error jika request gagal
+    if (response.data == null || response.data['success'] == false) {
+      throw Exception(
+        'Gagal memperbarui foto profil dengan status code: ${response.statusCode}: ${response.data}',
+      );
+    }
+  }
 }
