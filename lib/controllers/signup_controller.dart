@@ -6,8 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:blood_donor/services/auth_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/user.dart';
-import 'package:blood_donor/models/api/auth/signup_request.dart';
-import 'package:blood_donor/models/api/auth/signup_response.dart';
+import 'package:blood_donor/models/api/signup_request.dart';
+import 'package:blood_donor/models/api/signup_response.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
