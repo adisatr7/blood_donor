@@ -22,6 +22,7 @@ class EditPasswordView extends StatelessWidget {
         label: 'Simpan',
         onPressed: controller.handleSubmit,
         isLoading: controller.isLoading,
+        isDisabled: controller.isSubmitDisabled,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,6 +33,7 @@ class EditPasswordView extends StatelessWidget {
             placeholder: 'Masukkan kata sandi lama...',
             isPassword: true,
             controller: controller.oldPasswordController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Password
@@ -40,6 +42,7 @@ class EditPasswordView extends StatelessWidget {
             placeholder: 'Masukkan minimal 8 digit...',
             isPassword: true,
             controller: controller.newPasswordController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Confirm Password
@@ -48,6 +51,7 @@ class EditPasswordView extends StatelessWidget {
             placeholder: 'Masukkankan ulang kata sandi...',
             isPassword: true,
             controller: controller.confirmPasswordController,
+            onChanged: controller.validateInput,
           ),
         ],
       ),
