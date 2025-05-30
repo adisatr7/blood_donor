@@ -63,7 +63,7 @@ void showAppError(String title, DioException e) {
     title: title,
     message:
         // Tampilkan pesan error dari response
-        // e.response?.data['error'] ??
+        e.response?.data['error'] ??
         // Jika tidak ada, tampilkan error class
         e.toString(),
   );

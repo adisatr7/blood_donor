@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 
 import 'package:blood_donor/services/auth_service.dart';
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/core/theme.dart';
 
 class SettingsController extends GetxController {
   final AuthService _authService = AuthService.instance;
+  final GlobalController global = Get.find<GlobalController>();
 
   /// Method untuk dipasangkan ke tombol ubah profil
   void goToEditProfile() {
@@ -31,8 +33,12 @@ class SettingsController extends GetxController {
   void handleLogout() {
     // Hapus token dari penyimpanan lokal
     _authService.logout();
+
     // Kembalikan user ke halaman login
     Get.offAllNamed(AppRoutes.login);
+
+    // Hapus data user yang sedang login dari GlobalController
+    global.clearCurrentUser();
 
     // Tampilkan pemberitahuan logout
     Get.snackbar(

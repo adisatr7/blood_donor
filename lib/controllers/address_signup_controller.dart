@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/profile_service.dart';
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
 
 class AddressSignupController extends GetxController {
   final ProfileService _profileService = ProfileService.instance;
+  final GlobalController global = Get.find<GlobalController>();
 
   final TextEditingController addressController = TextEditingController();
   final TextEditingController rtController = TextEditingController();
@@ -41,7 +43,7 @@ class AddressSignupController extends GetxController {
   Future<void> handleSubmit() async {
     try {
       // Ambil data profil pengguna yang sudah ada
-      final User user = await _profileService.getProfile();
+      final User user = global.currentUser.value!;
 
       // Perbarui data alamat pengguna
       user.address = addressController.text;

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/auth_service.dart';
+import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/models/api/auth/login_request.dart';
 
 class LoginController extends GetxController {
-  final GetStorage _storageClient = GetStorage();
   final AuthService _authService = AuthService.instance;
+  final GlobalController global = Get.find<GlobalController>();
 
   final TextEditingController nikController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -21,14 +21,12 @@ class LoginController extends GetxController {
   /// ke prop `onChanged` pada kolom inputan yang wajib diisi
   void validateInput(String _) {
     // Cek apakah inputan NIK dan password kosong
-    bool isEmpty =
-        nikController.text.isEmpty || passwordController.text.isEmpty;
+    bool isEmpty = nikController.text.isEmpty || passwordController.text.isEmpty;
 
     // Cek apakah inputan NIK dan password terlalu pendek
     // - NIK: minimal 16 karakter
     // - Password: minimal 8 karakter
-    bool isTooShort =
-        nikController.text.length < 16 || passwordController.text.length < 8;
+    bool isTooShort = nikController.text.length < 16 || passwordController.text.length < 8;
 
     // Jika ada salah satu saja yang `true`, maka tombol Login akan dimatikan
     isLoginDisabled.value = (isEmpty || isTooShort);
@@ -49,6 +47,9 @@ class LoginController extends GetxController {
 
       // Kirim request ke server
       await _authService.login(request);
+
+      // Simpan data user yang berhasil login ke GlobalController
+      global.refreshCurrentUser();
 
       // Jika login berhasil, buka halaman utama (Home)
       _goToHomePage();
