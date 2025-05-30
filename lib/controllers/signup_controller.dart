@@ -13,7 +13,7 @@ import 'package:blood_donor/core/app_routes.dart';
 
 class SignupController extends GetxController {
   final AuthService _authService = AuthService.instance;
-  final GlobalController _globalController = Get.find<GlobalController>();
+  final GlobalController global = Get.find<GlobalController>();
 
   final Rx<File?> selectedPhoto = Rx<File?>(null);
   final TextEditingController nikController = TextEditingController();
@@ -105,7 +105,7 @@ class SignupController extends GetxController {
       final SignupResponse response = await _authService.signup(request);
 
       // Jika berhasil, simpan data user ke GlobalController
-      _globalController.refreshCurrentUser();
+      global.refreshCurrentUser();
 
       // Lanjut ke halaman input alamat
       _goToAddressSignup(response.userId);
