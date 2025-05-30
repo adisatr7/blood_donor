@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:blood_donor/core/theme.dart';
 
 class Dropdown extends StatelessWidget {
@@ -7,6 +8,7 @@ class Dropdown extends StatelessWidget {
   final RxString? selectedValue;
   final List<String> options;
   final String? placeholder;
+  final ValueChanged<String>? onChanged;
 
   const Dropdown({
     super.key,
@@ -14,6 +16,7 @@ class Dropdown extends StatelessWidget {
     required this.selectedValue,
     required this.options,
     this.placeholder,
+    this.onChanged,
   });
 
   @override
@@ -46,10 +49,14 @@ class Dropdown extends StatelessWidget {
                   hintStyle: AppTextStyles.bodyGray,
                 ),
                 onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    if (selectedValue != null) {
-                      selectedValue!.value = newValue;
-                    }
+                  if (newValue == null) {
+                    return;
+                  }
+                  if (selectedValue != null) {
+                    selectedValue!.value = newValue;
+                  }
+                  if (onChanged != null) {
+                    onChanged!(newValue);
                   }
                 },
                 items:
