@@ -8,16 +8,15 @@ import 'package:blood_donor/widgets/inputs/text_input.dart';
 import 'package:blood_donor/widgets/inputs/dropdown.dart';
 import 'package:blood_donor/constants/province.dart';
 
-class AddressSignUpView extends StatelessWidget {
-  final AddressSignUpController controller = Get.put(AddressSignUpController());
+class AddressSignupView extends StatelessWidget {
+  final AddressSignupController controller = Get.put(AddressSignupController());
 
-  AddressSignUpView({super.key});
+  AddressSignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       title: 'Alamat Domisili',
-      showBackButton: true,
       // Footer: Buttons
       footer: Column(
         children: [
@@ -33,7 +32,7 @@ class AddressSignUpView extends StatelessWidget {
           WideButton(
             label: 'Isi Nanti',
             type: ButtonType.secondary,
-            onPressed: controller.skip,
+            onPressed: controller.handleSkip,
             isLoading: controller.isLoading,
           ),
         ],
@@ -46,6 +45,7 @@ class AddressSignUpView extends StatelessWidget {
             label: 'Alamat',
             placeholder: 'Jalan Sesame 123...',
             controller: controller.addressController,
+            onChanged: controller.validateInput,
           ),
 
           Row(
@@ -56,6 +56,7 @@ class AddressSignUpView extends StatelessWidget {
                   label: 'Nomor RT',
                   placeholder: 'RT 001',
                   controller: controller.rtController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -67,6 +68,7 @@ class AddressSignUpView extends StatelessWidget {
                   label: 'Nomor RW',
                   placeholder: 'RW 001...',
                   controller: controller.rwController,
+                  onChanged: controller.validateInput,
                   isNumeric: true,
                 ),
               ),
@@ -78,6 +80,7 @@ class AddressSignUpView extends StatelessWidget {
             label: 'Kelurahan/Desa',
             placeholder: 'Masukkan nama kelurahan/desa...',
             controller: controller.villageController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: District
@@ -85,6 +88,7 @@ class AddressSignUpView extends StatelessWidget {
             label: 'Kecamatan',
             placeholder: 'Masukkan nama kecamatan...',
             controller: controller.districtController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: City
@@ -92,6 +96,7 @@ class AddressSignUpView extends StatelessWidget {
             label: 'Kabupaten/Kota',
             placeholder: 'Masukkan nama kabupaten/kota...',
             controller: controller.cityController,
+            onChanged: controller.validateInput,
           ),
 
           // TextInput: Province
@@ -100,6 +105,7 @@ class AddressSignUpView extends StatelessWidget {
             placeholder: 'Pilih provinsi...',
             options: Province.list,
             selectedValue: controller.province,
+            onChanged: controller.validateInput,
           ),
         ],
       ),
