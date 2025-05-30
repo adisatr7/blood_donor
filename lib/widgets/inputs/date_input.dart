@@ -21,7 +21,7 @@ class DateInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter = DateFormat('dd MMMM yyyy');
+    final DateFormat formatter = DateFormat('dd MMM yyyy');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,7 @@ class DateInput extends StatelessWidget {
                     child: Text(
                       selectedDate.value != null
                           ? formatter.format(selectedDate.value!)
-                          : placeholder ?? 'Select a date',
+                          : placeholder ?? 'Pilih Tanggal',
                       style:
                           selectedDate.value != null
                               ? AppTextStyles.body
