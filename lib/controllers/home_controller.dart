@@ -58,7 +58,7 @@ class HomeController extends GetxController {
     }
 
     return user.address.isEmpty ||
-        user.rt > 0 ||
+        user.rt == 0 ||
         user.rw > 0 ||
         user.village.isEmpty ||
         user.district.isEmpty ||
