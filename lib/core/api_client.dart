@@ -1,3 +1,4 @@
+import 'package:blood_donor/widgets/popups/app_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_storage/get_storage.dart';
@@ -72,6 +73,12 @@ class ApiClient {
     if (error.response?.statusCode == 403) {
       GetStorage().erase(); // Hapus semua token dari storage
       Get.offAllNamed(AppRoutes.login); // Lempar ke halaman login
+
+      // Tampilkan dialog untuk memberitahu user mereka harus login lagi
+      showAppDialog(
+        title: 'Sesi Kadaluarsa',
+        message: 'Silakan masuk kembali ke akun Anda.',
+      );
 
       handler.reject(error); // Jangan lanjutkan request
     }
