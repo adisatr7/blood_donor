@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:blood_donor/widgets/buttons/app_back_button.dart';
 import 'package:blood_donor/core/theme.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -41,11 +42,7 @@ class AppScaffold extends StatelessWidget {
                   children: [
                     // Back button (Optional)
                     if (showBackButton)
-                      TextButton.icon(
-                        onPressed: () => Get.back(),
-                        icon: const Icon(Icons.arrow_back_ios),
-                        label: Text(backButtonLabel, style: AppTextStyles.body),
-                      ),
+                      AppBackButton(label: backButtonLabel),
 
                     // Space between back button and title
                     if (showBackButton && title != null)
