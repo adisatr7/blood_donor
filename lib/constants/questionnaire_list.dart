@@ -27,7 +27,7 @@ final Questionnaire allQuestions = Questionnaire(
         QuestionnaireSectionItem(
           itemNumber: 4,
           question:
-              'Apakah anda sedang minum aspirin atau obat yang mengandung aspirin?',
+              'Apakah Anda sedang minum aspirin atau obat yang mengandung aspirin?',
         ),
       ],
     ),
@@ -37,7 +37,7 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 5,
-          question: 'Apakah anda mengalami sakit kepala dan demam bersamaan?',
+          question: 'Apakah Anda mengalami sakit kepala dan demam bersamaan?',
         ),
       ],
     ),
@@ -48,7 +48,7 @@ final Questionnaire allQuestions = Questionnaire(
         QuestionnaireSectionItem(
           itemNumber: 6,
           question:
-              'Untuk donor darah wanita: Apakah anda saat ini sedang hamil?',
+              'Untuk donor darah wanita: Apakah Anda saat ini sedang hamil?',
         ),
       ],
     ),
@@ -58,16 +58,16 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 7,
-          question: 'Apakah anda mendonorkan darah lengkap?',
+          question: 'Apakah Anda mendonorkan darah lengkap?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 8,
-          question: 'Apakah anda menerima vaksinasi atau suntikan lainnya?',
+          question: 'Apakah Anda menerima vaksinasi atau suntikan lainnya?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 9,
           question:
-              'Apakah anda pernah kontak dengan orang yang menerima vaksinasi smallpox/cacar air?',
+              'Apakah Anda pernah kontak dengan orang yang menerima vaksinasi smallpox/cacar air?',
         ),
       ],
     ),
@@ -78,7 +78,7 @@ final Questionnaire allQuestions = Questionnaire(
         QuestionnaireSectionItem(
           itemNumber: 10,
           question:
-              'Apakah anda mendonorkan 2 kantong sel darah merah memlalui proses afereis?',
+              'Apakah Anda mendonorkan 2 kantong sel darah merah melalui proses afereis?',
         ),
       ],
     ),
@@ -88,7 +88,7 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 11,
-          question: 'Apakah anda pernah mengunjungi daerah endemis malaria?',
+          question: 'Apakah Anda pernah mengunjungi daerah endemis malaria?',
         ),
       ],
     ),
@@ -98,73 +98,73 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 12,
-          question: 'Apakah anda pernah menerima tranfusi darah?',
+          question: 'Apakah Anda pernah menerima tranfusi darah?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 13,
           question:
-              'Apakah anda pernah mendapat transplantasi, organ, atau jaringan sumsung tulang?',
+              'Apakah Anda pernah mendapat transplantasi, organ, atau jaringan sumsung tulang?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 14,
-          question: 'Apakah anda pernah cangkok organ?',
+          question: 'Apakah Anda pernah cangkok organ?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 15,
-          question: 'Apakah anda pernah tertusuk jarum medis?',
+          question: 'Apakah Anda pernah tertusuk jarum medis?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 16,
           question:
-              'Apakah anda pernah berhubungan seksual dengan orang dengan HIV/AIDS?',
+              'Apakah Anda pernah berhubungan seksual dengan orang dengan HIV/AIDS?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 17,
           question:
-              'Apakah anda pernah berhubungan seksual dengan pekerja seks komersil?',
+              'Apakah Anda pernah berhubungan seksual dengan pekerja seks komersil?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 18,
           question:
-              'Apakah anda pernah berhubungan seksual dengan pengguna narkotika jarum suntik?',
+              'Apakah Anda pernah berhubungan seksual dengan pengguna narkotika jarum suntik?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 19,
           question:
-              'Apakah anda pernah berhubungan seksual dengan pengguna konsentrat faktor pembekuan?',
+              'Apakah Anda pernah berhubungan seksual dengan pengguna konsentrat faktor pembekuan?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 20,
           question:
-              'Donor wanita: Apakah anda pernah berhubungan seksual dengan laki-laki biseksual?',
+              'Donor wanita: Apakah Anda pernah berhubungan seksual dengan laki-laki biseksual?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 21,
           question:
-              'Apakah anda pernah berhubungan seksual dengan orang yang terinfeksi hepatitis?',
+              'Apakah Anda pernah berhubungan seksual dengan orang yang terinfeksi hepatitis?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 22,
-          question: 'Apakah anda tinggal bersama penderita hepatitis?',
+          question: 'Apakah Anda tinggal bersama penderita hepatitis?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 23,
-          question: 'Apakah anda memiliki tatto?',
+          question: 'Apakah Anda memiliki tatto?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 24,
           question:
-              'Apakah anda memiliki tindik telinga atau bagian tubuh lainnya?',
+              'Apakah Anda memiliki tindik telinga atau bagian tubuh lainnya?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 25,
           question:
-              'Apakah anda sedang atau pernah mendapat pengobatan sifilis atau GO (kencing nanah)?',
+              'Apakah Anda sedang atau pernah mendapat pengobatan sifilis atau GO (kencing nanah)?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 26,
           question:
-              'Apakah anda pernah ditahan di penjara untuk waktu lebih dari 72 jam?',
+              'Apakah Anda pernah ditahan di penjara untuk waktu lebih dari 72 jam?',
         ),
       ],
     ),
@@ -174,7 +174,7 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 27,
-          question: 'Apakah anda menetap di berbagai alamat yang berebda?',
+          question: 'Apakah Anda menetap di berbagai alamat yang berebda?',
         ),
       ],
     ),
@@ -184,7 +184,7 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 28,
-          question: 'Apakah anda pernah berada di luar wilayah Indonesia?',
+          question: 'Apakah Anda pernah berada di luar wilayah Indonesia?',
         ),
       ],
     ),
@@ -194,11 +194,11 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 29,
-          question: 'Apakah anda tinggal selama 5 tahun atau lebih di Eropa?',
+          question: 'Apakah Anda tinggal selama 5 tahun atau lebih di Eropa?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 30,
-          question: 'Apakah anda menerima tranfusi darah di Inggris?',
+          question: 'Apakah Anda menerima tranfusi darah di Inggris?',
         ),
       ],
     ),
@@ -208,23 +208,23 @@ final Questionnaire allQuestions = Questionnaire(
       items: [
         QuestionnaireSectionItem(
           itemNumber: 31,
-          question: 'Apakah anda tinggal selama 3 bulan atau lebih di Inggris?',
+          question: 'Apakah Anda tinggal selama 3 bulan atau lebih di Inggris?',
         ),
       ],
     ),
     QuestionnaireSection(
-      title: 'Apakah anda pernah',
+      title: 'Apakah Anda pernah',
       sectionNumber: 13,
       items: [
         QuestionnaireSectionItem(
           itemNumber: 32,
           question:
-              'Apakah anda menerima uang, obat, atau pembayaran lainnya untuk seks?',
+              'Apakah Anda menerima uang, obat, atau pembayaran lainnya untuk seks?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 33,
           question:
-              'Laki-laki: Apakah anda pernah berhubungan seksual dengan laki-laki, walaupun sekali?',
+              'Laki-laki: Apakah Anda pernah berhubungan seksual dengan laki-laki, walaupun sekali?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 34,
@@ -232,7 +232,7 @@ final Questionnaire allQuestions = Questionnaire(
         ),
         QuestionnaireSectionItem(
           itemNumber: 35,
-          question: 'Apakah anda pernah melakukan bekam/fasdhu?',
+          question: 'Apakah Anda pernah melakukan bekam/fasdhu?',
         ),
         QuestionnaireSectionItem(
           itemNumber: 36,
