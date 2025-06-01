@@ -15,7 +15,7 @@ class CreateAppointmentPrompt extends StatelessWidget {
   });
 
   /// Method internal untuk memformat waktu ke dalam format HH:mm
-  _formatTime(int hour, int minute) {
+  String _formatTime(int hour, int minute) {
     return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
   }
 
