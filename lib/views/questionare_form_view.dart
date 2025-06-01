@@ -1,12 +1,13 @@
-import 'package:blood_donor/widgets/buttons/wide_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:blood_donor/controllers/questionare_form_controller.dart';
 import 'package:blood_donor/models/db/questionnaire.dart';
-import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/widgets/inputs/select_input.dart';
+import 'package:blood_donor/models/db/user.dart';
+import 'package:blood_donor/widgets/buttons/wide_button.dart';
 
 class QuestionnaireFormView extends StatelessWidget {
   QuestionnaireFormView({super.key});
@@ -15,46 +16,118 @@ class QuestionnaireFormView extends StatelessWidget {
     QuestionnaireFormController(),
   );
 
-  Widget _buildSubsection(Questionnaire questioner) {
-    List<QuestionnaireItem> items = questioner.items;
+  String _formatBirthDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}'
+        '/${date.month.toString().padLeft(2, '0')}'
+        '/${date.year}';
+  }
+
+  Widget _buildFieldsText(String field, String value) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(text: '$field: ', style: AppTextStyles.bodyBold),
+          TextSpan(text: value, style: AppTextStyles.body),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSection(QuestionnaireSection section) {
+    List<QuestionnaireSectionItem> items = section.items;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(questioner.title, style: AppTextStyles.subheading),
+          // Judul bab
+          child: Text(section.title, style: AppTextStyles.subheading),
         ),
+        // Daftar semua pertanyaan dalam bab ini
         ...items.map((item) => _buildItem(item)),
       ],
     );
   }
 
-  Widget _buildItem(QuestionnaireItem item) {
+  Widget _buildItem(QuestionnaireSectionItem item) {
     return SelectInput(
       label: '${item.itemNumber}. ${item.question}',
       options: controller.options,
       selectedValue: item.answer,
+      onChanged: controller.validateAnswers,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final int itemCount = controller.questionnaireForm.length;
-    List<Questionnaire> q = controller.questionnaireForm;
+    // Ambil data user dan nama lokasi agar kode tidak terlalu panjang
+    final User userData = controller.global.currentUser.value!;
+    final String locationName = controller.selectedLocation.name;
 
-    RxBool isAllAnswered = Questionnaire.isAllAnswered(q);
+    // Ambil semua bab kuesioner
+    final List<QuestionnaireSection> sections = controller.allQuestionnaireSections;
 
     return AppScaffold(
       title: 'Form Kuesioner',
       showBackButton: true,
       backButtonLabel: 'Batal Isi',
-      footer: WideButton(label: 'Kirim', isDisabled: isAllAnswered),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: itemCount,
-        itemBuilder: (context, index) => _buildSubsection(q[index]),
+      footer: WideButton(
+        label: 'Kirim',
+        isLoading: controller.isLoading,
+        isDisabled: controller.isSubmitDisabled,
+        onPressed: controller.handleSubmit,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Data Diri Anda', style: AppTextStyles.subheading),
+          const SizedBox(height: 6),
+
+          // Tampilkan data diri berdasarkan profil user
+          // Dibungkus oleh Column agar rapi saja
+          Column(
+            spacing: 4,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Pastikan data berikut sudah tepat:',
+                style: AppTextStyles.body,
+              ),
+              const SizedBox(height: 2),
+
+              _buildFieldsText('Lokasi Terpilih', locationName),
+              _buildFieldsText('NIK', userData.nik),
+              _buildFieldsText('Nama Lengkap', userData.name),
+              _buildFieldsText(
+                'TTL',
+                '${userData.birthPlace}, ${_formatBirthDate(userData.birthDate)}',
+              ),
+              _buildFieldsText(
+                'Umur',
+                '${DateTime.now().year - userData.birthDate.year} tahun',
+              ),
+              _buildFieldsText('Jenis Kelamin', userData.gender),
+              const SizedBox(height: 6),
+
+              _buildFieldsText('Pekerjaan', userData.job),
+              _buildFieldsText('Alamat', userData.address),
+              _buildFieldsText(
+                'Kel/Kec',
+                '${userData.village}/${userData.district}',
+              ),
+              _buildFieldsText('Wilayah', userData.city),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: sections.length,
+            itemBuilder: (context, index) => _buildSection(sections[index]),
+          ),
+        ],
       ),
     );
   }
