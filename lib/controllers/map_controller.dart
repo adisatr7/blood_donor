@@ -6,6 +6,9 @@ import 'package:blood_donor/services/location_service.dart';
 import 'package:blood_donor/models/db/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
+import 'package:blood_donor/widgets/map/create_appointment_prompt.dart';
+import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/core/app_routes.dart';
 
 class MapController extends GetxController {
   final LocationService _locationService = LocationService.instance;
@@ -56,8 +59,11 @@ class MapController extends GetxController {
 
       // Tampilkan dialog jika tidak ada hasil pencarian
       showAppDialog(
-        title: 'Tidak Ada Hasil',
-        message: 'Tidak ada lokasi yang ditemukan untuk "$query".',
+        title: 'Lokasi Tidak Ditemukan',
+        message:
+            'Tidak ada lokasi yang ditemukan untuk "$query".\n\nPastikan '
+            'nama lokasi yang Anda masukkan sudah benar dan acara donor darah '
+            'belum tutup.',
       );
       return;
     }
@@ -79,19 +85,47 @@ class MapController extends GetxController {
   /// Method untuk mengambil marker dari daftar lokasi yang sudah diambil
   Set<Marker> getMarkers() {
     return locations.map((location) {
+      // final String timeString =
+      //     '${location.time.start.hour.toString().padLeft(2, '0')}:${location.time.start.minute.toString().padLeft(2, '0')}'
+      //     ' - '
+      //     '${location.time.end.hour.toString().padLeft(2, '0')}:${location.time.end.minute.toString().padLeft(2, '0')}';
+
       return Marker(
         markerId: MarkerId(location.id.toString()),
         position: LatLng(location.latitude, location.longitude),
-        infoWindow: InfoWindow(title: location.name),
+        infoWindow: InfoWindow(
+          title: location.name,
+          snippet: 'Klik untuk melihat detail',
+          onTap: () {
+            // Show custom bottom sheet/dialog
+            Get.bottomSheet(
+              CreateAppointmentPrompt(
+                location: location,
+                onCreateAppointment: handleCreateAppointment,
+              ),
+              isScrollControlled: true,
+              backgroundColor: AppColors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+            );
+          },
+        ),
       );
     }).toSet();
+  }
+
+  /// Method untuk menangani aksi membuat janji
+  void handleCreateAppointment(Location location) {
+    Get.toNamed(AppRoutes.questionareForm, arguments: location);
   }
 
   /// Cek dan minta izin lokasi ke user
   Future<void> _checkAndRequestLocationPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
 
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
       // Minta izin lokasi jika belum diberikan
       permission = await Geolocator.requestPermission();
 
@@ -99,7 +133,8 @@ class MapController extends GetxController {
       if (permission == LocationPermission.denied) {
         showAppDialog(
           title: 'Izin Lokasi Ditolak',
-          message: 'Aplikasi membutuhkan izin lokasi untuk membantu Anda mencari lokasi donor terdekat.',
+          message:
+              'Aplikasi membutuhkan izin lokasi untuk membantu Anda mencari lokasi donor terdekat.',
         );
         return;
       }
@@ -130,8 +165,6 @@ class MapController extends GetxController {
       return;
     }
 
-    googleMapController!.animateCamera(
-      CameraUpdate.newLatLng(location),
-    );
+    googleMapController!.animateCamera(CameraUpdate.newLatLng(location));
   }
 }
