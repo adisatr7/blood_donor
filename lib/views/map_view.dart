@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:blood_donor/controllers/map_controller.dart';
 import 'package:blood_donor/core/theme.dart';
 import 'package:blood_donor/widgets/buttons/app_back_button.dart';
 import 'package:blood_donor/widgets/inputs/text_input.dart';
 
 class MapView extends StatelessWidget {
-  MapView({super.key});
-
   final MapController controller = Get.put(MapController());
+
+  MapView({super.key});
 
   @override
   Widget build(BuildContext context) {
