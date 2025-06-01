@@ -58,13 +58,12 @@ void showAppDialog({
 }
 
 /// Method untuk menampilkan dialog error
-void showAppError(String title, DioException e) {
+void showAppError(String title, Exception e) {
   showAppDialog(
-    title: title,
+    title: title, // Judul pesan error
     message:
-        // Tampilkan pesan error dari response
-        e.response?.data['error'] ??
-        // Jika tidak ada, tampilkan error class
-        e.toString(),
+        (e is DioException && e.response != null)
+            ? e.response!.data['error'] // Handle error berkaitan dengan API
+            : e.toString(), // Handle error umum
   );
 }
