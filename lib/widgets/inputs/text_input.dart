@@ -10,6 +10,7 @@ class TextInput extends StatelessWidget {
   final String? placeholder;
   final bool isNumeric;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const TextInput({
     super.key,
@@ -19,6 +20,7 @@ class TextInput extends StatelessWidget {
     this.placeholder,
     this.isNumeric = false,
     this.onChanged,
+    this.onSubmitted,
   });
 
   @override
@@ -29,7 +31,8 @@ class TextInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Label for the text field
-        Text(label, style: AppTextStyles.body),
+        if (label.isNotEmpty)
+          Text(label, style: AppTextStyles.body),
 
         // Textbox container
         Container(
@@ -52,6 +55,7 @@ class TextInput extends StatelessWidget {
                 inputFormatters:
                     isNumeric ? [FilteringTextInputFormatter.digitsOnly] : null,
                 onChanged: onChanged,
+                onSubmitted: onSubmitted,
                 decoration: InputDecoration(
                   fillColor: AppColors.secondary,
                   border: InputBorder.none,
