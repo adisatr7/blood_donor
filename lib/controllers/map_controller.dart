@@ -51,8 +51,8 @@ class MapController extends GetxController {
 
     if (locations.isEmpty) {
       // Jika tidak ada lokasi hasil pencarian, lompat ke lokasi user sekarang
-      final LatLng user = currentLocation.value!;
-      _goToLocation(user.latitude, user.longitude);
+      final LatLng userLocation = currentLocation.value!;
+      _goToLocation(userLocation);
 
       // Tampilkan dialog jika tidak ada hasil pencarian
       showAppDialog(
@@ -68,11 +68,11 @@ class MapController extends GetxController {
         locations.first.latitude,
         locations.first.longitude,
       );
-      _goToLocation(firstLocation.latitude, firstLocation.longitude);
+      _goToLocation(firstLocation);
     } else {
       // Jika query pencarian kosong, lompat ke lokasi user sekarang
-      final LatLng user = currentLocation.value!;
-      _goToLocation(user.latitude, user.longitude);
+      final LatLng userLocation = currentLocation.value!;
+      _goToLocation(userLocation);
     }
   }
 
@@ -125,13 +125,13 @@ class MapController extends GetxController {
     }
   }
 
-  void _goToLocation(double latitude, double longitude) {
+  void _goToLocation(LatLng location) {
     if (googleMapController == null) {
       return;
     }
 
     googleMapController!.animateCamera(
-      CameraUpdate.newLatLng(LatLng(latitude, longitude)),
+      CameraUpdate.newLatLng(location),
     );
   }
 }
