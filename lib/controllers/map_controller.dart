@@ -37,48 +37,52 @@ class MapController extends GetxController {
   /// Method untuk mencari lokasi berdasarkan query. Untuk dipasangkan ke widget
   /// TextInput yang digunakan untuk mencari lokasi donor darah terdekat
   void searchLocation(String query) async {
-    // Gunakan huruf kecil untuk pencarian
-    final lowerQuery = query.toLowerCase();
+    try {
+      // Gunakan huruf kecil untuk pencarian
+      final lowerQuery = query.toLowerCase();
 
-    if (lowerQuery.isEmpty) {
-      // Jika query kosong, tampilkan semua lokasi
-      locations.assignAll(await _locationService.getAllLocations());
-    } else {
-      // Jika query search diberikan, cari lokasi berdasarkan nama
-      locations.assignAll(await _locationService.searchLocations(lowerQuery));
-    }
+      if (lowerQuery.isEmpty) {
+        // Jika query kosong, tampilkan semua lokasi
+        locations.assignAll(await _locationService.getAllLocations());
+      } else {
+        // Jika query search diberikan, cari lokasi berdasarkan nama
+        locations.assignAll(await _locationService.searchLocations(lowerQuery));
+      }
 
-    if (googleMapController == null) {
-      return;
-    }
+      if (googleMapController == null) {
+        return;
+      }
 
-    if (locations.isEmpty) {
-      // Jika tidak ada lokasi hasil pencarian, lompat ke lokasi user sekarang
-      final LatLng userLocation = currentLocation.value!;
-      _goToLocation(userLocation);
+      if (locations.isEmpty) {
+        // Jika tidak ada lokasi hasil pencarian, lompat ke lokasi user sekarang
+        final LatLng userLocation = currentLocation.value!;
+        _goToLocation(userLocation);
 
-      // Tampilkan dialog jika tidak ada hasil pencarian
-      showAppDialog(
-        title: 'Lokasi Tidak Ditemukan',
-        message:
-            'Tidak ada lokasi yang ditemukan untuk "$query".\n\nPastikan '
-            'nama lokasi yang Anda masukkan sudah benar dan acara donor darah '
-            'belum tutup.',
-      );
-      return;
-    }
+        // Tampilkan dialog jika tidak ada hasil pencarian
+        showAppDialog(
+          title: 'Lokasi Tidak Ditemukan',
+          message:
+              'Tidak ada lokasi yang ditemukan untuk "$query".\n\nPastikan '
+              'nama lokasi yang Anda masukkan sudah benar dan acara donor darah '
+              'belum tutup.',
+        );
+        return;
+      }
 
-    if (query.isNotEmpty) {
-      // Jika pencarian berhasil, tampilkan lokasi pertama
-      final LatLng firstLocation = LatLng(
-        locations.first.latitude,
-        locations.first.longitude,
-      );
-      _goToLocation(firstLocation);
-    } else {
-      // Jika query pencarian kosong, lompat ke lokasi user sekarang
-      final LatLng userLocation = currentLocation.value!;
-      _goToLocation(userLocation);
+      if (query.isNotEmpty) {
+        // Jika pencarian berhasil, tampilkan lokasi pertama
+        final LatLng firstLocation = LatLng(
+          locations.first.latitude,
+          locations.first.longitude,
+        );
+        _goToLocation(firstLocation);
+      } else {
+        // Jika query pencarian kosong, lompat ke lokasi user sekarang
+        final LatLng userLocation = currentLocation.value!;
+        _goToLocation(userLocation);
+      }
+    } on Exception catch (e) {
+      showAppError('Gagal Mencari Lokasi', e);
     }
   }
 
