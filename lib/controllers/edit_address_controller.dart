@@ -50,12 +50,12 @@ class EditAddressController extends GetxController {
     try {
       // Siapkan request untuk dikirim ke server
       final User request = global.currentUser.value!;
-      request.address = addressController.text;
-      request.rt = int.tryParse(rtController.text) ?? 0;
-      request.rw = int.tryParse(rwController.text) ?? 0;
-      request.village = villageController.text;
-      request.district = districtController.text;
-      request.city = cityController.text;
+      request.address = addressController.text.trim();
+      request.noRt = int.tryParse(rtController.text.trim()) ?? 0;
+      request.noRw = int.tryParse(rwController.text.trim()) ?? 0;
+      request.village = villageController.text.trim();
+      request.district = districtController.text.trim();
+      request.city = cityController.text.trim();
       request.province = province.value;
 
       // Mulai animasi loading
@@ -95,8 +95,8 @@ class EditAddressController extends GetxController {
 
     // Isi TextController dengan data user saat ini
     addressController.text = user.address;
-    rtController.text = user.rt.toString();
-    rwController.text = user.rw.toString();
+    rtController.text = user.noRt.toString();
+    rwController.text = user.noRw.toString();
     villageController.text = user.village;
     districtController.text = user.district;
     cityController.text = user.city;
