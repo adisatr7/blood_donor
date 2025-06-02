@@ -121,6 +121,6 @@ class SignupController extends GetxController {
   /// Method internal untuk membuka halaman input alamat. Parameter `userId` digunakan
   /// untuk menentukan user mana yang alamatnya akan dimasukkan
   void _goToAddressSignup(int userId) {
-    Get.toNamed('${AppRoutes.addressSignup}/$userId');
+    Get.offAllNamed('${AppRoutes.addressSignup}/$userId');
   }
 }
