@@ -47,8 +47,8 @@ class AddressSignupController extends GetxController {
 
       // Perbarui data alamat pengguna
       user.address = addressController.text;
-      user.rt = int.tryParse(rtController.text) ?? 0;
-      user.rw = int.tryParse(rwController.text) ?? 0;
+      user.noRt = int.tryParse(rtController.text) ?? 0;
+      user.noRw = int.tryParse(rwController.text) ?? 0;
       user.village = villageController.text;
       user.district = districtController.text;
       user.city = cityController.text;

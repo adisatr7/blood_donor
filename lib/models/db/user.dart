@@ -21,8 +21,8 @@ class User {
   String rhesus;
 
   String address;
-  int rt;
-  int rw;
+  int noRt;
+  int noRw;
   String village;
   String district;
   String city;
@@ -43,8 +43,8 @@ class User {
     this.bloodType = '',
     this.rhesus = '',
     this.address = '',
-    this.rt = 0,
-    this.rw = 0,
+    this.noRt = 0,
+    this.noRw = 0,
     this.village = '',
     this.district = '',
     this.city = '',
@@ -86,8 +86,8 @@ class User {
       bloodType: map['bloodType'] as String? ?? '',
       rhesus: rhesusEnumToString(map['rhesus']),
       address: map['address'] as String? ?? '',
-      rt: map['rt'] as int? ?? 0,
-      rw: map['rw'] as int? ?? 0,
+      noRt: map['noRt'] as int? ?? 0,
+      noRw: map['noRw'] as int? ?? 0,
       village: map['village'] as String? ?? '',
       district: map['district'] as String? ?? '',
       city: map['city'] as String? ?? '',
@@ -110,8 +110,8 @@ class User {
       'bloodType': bloodType,
       'rhesus': User.rhesusStringToEnum(rhesus),
       'address': address,
-      'rt': rt,
-      'rw': rw,
+      'noRt': noRt,
+      'noRw': noRw,
       'village': village,
       'district': district,
       'city': city,
@@ -137,8 +137,8 @@ class User {
       'bloodType': bloodType,
       'rhesus': rhesus,
       'address': address,
-      'noRt': rt,
-      'noRw': rw,
+      'noRt': noRt,
+      'noRw': noRw,
       'village': village,
       'district': district,
       'city': city,
