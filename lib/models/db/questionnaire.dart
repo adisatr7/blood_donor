@@ -6,7 +6,7 @@ class Questionnaire {
   Questionnaire({required this.sections});
 
   /// Method untuk mengambil semua jawaban dari semua kuesioner.
-  List<String> get getAllAnswers {
+  List<String> get allAnswers {
     return sections.expand((section) => section.allAnswers).toList();
   }
 }
@@ -36,6 +36,19 @@ class QuestionnaireSection {
   /// Cek apakah semua pertanyaan dalam bab ini sudah dijawab.
   bool get isAllAnswered {
     return items.every((item) => item.isAnswered);
+  }
+
+  /// Method untuk mengubah objek menjadi Map atau JSON
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'sectionNumber': sectionNumber,
+      'items': items.map((item) => {
+        'itemNumber': item.itemNumber,
+        'question': item.question,
+        'answer': item.answer.value,
+      }).toList(),
+    };
   }
 }
 
