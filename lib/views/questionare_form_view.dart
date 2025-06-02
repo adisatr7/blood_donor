@@ -16,12 +16,15 @@ class QuestionnaireFormView extends StatelessWidget {
     QuestionnaireFormController(),
   );
 
+  /// Method formatter internal untuk memformat tanggal lahir
+  /// ke dalam format dd/MM/yyyy
   String _formatBirthDate(DateTime date) {
     return '${date.day.toString().padLeft(2, '0')}'
         '/${date.month.toString().padLeft(2, '0')}'
         '/${date.year}';
   }
 
+  /// Method builder untuk menampilkan field data diri
   Widget _buildFieldsText(String field, String value) {
     return RichText(
       text: TextSpan(
@@ -33,6 +36,8 @@ class QuestionnaireFormView extends StatelessWidget {
     );
   }
 
+  /// Method builder untuk setiap bab kuesioner yang di
+  /// dalamnya berisi banyak item-item pertanyaan
   Widget _buildSection(QuestionnaireSection section) {
     List<QuestionnaireSectionItem> items = section.items;
 
@@ -41,15 +46,14 @@ class QuestionnaireFormView extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          // Judul bab
-          child: Text(section.title, style: AppTextStyles.subheading),
+          child: Text(section.title, style: AppTextStyles.subheading), // Judul bab
         ),
-        // Daftar semua pertanyaan dalam bab ini
-        ...items.map((item) => _buildItem(item)),
+        ...items.map((item) => _buildItem(item)), // Daftar semua pertanyaan dalam bab ini
       ],
     );
   }
 
+  /// Method builder untuk setiap item pertanyaan
   Widget _buildItem(QuestionnaireSectionItem item) {
     return SelectInput(
       label: '${item.itemNumber}. ${item.question}',
