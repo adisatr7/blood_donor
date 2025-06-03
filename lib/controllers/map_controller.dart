@@ -43,10 +43,10 @@ class MapController extends GetxController {
 
       if (lowerQuery.isEmpty) {
         // Jika query kosong, tampilkan semua lokasi
-        locations.assignAll(await _locationService.getAllLocations());
+        locations.assignAll(await _locationService.getAll());
       } else {
         // Jika query search diberikan, cari lokasi berdasarkan nama
-        locations.assignAll(await _locationService.searchLocations(lowerQuery));
+        locations.assignAll(await _locationService.search(lowerQuery));
       }
 
       if (googleMapController == null) {

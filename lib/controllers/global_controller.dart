@@ -9,7 +9,7 @@ class GlobalController extends GetxController {
 
   /// Method untuk memperbarui data user yang sedang login
   void refreshCurrentUser() async {
-    currentUser.value = await _profileService.getProfile();
+    currentUser.value = await _profileService.get();
   }
 
   /// Method untuk menghapus data user yang sedang login. Biasanya

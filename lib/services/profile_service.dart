@@ -10,7 +10,7 @@ class ProfileService {
   late final Dio _apiClient = ApiClient.instance;
 
   /// Ambil data profil pengguna dari server.
-  Future<User> getProfile() async {
+  Future<User> get() async {
     // Kirim request GET ke server
     final response = await _apiClient.get('/profile');
 

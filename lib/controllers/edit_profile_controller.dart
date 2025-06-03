@@ -70,8 +70,8 @@ class EditProfileController extends GetxController {
           'Ukuran gambar terlalu besar. Maksimal 2 MB.',
           snackPosition: SnackPosition.TOP,
           duration: Duration(seconds: 2),
-          colorText: AppColors.black,
-          backgroundColor: AppColors.white,
+          colorText: AppColors.white,
+          backgroundColor: AppColors.danger,
           boxShadows: [AppStyles.cardShadow],
         );
         selectedImage.value = null;

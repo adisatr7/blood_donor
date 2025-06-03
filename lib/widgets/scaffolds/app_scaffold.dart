@@ -50,7 +50,7 @@ class AppScaffold extends StatelessWidget {
 
                     // Header title (Optional)
                     if (title != null)
-                      Text(title ?? '', style: AppTextStyles.heading),
+                      Text(title ?? '', style: AppTextStyles.headingBold),
 
                     // Trailing widget below header (Optional)
                     if (trailing != null) trailing!,

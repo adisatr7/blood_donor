@@ -23,7 +23,7 @@ void showAppDialog({
             // Text: Title
             Text(
               title,
-              style: AppTextStyles.subheading,
+              style: AppTextStyles.subheadingBold,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),

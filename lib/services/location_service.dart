@@ -8,7 +8,7 @@ class LocationService {
   final Dio _apiClient = ApiClient.instance;
 
   /// Mengambil semua lokasi dari server
-  Future<List<Location>> getAllLocations() async {
+  Future<List<Location>> getAll() async {
     final response = await _apiClient.get('/locations');
 
     if (response.data == null || response.data['success'] == false) {
@@ -21,7 +21,7 @@ class LocationService {
   }
 
   /// Mencari nama lokasi berdasarkan query
-  Future<List<Location>> searchLocations(String query) async {
+  Future<List<Location>> search(String query) async {
     // Jika query kosong, serahkan hasil kosong. Pastikan di
     // MapController jika search query kosong, panggil method
     // getAllLocations() saja
@@ -29,7 +29,8 @@ class LocationService {
       return [];
     }
 
-    final response = await _apiClient.get('/locations/search',
+    final response = await _apiClient.get(
+      '/locations/search',
       queryParameters: {'name': query},
     );
 
