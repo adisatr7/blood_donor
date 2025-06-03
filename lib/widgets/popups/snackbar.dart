@@ -8,8 +8,8 @@ void showSnackbar({
   required String message,
   SnackPosition position = SnackPosition.TOP,
   Duration duration = const Duration(seconds: 2),
-  Color? colorText = AppColors.white,
-  Color? backgroundColor = AppColors.black,
+  Color? colorText = AppColors.black,
+  Color? backgroundColor = AppColors.white,
 }) {
   Get.snackbar(
     title,
