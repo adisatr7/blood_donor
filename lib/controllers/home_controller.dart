@@ -42,6 +42,11 @@ class HomeController extends GetxController {
     Get.toNamed(AppRoutes.map);
   }
 
+  void handleGoToAppointmentDetail(int appointmentId) {
+    // Arahkan ke halaman detail janji temu dengan ID yang diberikan
+    Get.toNamed(AppRoutes.appointmentDetail, arguments: appointmentId);
+  }
+
   Future<void> _fetchAppointments() async {
     appointments.value = await _appointmentService.getAppointments();
   }

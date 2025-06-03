@@ -7,8 +7,13 @@ import 'package:blood_donor/core/theme.dart';
 
 class AppointmentCard extends StatelessWidget {
   final Appointment appointment;
+  final void Function(int) onTap;
 
-  const AppointmentCard({super.key, required this.appointment});
+  const AppointmentCard({
+    super.key,
+    required this.appointment,
+    required this.onTap,
+  });
 
   /// Method internal untuk memformat tanggal dan waktu
   /// dari objek [Appointment] menjadi string yang mudah dibaca.
@@ -42,60 +47,63 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        // Dekorasi untuk efek kartu
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [AppStyles.cardShadow],
-        ),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Garis vertikal kiri berwarna sesuai status
-              Container(
-                width: 8,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: _getStatusTextStyle().color,
-                  borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(8),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [AppStyles.cardShadow],
+      ),
+      child: Material(
+        child: InkWell(
+          onTap: () {
+            onTap(appointment.id);
+          },
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Garis vertikal kiri berwarna sesuai status
+                Container(
+                  width: 8,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: _getStatusTextStyle().color,
+                    borderRadius: BorderRadius.horizontal(
+                      left: Radius.circular(8),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 12), // Jarak antara garis kiri dan text
-              // Text group berisi nama lokasi, waktu buka, dan status kunjungan
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Nama lokasi
-                      Text(
-                        appointment.location.name,
-                        style: AppTextStyles.subheading,
-                      ),
+                const SizedBox(width: 12), // Jarak antara garis kiri dan text
+                // Text group berisi nama lokasi, waktu buka, dan status kunjungan
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Nama lokasi
+                        Text(
+                          appointment.location.name,
+                          style: AppTextStyles.subheadingBold,
+                        ),
 
-                      // Waktu buka
-                      Text(
-                        _formatDateTime(appointment),
-                        style: AppTextStyles.bodyGray,
-                      ),
+                        // Waktu buka
+                        Text(
+                          _formatDateTime(appointment),
+                          style: AppTextStyles.bodyGray,
+                        ),
 
-                      // Status kunjungan
-                      Text(
-                        appointment.statusString,
-                        style: _getStatusTextStyle(),
-                      ),
-                    ],
+                        // Status kunjungan
+                        Text(
+                          appointment.statusString,
+                          style: _getStatusTextStyle(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
