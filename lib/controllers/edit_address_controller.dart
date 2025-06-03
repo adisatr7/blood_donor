@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:blood_donor/services/profile_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/user.dart';
-import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 
 class EditAddressController extends GetxController {
@@ -68,15 +68,7 @@ class EditAddressController extends GetxController {
       Get.back();
 
       // Tampilkan notifikasi sukses
-      Get.snackbar(
-        'Berhasil',
-        'Alamat berhasil diperbarui',
-        snackPosition: SnackPosition.TOP,
-        duration: Duration(seconds: 2),
-        colorText: AppColors.black,
-        backgroundColor: AppColors.white,
-        boxShadows: [AppStyles.cardShadow],
-      );
+      showSnackbar(title: 'Berhasil', message: 'Alamat berhasil diperbarui');
     } on DioException catch (e) {
       // Jika ada error, tampilkan pesan error
       showAppError('Gagal Menyimpan Alamat Baru', e);

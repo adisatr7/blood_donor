@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:blood_donor/services/auth_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/core/app_routes.dart';
-import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 
 class SettingsController extends GetxController {
   final AuthService _authService = AuthService.instance;
@@ -41,14 +41,9 @@ class SettingsController extends GetxController {
     global.clearCurrentUser();
 
     // Tampilkan pemberitahuan logout
-    Get.snackbar(
-      'Terima Kasih Telah Menggunakan Aplikasi Ini',
-      'Anda telah berhasil keluar dari akun Anda.',
-      snackPosition: SnackPosition.TOP,
-      duration: Duration(seconds: 2),
-      colorText: AppColors.black,
-      backgroundColor: AppColors.white,
-      boxShadows: [AppStyles.cardShadow],
+    showSnackbar(
+      title: 'Terima Kasih Telah Menggunakan Aplikasi Ini',
+      message: 'Anda telah berhasil keluar dari akun Anda.',
     );
   }
 }

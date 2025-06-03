@@ -7,8 +7,8 @@ import 'package:blood_donor/models/db/questionnaire.dart';
 import 'package:blood_donor/constants/questionnaire_list.dart';
 import 'package:blood_donor/models/api/create_appointment_request.dart';
 import 'package:blood_donor/core/app_routes.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
-import 'package:blood_donor/core/theme.dart';
 
 class QuestionnaireFormController extends GetxController {
   final Location selectedLocation = Get.arguments as Location;
@@ -52,15 +52,7 @@ class QuestionnaireFormController extends GetxController {
       Get.offAllNamed(AppRoutes.home);
 
       // Tampilkan pesan sukses atau navigasi ke halaman lain
-      Get.snackbar(
-        'Sukses',
-        'Form kuesioner berhasil dikirim',
-        snackPosition: SnackPosition.TOP,
-        duration: Duration(seconds: 2),
-        colorText: AppColors.black,
-        backgroundColor: AppColors.white,
-        boxShadows: [AppStyles.cardShadow],
-      );
+      showSnackbar(title: 'Sukses', message: 'Form kuesioner berhasil dikirim');
     } on Exception catch (e) {
       // Tampilkan pesan kesalahan
       showAppError('Terjadi Kesalahan', e);
