@@ -8,6 +8,7 @@ import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/widgets/inputs/select_input.dart';
 import 'package:blood_donor/models/db/user.dart';
 import 'package:blood_donor/widgets/buttons/wide_button.dart';
+import 'package:intl/intl.dart';
 
 class QuestionnaireFormView extends StatelessWidget {
   QuestionnaireFormView({super.key});
@@ -15,14 +16,6 @@ class QuestionnaireFormView extends StatelessWidget {
   final QuestionnaireFormController controller = Get.put(
     QuestionnaireFormController(),
   );
-
-  /// Method formatter internal untuk memformat tanggal lahir
-  /// ke dalam format dd/MM/yyyy
-  String _formatBirthDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}'
-        '/${date.month.toString().padLeft(2, '0')}'
-        '/${date.year}';
-  }
 
   /// Method builder untuk menampilkan field data diri
   Widget _buildFieldsText(String field, String value) {
@@ -46,9 +39,14 @@ class QuestionnaireFormView extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(section.title, style: AppTextStyles.subheading), // Judul bab
+          child: Text(
+            section.title,
+            style: AppTextStyles.subheadingBold,
+          ), // Judul bab
         ),
-        ...items.map((item) => _buildItem(item)), // Daftar semua pertanyaan dalam bab ini
+        ...items.map(
+          (item) => _buildItem(item),
+        ), // Daftar semua pertanyaan dalam bab ini
       ],
     );
   }
@@ -65,12 +63,15 @@ class QuestionnaireFormView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat formatter = DateFormat('dd/MM/yyyy', 'id');
+
     // Ambil data user dan nama lokasi agar kode tidak terlalu panjang
     final User userData = controller.global.currentUser.value!;
     final String locationName = controller.selectedLocation.name;
 
     // Ambil semua bab kuesioner
-    final List<QuestionnaireSection> sections = controller.allQuestionnaireSections;
+    final List<QuestionnaireSection> sections =
+        controller.allQuestionnaireSections;
 
     return AppScaffold(
       title: 'Form Kuesioner',
@@ -78,14 +79,14 @@ class QuestionnaireFormView extends StatelessWidget {
       backButtonLabel: 'Batal Isi',
       footer: WideButton(
         label: 'Kirim',
+        onPressed: controller.handleSubmit,
         isLoading: controller.isLoading,
         isDisabled: controller.isSubmitDisabled,
-        onPressed: controller.handleSubmit,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Data Diri Anda', style: AppTextStyles.subheading),
+          Text('Data Diri Anda', style: AppTextStyles.subheadingBold),
           const SizedBox(height: 6),
 
           // Tampilkan data diri berdasarkan profil user
@@ -103,23 +104,14 @@ class QuestionnaireFormView extends StatelessWidget {
               _buildFieldsText('Lokasi Terpilih', locationName),
               _buildFieldsText('NIK', userData.nik),
               _buildFieldsText('Nama Lengkap', userData.name),
-              _buildFieldsText(
-                'TTL',
-                '${userData.birthPlace}, ${_formatBirthDate(userData.birthDate)}',
-              ),
-              _buildFieldsText(
-                'Umur',
-                '${DateTime.now().year - userData.birthDate.year} tahun',
-              ),
+              _buildFieldsText('TTL', '${userData.birthPlace}, ${formatter.format(userData.birthDate)}'),
+              _buildFieldsText('Umur', '${DateTime.now().year - userData.birthDate.year} tahun'),
               _buildFieldsText('Jenis Kelamin', userData.gender),
               const SizedBox(height: 6),
 
               _buildFieldsText('Pekerjaan', userData.job),
               _buildFieldsText('Alamat', userData.address),
-              _buildFieldsText(
-                'Kel/Kec',
-                '${userData.village}/${userData.district}',
-              ),
+              _buildFieldsText('Kel/Kec', '${userData.village}/${userData.district}'),
               _buildFieldsText('Wilayah', userData.city),
             ],
           ),

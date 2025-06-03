@@ -13,11 +13,10 @@ class AboutView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text('Sejarah PMI', style: AppTextStyles.heading),
+          const Text('Sejarah PMI', style: AppTextStyles.headingBold),
           const SizedBox(height: 12),
 
           // TODO: Tambahkan gambar/logo PMI di sini (jika ada)
-
           const Text(
             'Palang Merah Indonesia sebenarnya dimulai sebelum Perang Dunia II. '
             'Pada 21 Oktober 1873, Pemerintah Kolonial Belanda mendirikan Palang '

@@ -48,7 +48,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> _fetchAppointments() async {
-    appointments.value = await _appointmentService.getAppointments();
+    appointments.value = await _appointmentService.getAll();
   }
 
   /// Method internal untuk mengecek apakah user sudah mengisi alamat

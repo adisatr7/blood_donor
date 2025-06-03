@@ -21,7 +21,7 @@ class DateInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter = DateFormat('dd MMM yyyy');
+    final DateFormat formatter = DateFormat('dd MMM yyyy', 'id');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

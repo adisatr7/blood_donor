@@ -6,6 +6,7 @@ import 'package:blood_donor/widgets/scaffolds/app_scaffold.dart';
 import 'package:blood_donor/widgets/home/user_profile_header.dart';
 import 'package:blood_donor/widgets/buttons/wide_button.dart';
 import 'package:blood_donor/widgets/home/appointment_card.dart';
+import 'package:blood_donor/core/theme.dart';
 
 class HomeView extends StatelessWidget {
   final HomeController controller = Get.put(HomeController());
@@ -18,7 +19,10 @@ class HomeView extends StatelessWidget {
     final appointment = controller.appointments[index];
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: AppointmentCard(appointment: appointment),
+      child: AppointmentCard(
+        appointment: appointment,
+        onTap: controller.handleGoToAppointmentDetail,
+      ),
     );
   }
 
@@ -41,6 +45,16 @@ class HomeView extends StatelessWidget {
             onPressed: controller.goToMap,
           ),
           const SizedBox(height: 12),
+
+          Row(
+            children: [
+              Text(
+                'Riwayat Donor',
+                style: AppTextStyles.heading,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
 
           // 📅 Daftar sesi kunjungan donor (appointment)
           Obx(

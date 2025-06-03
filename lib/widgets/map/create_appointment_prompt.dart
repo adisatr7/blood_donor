@@ -40,7 +40,7 @@ class CreateAppointmentPrompt extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Nama lokasi
-          Text(location.name, style: AppTextStyles.subheading),
+          Text(location.name, style: AppTextStyles.subheadingBold),
 
           // Jam buka lokasi
           Text(

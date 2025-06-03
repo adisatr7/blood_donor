@@ -8,6 +8,7 @@ import 'package:blood_donor/constants/questionnaire_list.dart';
 import 'package:blood_donor/models/api/create_appointment_request.dart';
 import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
+import 'package:blood_donor/core/theme.dart';
 
 class QuestionnaireFormController extends GetxController {
   final Location selectedLocation = Get.arguments as Location;
@@ -45,7 +46,7 @@ class QuestionnaireFormController extends GetxController {
       );
 
       // Tampilkan dialog konfirmasi sebelum mengirim
-      await _appointmentService.createAppointment(request);
+      await _appointmentService.create(request);
 
       // Kembalikan user ke halaman beranda (Home)
       Get.offAllNamed(AppRoutes.home);
@@ -54,7 +55,11 @@ class QuestionnaireFormController extends GetxController {
       Get.snackbar(
         'Sukses',
         'Form kuesioner berhasil dikirim',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
+        duration: Duration(seconds: 2),
+        colorText: AppColors.black,
+        backgroundColor: AppColors.white,
+        boxShadows: [AppStyles.cardShadow],
       );
     } on Exception catch (e) {
       // Tampilkan pesan kesalahan

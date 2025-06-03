@@ -8,8 +8,24 @@ class AppointmentService {
   static final AppointmentService instance = AppointmentService();
   final Dio _apiClient = ApiClient.instance;
 
+  /// Method untuk mendaftar sesi kunjungan baru
+  Future<void> create(CreateAppointmentRequest request) async {
+    // Kirim request POST ke server dengan payload
+    final response = await _apiClient.post(
+      '/appointments',
+      data: request.toMap(),
+    );
+
+    // Handle error jika request gagal
+    if (response.data == null || response.data['success'] == false) {
+      throw Exception(
+        'Gagal mendaftar sesi kunjungan dengan status code: ${response.statusCode}: ${response.data}',
+      );
+    }
+  }
+
   /// Ambil daftar sesi kunjungan milik user dari server
-  Future<List<Appointment>> getAppointments() async {
+  Future<List<Appointment>> getAll() async {
     // Kirim request GET ke server
     final response = await _apiClient.get('/appointments');
 
@@ -25,16 +41,19 @@ class AppointmentService {
     return data.map((e) => Appointment.fromMap(e)).toList();
   }
 
-  /// Method untuk mendaftar sesi kunjungan baru
-  Future<void> createAppointment(CreateAppointmentRequest request) async {
-    // Kirim request POST ke server dengan payload
-    final response = await _apiClient.post('/appointments', data: request.toMap());
+  /// Ambil sesi kunjungan berdasarkan ID
+  Future<Appointment> getById(int id) async {
+    // Kirim request GET ke server untuk mengambil sesi kunjungan berdasarkan ID
+    final response = await _apiClient.get('/appointments/$id');
 
     // Handle error jika request gagal
     if (response.data == null || response.data['success'] == false) {
       throw Exception(
-        'Gagal mendaftar sesi kunjungan dengan status code: ${response.statusCode}: ${response.data}',
+        'Gagal mengambil sesi kunjungan dengan ID $id: ${response.statusCode}: ${response.data}',
       );
     }
+
+    // Ambil data sesi kunjungan untuk diserahkan ke Controller
+    return Appointment.fromMap(response.data['data']);
   }
 }
