@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import 'package:blood_donor/services/profile_service.dart';
 import 'package:blood_donor/models/api/edit_password_request.dart';
-import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 import 'package:blood_donor/widgets/popups/app_dialog.dart';
 
 class EditPasswordController extends GetxController {
@@ -55,15 +55,7 @@ class EditPasswordController extends GetxController {
       Get.back();
 
       // Tampilkan notifikasi sukses
-      Get.snackbar(
-        'Berhasil',
-        'Kata sandi berhasil diubah',
-        snackPosition: SnackPosition.TOP,
-        duration: Duration(seconds: 2),
-        colorText: AppColors.black,
-        backgroundColor: AppColors.white,
-        boxShadows: [AppStyles.cardShadow],
-      );
+      showSnackbar(title: 'Berhasil', message: 'Kata sandi berhasil diubah');
     } on DioException catch (e) {
       // Jika ada error, tampilkan pesan error
       showAppError('Gagal Menyimpan Kata Sandi Baru', e);

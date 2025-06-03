@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'package:blood_donor/services/appointment_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/appointment.dart';
 import 'package:blood_donor/constants/appointment_status.dart';
-import 'package:blood_donor/core/theme.dart';
-import 'package:intl/intl.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 
 class AppointmentDetailController extends GetxController {
   final AppointmentService _appointmentService = AppointmentService.instance;
@@ -62,15 +62,7 @@ class AppointmentDetailController extends GetxController {
       }
     } catch (e) {
       // Tangani error jika gagal mengambil data
-      Get.snackbar(
-        'Gagal Memuat Data',
-        e.toString(),
-        snackPosition: SnackPosition.TOP,
-        duration: Duration(seconds: 2),
-        colorText: AppColors.white,
-        backgroundColor: AppColors.danger,
-        boxShadows: [AppStyles.cardShadow],
-      );
+      showSnackbar(title: 'Gagal Memuat Data', message: e.toString());
     } finally {
       // Hentikan animasi loading
       isLoading.value = false;
