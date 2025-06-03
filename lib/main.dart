@@ -12,11 +12,12 @@ import 'package:blood_donor/views/address_signup_view.dart';
 import 'package:blood_donor/views/home_view.dart';
 import 'package:blood_donor/views/map_view.dart';
 import 'package:blood_donor/views/about_view.dart';
+import 'package:blood_donor/views/appointment_detail_view.dart';
+import 'package:blood_donor/views/questionare_form_view.dart';
 import 'package:blood_donor/views/settings_view.dart';
 import 'package:blood_donor/views/edit_profile_view.dart';
 import 'package:blood_donor/views/edit_address_view.dart';
 import 'package:blood_donor/views/edit_password_view.dart';
-import 'package:blood_donor/views/questionare_form_view.dart';
 
 void main() async {
   // Pastikan binding Flutter sudah diinisialisasi sebelum memanggil fungsi lain
@@ -26,7 +27,7 @@ void main() async {
   await dotenv.load(fileName: '.env');
 
   // Atur format tanggal untuk bahasa Indonesia
-  await initializeDateFormatting('id_ID', null);
+  await initializeDateFormatting('id', null);
 
   // Inisiasi GlobalController agar data user dapat diakses di seluruh halaman di aplikasi
   Get.put(GlobalController(), permanent: true);
@@ -45,6 +46,7 @@ void main() async {
         GetPage(name: AppRoutes.map, page: () => MapView()),
         GetPage(name: AppRoutes.about, page: () => AboutView()),
         GetPage(name: AppRoutes.questionareForm, page: () => QuestionnaireFormView()),
+        GetPage(name: AppRoutes.appointmentDetail, page: () => AppointmentDetailView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),
