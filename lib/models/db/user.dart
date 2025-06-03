@@ -102,7 +102,7 @@ class User {
       'name': name,
       'password': password,
       'birthPlace': birthPlace,
-      'birthDate': birthDate.toIso8601String(),
+      'birthDate': birthDate.toUtc().toIso8601String(),
       'gender': User.genderStringToEnum(gender),
       'job': job,
       'weightKg': weightKg,
@@ -129,7 +129,7 @@ class User {
               ? await MultipartFile.fromFile(profilePicture!.path)
               : null,
       'birthPlace': birthPlace,
-      'birthDate': birthDate.toIso8601String(),
+      'birthDate': birthDate.toUtc().toIso8601String(),
       'gender': gender,
       'job': job,
       'weightKg': weightKg,
