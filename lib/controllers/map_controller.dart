@@ -22,11 +22,17 @@ class MapController extends GetxController {
   final RxBool isLoading = true.obs;
 
   @override
-  void onInit() async {
-    super.onInit();
+  void onReady() async {
+    super.onReady();
 
+    // Begitu halaman map dibuka, cek dan minta izin lokasi
     await _checkAndRequestLocationPermission();
+
+    // Lacak lokasi user saat ini
     _locateUserLocation();
+
+    // Ambil semua lokasi donor darah yang ada di database
+    locations.assignAll(await _locationService.getAll());
   }
 
   /// Method untuk mengambil GoogleMapController dari widget MapView
