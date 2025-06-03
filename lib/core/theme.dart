@@ -16,11 +16,29 @@ class AppColors {
 class AppTextStyles {
   static const TextStyle heading = TextStyle(
     fontSize: 24,
+    fontWeight: FontWeight.normal,
+    color: AppColors.black,
+  );
+
+  static const TextStyle headingBold = TextStyle(
+    fontSize: 24,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
   );
 
   static const TextStyle subheading = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: AppColors.black,
+  );
+
+  static const TextStyle subheadingGray = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: AppColors.gray,
+  );
+
+  static const TextStyle subheadingBold = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
