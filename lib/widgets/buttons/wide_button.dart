@@ -5,44 +5,44 @@ import 'package:blood_donor/core/theme.dart';
 enum ButtonType { primary, secondary }
 
 class WideButton extends StatelessWidget {
-  final String label;
+  final String? label;
   final VoidCallback? onPressed;
   final ButtonType type;
   final RxBool isLoading;
   final RxBool isDisabled;
+  final Icon? leftIcon;
 
   WideButton({
     super.key,
-    required this.label,
+    this.label,
     this.onPressed,
     this.type = ButtonType.primary,
     RxBool? isLoading,
     RxBool? isDisabled,
-  })  : isLoading = isLoading ?? false.obs,
-        isDisabled = isDisabled ?? false.obs;
+    this.leftIcon,
+  }) : isLoading = isLoading ?? false.obs,
+       isDisabled = isDisabled ?? false.obs;
 
   @override
   Widget build(BuildContext context) {
-    // Determine the background color based on the button type
+    // Tentukan warna latar belakang berdasarkan tipe tombol
     Color bgColor =
         type == ButtonType.primary ? AppColors.primary : AppColors.secondary;
 
     return SizedBox(
-      width: double.infinity, // To stretch the button across the screen
+      width: double.infinity, // Supaya tombol melebar sepanjang layar
       child: Obx(
         () => ElevatedButton(
           onPressed: (isLoading.value || isDisabled.value) ? null : onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: bgColor,
             disabledBackgroundColor: isDisabled.value ? AppColors.gray : bgColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             elevation: 2,
           ),
           child:
               isLoading.value
-                  // If loading, show a circular progress indicator
+                  // Jika sedang loading, tampilkan circular progress indicator
                   ? SizedBox(
                     width: 20,
                     height: 20,
@@ -54,13 +54,24 @@ class WideButton extends StatelessWidget {
                       strokeWidth: 2,
                     ),
                   )
-                  // Otherwise, show the text label
-                  : Text(
-                    label,
-                    style:
-                        type == ButtonType.primary
-                            ? AppTextStyles.bodyWhite
-                            : AppTextStyles.body,
+                  // Jika tidak, tampilkan teks label (dengan optional leftIcon)
+                  : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (leftIcon != null) ...[
+                        leftIcon!,
+                        const SizedBox(width: 8),
+                      ],
+                      if (label != null)
+                        Text(
+                          label!,
+                          style:
+                              type == ButtonType.primary
+                                  ? AppTextStyles.bodyWhite
+                                  : AppTextStyles.body,
+                        ),
+                    ],
                   ),
         ),
       ),
