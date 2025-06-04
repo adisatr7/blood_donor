@@ -6,12 +6,14 @@ import 'package:blood_donor/core/theme.dart';
 
 class UserProfileHeader extends StatelessWidget {
   final Rxn<User> currentUser;
-  final VoidCallback onIconPress;
+  final VoidCallback onGoToChat;
+  final VoidCallback onGoToSettings;
 
   const UserProfileHeader({
     super.key,
     required this.currentUser,
-    required this.onIconPress,
+    required this.onGoToChat,
+    required this.onGoToSettings,
   });
 
   @override
@@ -64,8 +66,10 @@ class UserProfileHeader extends StatelessWidget {
             ),
           ),
 
+          // ✨ Tombol Chat
+          IconButton(icon: const Icon(Icons.chat_rounded), onPressed: onGoToChat),
           // ⚙️ Tombol Pengaturan
-          IconButton(icon: const Icon(Icons.menu), onPressed: onIconPress),
+          IconButton(icon: const Icon(Icons.menu), onPressed: onGoToSettings),
         ],
       ),
     );

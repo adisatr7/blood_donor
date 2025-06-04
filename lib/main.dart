@@ -12,8 +12,9 @@ import 'package:blood_donor/views/address_signup_view.dart';
 import 'package:blood_donor/views/home_view.dart';
 import 'package:blood_donor/views/map_view.dart';
 import 'package:blood_donor/views/about_view.dart';
-import 'package:blood_donor/views/appointment_detail_view.dart';
 import 'package:blood_donor/views/questionare_form_view.dart';
+import 'package:blood_donor/views/appointment_detail_view.dart';
+import 'package:blood_donor/views/ai_chat_view.dart';
 import 'package:blood_donor/views/settings_view.dart';
 import 'package:blood_donor/views/edit_profile_view.dart';
 import 'package:blood_donor/views/edit_address_view.dart';
@@ -47,6 +48,7 @@ void main() async {
         GetPage(name: AppRoutes.about, page: () => AboutView()),
         GetPage(name: AppRoutes.questionareForm, page: () => QuestionnaireFormView()),
         GetPage(name: AppRoutes.appointmentDetail, page: () => AppointmentDetailView()),
+        GetPage(name: AppRoutes.aiChat, page: () => AiChatView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),

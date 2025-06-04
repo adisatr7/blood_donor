@@ -19,11 +19,17 @@ class HomeController extends GetxController {
     await _fetchAppointments();
   }
 
+  /// Method untuk mengarahkan ke halaman chat
+  void goToChat() {
+    Get.toNamed(AppRoutes.aiChat);
+  }
+
+  /// Method untuk mengarahkan ke halaman pengaturan
   void goToSettings() {
     Get.toNamed(AppRoutes.settings);
   }
 
-  /// Method untuk mengarahkan ke Map
+  /// Method untuk mengarahkan ke halaman Map
   void goToMap() {
     // Cek terlebih dahulu apakah user sudah mengisi alamat
     if (_isAddressIncomplete) {
@@ -33,7 +39,8 @@ class HomeController extends GetxController {
       // Tampilkan dialog peringatan
       showAppDialog(
         title: 'Anda Belum Mengisi Alamat',
-        message: 'Harap isi alamat Anda terlebih dahulu sebelum menggunakan fitur peta.',
+        message:
+            'Harap isi alamat Anda terlebih dahulu sebelum menggunakan fitur peta.',
       );
       return;
     }
@@ -42,7 +49,12 @@ class HomeController extends GetxController {
     Get.toNamed(AppRoutes.map);
   }
 
-  void handleGoToAppointmentDetail(int appointmentId) {
+  /// Method untuk mengarahkan ke halaman AI Chat
+  void goToAiChat() {
+    Get.toNamed(AppRoutes.aiChat);
+  }
+
+  void goToAppointmentDetail(int appointmentId) {
     // Arahkan ke halaman detail janji temu dengan ID yang diberikan
     Get.toNamed(AppRoutes.appointmentDetail, arguments: appointmentId);
   }
