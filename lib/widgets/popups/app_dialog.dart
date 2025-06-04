@@ -9,7 +9,10 @@ void showAppDialog({
   required String message,
   String confirmText = 'Tutup',
   VoidCallback? onConfirm,
+  String? cancelText,
+  VoidCallback? onCancel,
 }) {
+  // Menampilkan dialog menggunakan Get.dialog
   Get.dialog(
     Dialog(
       backgroundColor: AppColors.white,
@@ -20,7 +23,7 @@ void showAppDialog({
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Text: Title
+            // Menampilkan judul dialog
             Text(
               title,
               style: AppTextStyles.subheadingBold,
@@ -28,7 +31,7 @@ void showAppDialog({
             ),
             const SizedBox(height: 10),
 
-            // Text: Message
+            // Menampilkan pesan dialog
             Text(
               message,
               style: AppTextStyles.bodyGray,
@@ -36,20 +39,69 @@ void showAppDialog({
             ),
             const SizedBox(height: 12),
 
-            // Button: Close
+            // Garis pemisah antara pesan dan tombol
             const Divider(height: 1, color: AppColors.secondary),
-            InkWell(
-              borderRadius: BorderRadius.circular(14),
-              onTap: () {
-                Get.back();
-                onConfirm?.call();
-              },
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                child: Text(confirmText, style: AppTextStyles.bodyBoldPrimary),
+
+            // Menampilkan tombol aksi (bisa 1 atau 2 tombol)
+            if (cancelText != null)
+              Row(
+                children: [
+                  // Tombol batal
+                  Expanded(
+                    child: InkWell(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(14),
+                      ),
+                      onTap: () {
+                        Get.back();
+                        onCancel?.call();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Text(cancelText, style: AppTextStyles.body),
+                      ),
+                    ),
+                  ),
+                  // Garis pemisah vertikal antara tombol
+                  Container(
+                    width: 1,
+                    height: 48,
+                    color: AppColors.secondary,
+                  ),
+                  // Tombol konfirmasi
+                  Expanded(
+                    child: InkWell(
+                      borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(14),
+                      ),
+                      onTap: () {
+                        Get.back();
+                        onConfirm?.call();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Text(confirmText, style: AppTextStyles.bodyBoldPrimary),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            else
+              // Jika hanya ada tombol konfirmasi
+              InkWell(
+                borderRadius: BorderRadius.circular(14),
+                onTap: () {
+                  Get.back();
+                  onConfirm?.call();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  child: Text(confirmText, style: AppTextStyles.bodyBoldPrimary),
+                ),
               ),
-            ),
           ],
         ),
       ),
