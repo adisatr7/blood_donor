@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: AppointmentCard(
         appointment: appointment,
-        onTap: controller.handleGoToAppointmentDetail,
+        onTap: controller.goToAppointmentDetail,
       ),
     );
   }
@@ -35,13 +35,18 @@ class HomeView extends StatelessWidget {
           // 🧑‍🦳 Info tentang user dan tombol pengaturan
           UserProfileHeader(
             currentUser: controller.global.currentUser,
-            onIconPress: controller.goToSettings,
+            onGoToChat: controller.goToChat,
+            onGoToSettings: controller.goToSettings,
           ),
           const SizedBox(height: 12),
 
           // 🗺️ Tombol untuk mencari lokasi donor terdekat
           WideButton(
-            label: 'Cari Lokasi Donor Terdekat',
+            leftIcon: const Icon(
+              Icons.bloodtype_rounded,
+              color: AppColors.white,
+            ),
+            label: 'Cari Donor Terdekat',
             onPressed: controller.goToMap,
           ),
           const SizedBox(height: 12),
@@ -57,14 +62,26 @@ class HomeView extends StatelessWidget {
           const SizedBox(height: 8),
 
           // 📅 Daftar sesi kunjungan donor (appointment)
-          Obx(
-            () => ListView.builder(
+          Obx(() {
+            // Jika riwayat donot kosong, tampilkan text
+            if (controller.appointments.isEmpty) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 64),
+                child: Text(
+                  'Belum ada riwayat donor.\nYuk mulai daftar donor sekarang!',
+                  style: AppTextStyles.bodyGray,
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
+
+            return ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.appointments.length,
               itemBuilder: _buildItem,
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );
