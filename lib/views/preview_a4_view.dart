@@ -18,7 +18,7 @@ class PreviewA4View extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
-      body: Obx(() => questionnairePdfPreviewA4(controller.user.value, controller.appointment.value)),
+      body: Obx(() => questionnairePdfPreviewA4(controller.user.value, controller.appointment.value)), 
     );
   }
 }
