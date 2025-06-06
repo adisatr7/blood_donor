@@ -1,3 +1,4 @@
+import 'package:blood_donor/views/preview_a4_view.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,8 +52,9 @@ void main() async {
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),
         GetPage(name: AppRoutes.editPassword, page: () => EditPasswordView()),
+        GetPage(name: '/temp', page: () => PreviewA4View()),
       ],
-      initialRoute: AppRoutes.login,
+      initialRoute: '/temp',
     ),
   );
 }
