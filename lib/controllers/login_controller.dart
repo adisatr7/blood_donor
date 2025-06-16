@@ -15,7 +15,15 @@ class LoginController extends GetxController {
   final TextEditingController nikController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final RxBool isLoginDisabled = true.obs;
-  final RxBool isLoading = false.obs;
+  final RxBool isLoading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Cek apakah server dapat dijangkau saat controller diinisialisasi
+    _checkServerReadiness();
+  }
 
   /// Method untuk mengecek apakah kolom inputan sudah valid. Untuk dipasangkan
   /// ke prop `onChanged` pada kolom inputan yang wajib diisi
@@ -65,6 +73,22 @@ class LoginController extends GetxController {
   /// Handler method untuk dipasangkan ke tombol Daftar Akun
   void handleSignup() {
     _goToSignupPage();
+  }
+
+  /// Method internal untuk mengecek apakah server dapat dijangkau
+  void _checkServerReadiness() async {
+    try {
+      isLoading.value = true;
+      await _authService.isServerUp();
+    } catch (_) {
+      // Jika tidak dapat dijangkau, tampilkan dialog error
+      showAppDialog(
+        title: 'Aplikasi Tidak Dapat Terhubung ke Server',
+        message: 'Periksa koneksi internet Anda atau coba lagi nanti.',
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   /// Method internal untuk membuka halaman Sign Up (Daftar Akun)
