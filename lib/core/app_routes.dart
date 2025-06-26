@@ -6,6 +6,7 @@ class AppRoutes {
   static const String map = '/map';
   static const String questionareForm = '/questionare-form';
   static const String appointmentDetail = '/appointments/'; // Param wajib: `appointmentId`
+  static const String pdfPrint = '/pdf-print';
   static const String aiChat = '/ai-chat';
 
   static const String about = '/about';

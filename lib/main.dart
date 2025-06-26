@@ -1,6 +1,5 @@
-import 'package:blood_donor/views/preview_a4_view.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -15,6 +14,7 @@ import 'package:blood_donor/views/map_view.dart';
 import 'package:blood_donor/views/about_view.dart';
 import 'package:blood_donor/views/questionare_form_view.dart';
 import 'package:blood_donor/views/appointment_detail_view.dart';
+import 'package:blood_donor/views/pdf_print_view.dart';
 import 'package:blood_donor/views/ai_chat_view.dart';
 import 'package:blood_donor/views/settings_view.dart';
 import 'package:blood_donor/views/edit_profile_view.dart';
@@ -37,6 +37,7 @@ void main() async {
   // Initialize the app and routing
   runApp(
     GetMaterialApp(
+      theme: ThemeData(primaryColor: AppColors.white),
       debugShowCheckedModeBanner: false,
       customTransition: AppViewTransition(),
       transitionDuration: const Duration(milliseconds: 300),
@@ -49,14 +50,14 @@ void main() async {
         GetPage(name: AppRoutes.about, page: () => AboutView()),
         GetPage(name: AppRoutes.questionareForm, page: () => QuestionnaireFormView()),
         GetPage(name: AppRoutes.appointmentDetail, page: () => AppointmentDetailView()),
+        GetPage(name: AppRoutes.pdfPrint, page: () => PdfPrintView()),
         GetPage(name: AppRoutes.aiChat, page: () => AiChatView()),
         GetPage(name: AppRoutes.settings, page: () => SettingsView()),
         GetPage(name: AppRoutes.editProfile, page: () => EditProfileView()),
         GetPage(name: AppRoutes.editAddress, page: () => EditAddressView()),
         GetPage(name: AppRoutes.editPassword, page: () => EditPasswordView()),
-        GetPage(name: '/temp', page: () => PreviewA4View()),
       ],
-      initialRoute: '/temp',
+      initialRoute: AppRoutes.login,
     ),
   );
 }

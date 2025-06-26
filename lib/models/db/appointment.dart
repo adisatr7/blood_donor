@@ -117,4 +117,12 @@ class AppointmentQuestionnaire {
       'answer': answer,
     };
   }
+
+  bool get isYes {
+    return answer.toLowerCase() == 'ya';
+  }
+
+  bool get isNo {
+    return answer.toLowerCase() == 'tidak';
+  }
 }

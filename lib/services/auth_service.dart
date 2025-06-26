@@ -12,6 +12,19 @@ class AuthService {
   static final GetStorage _storageClient = GetStorage();
   final Dio _apiClient = ApiClient.instance;
 
+  /// Cek apakah aplikasi dapat terhubung ke server.
+  Future<bool> isServerUp() async {
+    try {
+      // Coba kirim request ke server
+      final response = await _apiClient.get('/health-check');
+      // Jika berhasil, berarti terhubung
+      return response.statusCode == 200;
+    } catch (e) {
+      // Jika terjadi error, berarti tidak terhubung
+      return false;
+    }
+  }
+
   /// Login ke server dengan NIK dan password.
   Future<LoginResponse> login(LoginRequest request) async {
     // Kirim request ke server
