@@ -82,6 +82,9 @@ class EditProfileController extends GetxController {
 
       // Kirim gambar ke server
       await _profileService.updateProfilePicture(image);
+
+      // Tampilkan notifikasi sukses
+      showSnackbar(title: 'Berhasil', message: 'Foto profil berhasil diperbarui');
     } on DioException catch (e) {
       // Jika ada error, tampilkan notifikasi error
       showAppError('Gagal Memperbarui Foto Profil', e);
