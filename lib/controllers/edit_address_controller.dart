@@ -93,5 +93,7 @@ class EditAddressController extends GetxController {
     districtController.text = user.district;
     cityController.text = user.city;
     province.value = user.province;
+
+    validateInput('');
   }
 }

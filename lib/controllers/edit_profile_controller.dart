@@ -150,5 +150,7 @@ class EditProfileController extends GetxController {
     rhesus.value = user.rhesus;
     weightKgController.text = user.weightKg.toString();
     heightCmController.text = user.heightCm.toString();
+
+    validateInput('');
   }
 }
