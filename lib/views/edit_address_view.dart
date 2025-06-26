@@ -49,9 +49,9 @@ class EditAddressView extends StatelessWidget {
                 child: TextInput(
                   label: 'Nomor RT',
                   placeholder: 'RT 001',
+                  isNumeric: true,
                   controller: controller.rtController,
                   onChanged: controller.validateInput,
-                  isNumeric: true,
                 ),
               ),
               const SizedBox(width: 16),
@@ -61,9 +61,9 @@ class EditAddressView extends StatelessWidget {
                 child: TextInput(
                   label: 'Nomor RW',
                   placeholder: 'RW 001...',
+                  isNumeric: true,
                   controller: controller.rwController,
                   onChanged: controller.validateInput,
-                  isNumeric: true,
                 ),
               ),
             ],

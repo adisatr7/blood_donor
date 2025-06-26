@@ -92,6 +92,14 @@ class EditProfileView extends StatelessWidget {
             controller: controller.jobController,
           ),
 
+          // TextInput: Phone Number
+          TextInput(
+            label: 'Nomor Telepon',
+            placeholder: '08...',
+            isNumeric: true,
+            controller: controller.phoneNumberController,
+          ),
+
           Row(
             children: [
               // TextInput: Weight
@@ -99,9 +107,9 @@ class EditProfileView extends StatelessWidget {
                 child: TextInput(
                   label: 'Berat Badan',
                   placeholder: 'Berat badan (kg)...',
+                  isNumeric: true,
                   controller: controller.weightKgController,
                   onChanged: controller.validateInput,
-                  isNumeric: true,
                 ),
               ),
               const SizedBox(width: 16),
@@ -111,9 +119,9 @@ class EditProfileView extends StatelessWidget {
                 child: TextInput(
                   label: 'Tinggi Badan',
                   placeholder: 'Tinggi badan (cm)...',
+                  isNumeric: true,
                   controller: controller.heightCmController,
                   onChanged: controller.validateInput,
-                  isNumeric: true,
                 ),
               ),
             ],

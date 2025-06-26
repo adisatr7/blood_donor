@@ -104,6 +104,14 @@ class SignupView extends StatelessWidget {
             controller: controller.jobController,
           ),
 
+          // TextInput: Phone Number
+          TextInput(
+            label: 'Nomor Telepon',
+            placeholder: '08...',
+            isNumeric: true,
+            controller: controller.phoneNumberController,
+          ),
+
           Row(
             children: [
               // TextInput: Weight
@@ -111,8 +119,8 @@ class SignupView extends StatelessWidget {
                 child: TextInput(
                   label: 'Berat Badan',
                   placeholder: 'Berat badan (kg)...',
-                  controller: controller.weightKgController,
                   isNumeric: true,
+                  controller: controller.weightKgController,
                 ),
               ),
               const SizedBox(width: 16),
@@ -122,8 +130,8 @@ class SignupView extends StatelessWidget {
                 child: TextInput(
                   label: 'Tinggi Badan',
                   placeholder: 'Tinggi badan (cm)...',
-                  controller: controller.heightCmController,
                   isNumeric: true,
+                  controller: controller.heightCmController,
                 ),
               ),
             ],

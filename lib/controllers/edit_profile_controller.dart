@@ -22,6 +22,7 @@ class EditProfileController extends GetxController {
   final TextEditingController birthPlaceController = TextEditingController();
   final Rx<DateTime> birthDate = Rx<DateTime>(DateTime.now());
   final TextEditingController jobController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   final RxString gender = ''.obs;
   final RxString bloodType = ''.obs;
   final RxString rhesus = ''.obs;
@@ -42,14 +43,14 @@ class EditProfileController extends GetxController {
   /// saja yang kosong, maka tombol Simpan akan dimatikan
   void validateInput(String _) {
     isSubmitDisabled.value =
-        nikController.text.isEmpty ||
-        nameController.text.isEmpty ||
-        birthPlaceController.text.isEmpty ||
+        nikController.text.trim().isEmpty ||
+        nameController.text.trim().isEmpty ||
+        birthPlaceController.text.trim().isEmpty ||
         gender.value.isEmpty ||
         bloodType.value.isEmpty ||
         rhesus.value.isEmpty ||
-        weightKgController.text.isEmpty ||
-        heightCmController.text.isEmpty;
+        weightKgController.text.trim().isEmpty ||
+        heightCmController.text.trim().isEmpty;
   }
 
   /// Method untuk handle update foto profil
@@ -97,16 +98,17 @@ class EditProfileController extends GetxController {
     try {
       // Siapkan request untuk dikirim ke server
       final User request = global.currentUser.value!;
-      request.nik = nikController.text;
-      request.name = nameController.text;
-      request.birthPlace = birthPlaceController.text;
+      request.nik = nikController.text.trim();
+      request.name = nameController.text.trim();
+      request.birthPlace = birthPlaceController.text.trim();
       request.birthDate = birthDate.value;
-      request.job = jobController.text;
+      request.job = jobController.text.trim();
+      request.phoneNumber = phoneNumberController.text.trim();
       request.gender = gender.value;
       request.bloodType = bloodType.value;
       request.rhesus = rhesus.value;
-      request.weightKg = double.tryParse(weightKgController.text) ?? 0;
-      request.heightCm = double.tryParse(heightCmController.text) ?? 0;
+      request.weightKg = double.tryParse(weightKgController.text.trim()) ?? 0;
+      request.heightCm = double.tryParse(heightCmController.text.trim()) ?? 0;
 
       // Mulai animasi loading
       isLoading.value = true;
@@ -142,6 +144,7 @@ class EditProfileController extends GetxController {
     birthPlaceController.text = user.birthPlace;
     birthDate.value = user.birthDate;
     jobController.text = user.job;
+    phoneNumberController.text = user.phoneNumber;
     gender.value = user.gender;
     bloodType.value = user.bloodType;
     rhesus.value = user.rhesus;
