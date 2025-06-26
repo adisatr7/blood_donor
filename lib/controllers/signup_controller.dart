@@ -23,6 +23,7 @@ class SignupController extends GetxController {
   final TextEditingController birthPlaceController = TextEditingController();
   final Rx<DateTime> birthDateController = Rx<DateTime>(DateTime.now());
   final TextEditingController jobController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   final RxString gender = ''.obs;
   final RxString bloodType = ''.obs;
   final RxString rhesus = ''.obs;
@@ -71,6 +72,7 @@ class SignupController extends GetxController {
       String birthPlace = birthPlaceController.text.trim();
       DateTime birthDate = birthDateController.value;
       String job = jobController.text.trim();
+      String phoneNumber = phoneNumberController.text.trim();
       String bloodTypeString = bloodType.value;
       String weightKg = weightKgController.text.trim();
       String heightCm = heightCmController.text.trim();
@@ -90,6 +92,7 @@ class SignupController extends GetxController {
           birthPlace: birthPlace,
           birthDate: birthDate,
           job: job,
+          phoneNumber: phoneNumber,
           gender: genderEnum,
           bloodType: bloodTypeString,
           rhesus: rhesusEnum,
