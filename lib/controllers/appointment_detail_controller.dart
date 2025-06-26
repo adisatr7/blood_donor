@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:blood_donor/services/appointment_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
 import 'package:blood_donor/models/db/appointment.dart';
+import 'package:blood_donor/core/app_routes.dart';
 import 'package:blood_donor/constants/appointment_status.dart';
 import 'package:blood_donor/widgets/popups/snackbar.dart';
 
@@ -41,7 +42,7 @@ class AppointmentDetailController extends GetxController {
 
   /// Handler untuk dipasangkan ke tombol Cetak PDF
   void handlePrintPdf() {
-    // TODO: Implement
+    Get.toNamed(AppRoutes.pdfPrint, arguments: appointment.value!.id);
   }
 
   /// Method internal untuk mengambil data sesi kunjungan dari server

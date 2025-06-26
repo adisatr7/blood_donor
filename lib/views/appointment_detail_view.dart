@@ -46,6 +46,7 @@ class AppointmentDetailView extends StatelessWidget {
         return WideButton(
           label: 'Cetak PDF',
           isLoading: controller.isLoading,
+          onPressed: controller.handlePrintPdf,
         );
       }),
       child: Obx(() {
