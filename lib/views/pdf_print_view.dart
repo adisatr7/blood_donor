@@ -265,8 +265,8 @@ class PdfPrintView extends StatelessWidget {
                                       ),
                                       buildPdfField(
                                         label: 'No. HP',
-                                        value: '081234567890',
-                                      ), // TODO: Add phone number to User model in both Backend and Frontend
+                                        value: user.phoneNumber,
+                                      ),
                                     ],
                                   ),
                                 ),

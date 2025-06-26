@@ -15,6 +15,7 @@ class User {
   DateTime birthDate;
   String gender; // 'Laki-laki' atau 'Perempuan'
   String job;
+  String phoneNumber;
   double weightKg;
   double heightCm;
   String bloodType;
@@ -38,6 +39,7 @@ class User {
     this.profilePicture,
     this.gender = '',
     this.job = '',
+    this.phoneNumber = '',
     this.weightKg = 0,
     this.heightCm = 0,
     this.bloodType = '',
@@ -81,6 +83,7 @@ class User {
       profilePicture: _getProfilePicture(map['profilePicture']),
       gender: genderEnumToString(map['gender']),
       job: map['job'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
       weightKg: (map['weightKg'] as num?)?.toDouble() ?? 0,
       heightCm: (map['heightCm'] as num?)?.toDouble() ?? 0,
       bloodType: map['bloodType'] as String? ?? '',
@@ -105,6 +108,7 @@ class User {
       'birthDate': birthDate.toUtc().toIso8601String(),
       'gender': User.genderStringToEnum(gender),
       'job': job,
+      'phoneNumber': phoneNumber,
       'weightKg': weightKg,
       'heightCm': heightCm,
       'bloodType': bloodType,
@@ -132,6 +136,7 @@ class User {
       'birthDate': birthDate.toUtc().toIso8601String(),
       'gender': gender,
       'job': job,
+      'phoneNumber': phoneNumber,
       'weightKg': weightKg,
       'heightCm': heightCm,
       'bloodType': bloodType,
