@@ -8,7 +8,7 @@ class AppScaffold extends StatelessWidget {
   final bool showBackButton;
   final String backButtonLabel;
   final Widget child;
-  final Widget? trailing;
+  final Widget? floatingActionButton;
   final Widget? footer;
 
   const AppScaffold({
@@ -17,7 +17,7 @@ class AppScaffold extends StatelessWidget {
     this.showBackButton = false,
     this.backButtonLabel = 'Kembali',
     required this.child,
-    this.trailing,
+    this.floatingActionButton,
     this.footer,
   });
 
@@ -25,6 +25,7 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      floatingActionButton: floatingActionButton,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,8 +42,7 @@ class AppScaffold extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Back button (Optional)
-                    if (showBackButton)
-                      AppBackButton(label: backButtonLabel),
+                    if (showBackButton) AppBackButton(label: backButtonLabel),
 
                     // Space between back button and title
                     if (showBackButton && title != null)
@@ -51,9 +51,6 @@ class AppScaffold extends StatelessWidget {
                     // Header title (Optional)
                     if (title != null)
                       Text(title ?? '', style: AppTextStyles.headingBold),
-
-                    // Trailing widget below header (Optional)
-                    if (trailing != null) trailing!,
                   ],
                 ),
               ),
