@@ -29,13 +29,19 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.white,
+        foregroundColor: AppColors.primary,
+        onPressed: controller.goToAiChat,
+        child: const Icon(Icons.chat_rounded),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // 🧑‍🦳 Info tentang user dan tombol pengaturan
           UserProfileHeader(
             currentUser: controller.global.currentUser,
-            onGoToChat: controller.goToChat,
+            // onGoToChat: controller.goToChat,
             onGoToSettings: controller.goToSettings,
           ),
           const SizedBox(height: 12),
