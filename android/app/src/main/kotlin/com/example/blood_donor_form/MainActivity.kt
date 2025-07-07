@@ -1,4 +1,4 @@
-package com.example.blood_donor
+package com.nidzar.blood_donor
 
 import io.flutter.embedding.android.FlutterActivity
 
