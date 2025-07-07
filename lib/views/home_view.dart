@@ -36,7 +36,7 @@ class HomeView extends StatelessWidget {
         child: const Icon(Icons.chat_rounded),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 🧑‍🦳 Info tentang user dan tombol pengaturan
           UserProfileHeader(
@@ -57,15 +57,32 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 12),
 
-          Row(
-            children: [
-              Text(
-                'Riwayat Donor',
-                style: AppTextStyles.heading,
-              ),
-            ],
+          Text(
+            'Riwayat Donor',
+            style: AppTextStyles.heading,
           ),
-          const SizedBox(height: 8),
+
+          // Rekap total sesi donor
+          Obx(() {
+            if (controller.appointments.isNotEmpty) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Total donor dilakukan: ${controller.totalSuccess.value} kali',
+                    style: AppTextStyles.bodyGray,
+                  ),
+                  Text(
+                    'Total donor dibatalkan: ${controller.totalMissed.value} kali',
+                    style: AppTextStyles.bodyGray,
+                  ),
+                  const SizedBox(height: 14),
+                ],
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          }),
 
           // 📅 Daftar sesi kunjungan donor (appointment)
           Obx(() {
@@ -73,10 +90,12 @@ class HomeView extends StatelessWidget {
             if (controller.appointments.isEmpty) {
               return const Padding(
                 padding: EdgeInsets.symmetric(vertical: 64),
-                child: Text(
-                  'Belum ada riwayat donor.\nYuk mulai daftar donor sekarang!',
-                  style: AppTextStyles.bodyGray,
-                  textAlign: TextAlign.center,
+                child: Center(
+                  child: Text(
+                    'Belum ada riwayat donor.\nYuk mulai daftar donor sekarang!',
+                    style: AppTextStyles.bodyGray,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               );
             }

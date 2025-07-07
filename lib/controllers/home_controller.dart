@@ -1,3 +1,4 @@
+import 'package:blood_donor/constants/appointment_status.dart';
 import 'package:get/get.dart';
 
 import 'package:blood_donor/services/appointment_service.dart';
@@ -12,6 +13,8 @@ class HomeController extends GetxController {
   final GlobalController global = Get.find<GlobalController>();
 
   final RxList<Appointment> appointments = <Appointment>[].obs;
+  final RxInt totalSuccess = 0.obs;
+  final RxInt totalMissed = 0.obs;
 
   @override
   void onReady() async {
@@ -60,7 +63,15 @@ class HomeController extends GetxController {
   }
 
   Future<void> _fetchAppointments() async {
-    appointments.assignAll(await _appointmentService.getAll());
+    final List<Appointment> responseData = await _appointmentService.getAll();
+
+    appointments.assignAll(responseData);
+
+    // Hitung total hadir dan tidak hadir
+    if (responseData.isNotEmpty) {
+      totalSuccess.value = appointments.where((item) => item.status == AppointmentStatus.attended).length;
+      totalMissed.value = appointments.where((item) => item.status == AppointmentStatus.missed).length;
+    }
   }
 
   /// Method internal untuk mengecek apakah user sudah mengisi alamat
