@@ -22,9 +22,9 @@ pw.Widget _buildTableHeader(String title, {bool isCenterAligned = false}) {
 }
 
 /// Builder untuk kolom checklist di tabel.
-/// Jika [checked] true, akan menampilkan ikon centang; jika tidak, hanya kotak kosong.
+/// Jika [condition] true, akan menampilkan ikon centang; jika tidak, hanya kotak kosong.
 pw.Widget _buildChecklistCell({
-  required bool checked,
+  required bool condition,
   required pw.MemoryImage? checkIcon,
   double size = 8,
 }) {
@@ -39,7 +39,7 @@ pw.Widget _buildChecklistCell({
             height: size,
             decoration: pw.BoxDecoration(border: pw.Border.all(width: 0.5)),
           ),
-          if (checked && checkIcon != null)
+          if (condition && checkIcon != null)
             pw.Image(checkIcon, width: size + 2, height: size + 2),
         ],
       ),
@@ -53,6 +53,8 @@ pw.Widget buildPdfQuestionTable({
   required pw.MemoryImage checkIcon,
   bool isLeftColumn = true,
 }) {
+  final answerMap = {for (var a in answers) a.number: a};
+
   // Hitung jumlah baris total dari semua section
   int totalRows = sections.fold(0, _countTotalRows);
   int halfRows = (totalRows / 2).ceil();
@@ -128,62 +130,63 @@ pw.Widget buildPdfQuestionTable({
           );
 
           rows.addAll(
-            column.asMap().entries.map(
-              (entry) => pw.TableRow(
-                children: [
-                  // Nomor
-                  pw.Padding(
-                    padding: const pw.EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 4,
+            column.map((entry) {
+              final answer = answerMap[entry.itemNumber];
+              return pw.TableRow(
+                  children: [
+                    // Nomor
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.symmetric(
+                        vertical: 2,
+                        horizontal: 4,
+                      ),
+                      child: pw.Text(
+                        entry.itemNumber.toString(),
+                        style: const pw.TextStyle(fontSize: 8),
+                        textAlign: pw.TextAlign.center,
+                      ),
                     ),
-                    child: pw.Text(
-                      entry.value.itemNumber.toString(),
-                      style: const pw.TextStyle(fontSize: 8),
-                      textAlign: pw.TextAlign.center,
-                    ),
-                  ),
 
-                  // Pertanyaan
-                  pw.Padding(
-                    padding: const pw.EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 4,
+                    // Pertanyaan
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.symmetric(
+                        vertical: 2,
+                        horizontal: 4,
+                      ),
+                      child: pw.Text(
+                        entry.question,
+                        style: const pw.TextStyle(fontSize: 8),
+                      ),
                     ),
-                    child: pw.Text(
-                      entry.value.question,
-                      style: const pw.TextStyle(fontSize: 8),
-                    ),
-                  ),
 
-                  // Kotak `Ya`
-                  _buildChecklistCell(
-                    checked: answers[entry.key].isYes,
-                    checkIcon: checkIcon,
-                  ),
-
-                  // Kotak `Tidak`
-                  _buildChecklistCell(
-                    checked: answers[entry.key].isNo,
-                    checkIcon: checkIcon,
-                  ),
-
-                  // Kolom `Diisi Petugas`
-                  pw.Padding(
-                    padding: const pw.EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 4,
+                    // Kotak `Ya`
+                    _buildChecklistCell(
+                      condition: answer?.isYes ?? false,
+                      checkIcon: checkIcon,
                     ),
-                    child: pw.Text(
-                      '.............................',
-                      style: const pw.TextStyle(fontSize: 8),
-                      textAlign: pw.TextAlign.center,
+
+                    // Kotak `Tidak`
+                    _buildChecklistCell(
+                      condition: answer?.isNo ?? false,
+                      checkIcon: checkIcon,
                     ),
-                  ),
-                ],
-              ),
-            ),
-          );
+
+                    // Kolom `Diisi Petugas`
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.symmetric(
+                        vertical: 2,
+                        horizontal: 4,
+                      ),
+                      child: pw.Text(
+                        '.............................',
+                        style: const pw.TextStyle(fontSize: 8),
+                        textAlign: pw.TextAlign.center,
+                      ),
+                    ),
+                  ],
+                );
+            }
+          ));
         }
 
         return rows;
