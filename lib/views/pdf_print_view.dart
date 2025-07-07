@@ -94,6 +94,8 @@ class PdfPrintView extends StatelessWidget {
             .load('assets/icons/check.png')
             .then((b) => b.buffer.asUint8List()),
         builder: (context, snapshot) {
+          final PdfPageFormat f4PageFormat = PdfPageFormat(210 * PdfPageFormat.mm, 330 * PdfPageFormat.mm);
+
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -110,7 +112,7 @@ class PdfPrintView extends StatelessWidget {
                 appointment.questionnaire;
 
             return PdfPreview(
-              initialPageFormat: PdfPageFormat.a3.landscape,
+              initialPageFormat: f4PageFormat,
               maxPageWidth: 1200,
               build: (format) async {
                 final pdfFile = pw.Document();
@@ -118,7 +120,7 @@ class PdfPrintView extends StatelessWidget {
                 // Halaman Pertama
                 pdfFile.addPage(
                   pw.Page(
-                    pageFormat: PdfPageFormat.a3.landscape,
+                    pageFormat: f4PageFormat,
                     margin: const pw.EdgeInsets.all(24),
                     build: (context) {
                       return pw.Column(
@@ -390,7 +392,7 @@ class PdfPrintView extends StatelessWidget {
                 // Halaman 2
                 pdfFile.addPage(
                   pw.Page(
-                    pageFormat: PdfPageFormat.a3.landscape,
+                    pageFormat: f4PageFormat,
                     margin: const pw.EdgeInsets.all(24),
                     build: (context) {
                       return pw.Column(
