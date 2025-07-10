@@ -44,13 +44,7 @@ class EditProfileController extends GetxController {
   void validateInput(String _) {
     isSubmitDisabled.value =
         nikController.text.trim().isEmpty ||
-        nameController.text.trim().isEmpty ||
-        birthPlaceController.text.trim().isEmpty ||
-        gender.value.isEmpty ||
-        bloodType.value.isEmpty ||
-        rhesus.value.isEmpty ||
-        weightKgController.text.trim().isEmpty ||
-        heightCmController.text.trim().isEmpty;
+        nameController.text.trim().isEmpty;
   }
 
   /// Method untuk handle update foto profil
