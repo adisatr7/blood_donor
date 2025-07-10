@@ -45,7 +45,7 @@ class UserProfileHeader extends StatelessWidget {
                   ),
 
                   // 🩸 Golongan Darah, hanya muncul jika golongan darah pernah di-input
-                  if (currentUser.value?.mergedBloodType != '')
+                  if (currentUser.value?.mergedBloodType?.isNotEmpty == true)
                     RichText(
                       text: TextSpan(
                         children: <TextSpan>[
