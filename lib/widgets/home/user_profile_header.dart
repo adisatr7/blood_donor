@@ -44,21 +44,22 @@ class UserProfileHeader extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
-                  // 🩸 Golongan Darah
-                  RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        const TextSpan(
-                          text: 'Golongan Darah: ',
-                          style: AppTextStyles.bodyGray,
-                        ),
-                        TextSpan(
-                          text: currentUser.value?.mergedBloodType ?? '-',
-                          style: AppTextStyles.bodyGrayBold,
-                        ),
-                      ],
+                  // 🩸 Golongan Darah, hanya muncul jika golongan darah pernah di-input
+                  if (currentUser.value?.mergedBloodType != '')
+                    RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          const TextSpan(
+                            text: 'Golongan Darah: ',
+                            style: AppTextStyles.bodyGray,
+                          ),
+                          TextSpan(
+                            text: currentUser.value!.mergedBloodType,
+                            style: AppTextStyles.bodyGrayBold,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
