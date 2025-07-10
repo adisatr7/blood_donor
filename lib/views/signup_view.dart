@@ -95,6 +95,7 @@ class SignupView extends StatelessWidget {
             label: 'Jenis Kelamin',
             options: ['Laki-laki', 'Perempuan'],
             selectedValue: controller.gender,
+            allowDeselect: true,
           ),
 
           // TextInput: Job
@@ -142,6 +143,7 @@ class SignupView extends StatelessWidget {
             label: 'Golongan Darah',
             options: ['A', 'B', 'AB', 'O'],
             selectedValue: controller.bloodType,
+            allowDeselect: true,
           ),
 
           // SelectInput: Rhesus
