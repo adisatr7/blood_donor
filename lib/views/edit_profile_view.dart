@@ -83,6 +83,7 @@ class EditProfileView extends StatelessWidget {
             options: ['Laki-laki', 'Perempuan'],
             selectedValue: controller.gender,
             onChanged: controller.validateInput,
+            allowDeselect: true,
           ),
 
           // TextInput: Job
@@ -133,6 +134,7 @@ class EditProfileView extends StatelessWidget {
             options: ['A', 'B', 'AB', 'O'],
             selectedValue: controller.bloodType,
             onChanged: controller.validateInput,
+            allowDeselect: true,
           ),
 
           // SelectInput: Rhesus
@@ -141,6 +143,7 @@ class EditProfileView extends StatelessWidget {
             options: ['Positif', 'Negatif'],
             selectedValue: controller.rhesus,
             onChanged: controller.validateInput,
+            allowDeselect: true,
           ),
         ],
       ),
