@@ -162,7 +162,7 @@ class User {
       case 'Perempuan':
         return 'FEMALE';
       default:
-        return 'ERROR';
+        return '';
     }
   }
 
@@ -177,7 +177,7 @@ class User {
       case 'FEMALE':
         return 'Perempuan';
       default:
-        return 'ERROR';
+        return '';
     }
   }
 
@@ -192,7 +192,7 @@ class User {
       case 'Negatif':
         return 'NEGATIVE';
       default:
-        return 'ERROR';
+        return '';
     }
   }
 
@@ -207,18 +207,26 @@ class User {
       case 'NEGATIVE':
         return 'Negatif';
       default:
-        return 'ERROR';
+        return '';
     }
   }
 
-  /// Getter untuk mengambil golongan darah dan rhesus dalam satu string (cth: B+)
+  /// Getter untuk mengambil golongan darah dan rhesus dalam satu string.
+  /// - Jika bloodType kosong, return '' (sembunyikan semua).
+  /// - Jika bloodType ada, tapi rhesus kosong/invalid, tampilkan hanya bloodType.
+  /// - Jika bloodType dan rhesus valid, tampilkan bloodType + simbol rhesus.
   String get mergedBloodType {
-    if (bloodType.isEmpty || (rhesus != 'Positif' && rhesus != 'Negatif')) {
-      throw ArgumentError('Invalid blood type or rhesus value');
+    if (bloodType.isEmpty) {
+      return '';
     }
 
-    String rhesusSymbol = (rhesus == 'Positif') ? '+' : '-';
-    return '$bloodType$rhesusSymbol';
+    if (rhesus == 'Positif') {
+      return '$bloodType+';
+    } else if (rhesus == 'Negatif') {
+      return '$bloodType-';
+    } else {
+      return bloodType;
+    }
   }
 
   /// Method internal untuk mendapatkan file gambar profil dari URL atau path.
