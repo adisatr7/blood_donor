@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
 import 'package:blood_donor/services/appointment_service.dart';
 import 'package:blood_donor/controllers/global_controller.dart';
@@ -13,6 +14,7 @@ class PdfPrintController extends GetxController {
   final GlobalController global = Get.find<GlobalController>();
   final Rxn<Appointment> appointment = Rxn<Appointment>();
   final RxInt totalSuccess = 0.obs;
+  final RxString lastDonorDate = ''.obs;
 
   @override
   void onInit() async {
@@ -20,7 +22,7 @@ class PdfPrintController extends GetxController {
 
     global.refreshCurrentUser(); // Ambil data user terkini
     _fetchAppointment(); // Ambil data appointment
-    _countSuccess(); // Hitung jumlah sesi berhasil
+    _getCountAndLastDonorDate(); // Hitung jumlah sesi berhasil dan ambil tanggal terakhir donor
   }
 
   /// Method internal untuk mengabil data appointment
@@ -36,11 +38,25 @@ class PdfPrintController extends GetxController {
     }
   }
 
-  Future<void> _countSuccess() async {
+  /// Method internal untuk menghitung jumlah sesi berhasil dan mengambil tanggal terakhir donor
+  Future<void> _getCountAndLastDonorDate() async {
     try {
       // Hitung jumlah sesi berhasil dari appointment
       final List<Appointment> appointments = await _appointmentService.getAll();
       totalSuccess.value = appointments.where((a) => a.status == 'ATTENDED').length;
+
+      // Ambil tanggal donor terakhir (jika ada)
+      if (appointments.isEmpty) {
+        lastDonorDate.value = 'Belum ada donor';
+        return;
+      }
+
+      final lastAttended = appointments
+          .where((a) => a.status == 'ATTENDED')
+          .map((a) => a.location.time.start)
+          .reduce((a, b) => a.isAfter(b) ? a : b);
+
+      lastDonorDate.value = DateFormat('d MMMM yyyy', 'id_ID').format(lastAttended);
     } on DioException catch (e) {
       // Tampilkan error jika gagal menghitung
       showAppError('Gagal Mengambil Riwayat Donor', e);

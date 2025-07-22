@@ -230,7 +230,7 @@ class PdfPrintView extends StatelessWidget {
 
                                       // Terakhir kali donor
                                       pw.Text(
-                                        'Donor yang terakhir tanggal:................................................ sekarang donor yang ke: ${controller.totalSuccess} kali',
+                                        'Donor yang terakhir tanggal: ${controller.lastDonorDate}. Sekarang donor yang ke: ${controller.totalSuccess} kali',
                                         style: pw.TextStyle(fontSize: 10),
                                       ),
                                     ],
