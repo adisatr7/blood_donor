@@ -69,8 +69,8 @@ class HomeController extends GetxController {
 
     // Hitung total hadir dan tidak hadir
     if (responseData.isNotEmpty) {
-      totalSuccess.value = appointments.where((item) => item.status == AppointmentStatus.attended).length;
-      totalMissed.value = appointments.where((item) => item.status == AppointmentStatus.missed).length;
+      totalSuccess.value = appointments.where((item) => item.status == 'ATTENDED').length;
+      totalMissed.value = appointments.where((item) => item.status == 'MISSED').length;
     }
   }
 
