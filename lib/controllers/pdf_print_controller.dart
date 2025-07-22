@@ -12,6 +12,7 @@ class PdfPrintController extends GetxController {
   final AppointmentService _appointmentService = AppointmentService.instance;
   final GlobalController global = Get.find<GlobalController>();
   final Rxn<Appointment> appointment = Rxn<Appointment>();
+  final RxInt totalSuccess = 0.obs;
 
   @override
   void onInit() async {
@@ -19,6 +20,7 @@ class PdfPrintController extends GetxController {
 
     global.refreshCurrentUser(); // Ambil data user terkini
     _fetchAppointment(); // Ambil data appointment
+    _countSuccess(); // Hitung jumlah sesi berhasil
   }
 
   /// Method internal untuk mengabil data appointment
@@ -31,6 +33,17 @@ class PdfPrintController extends GetxController {
       Get.back();
       // Tampilkan error
       showAppError('Gagal Memuat Data', e);
+    }
+  }
+
+  Future<void> _countSuccess() async {
+    try {
+      // Hitung jumlah sesi berhasil dari appointment
+      final List<Appointment> appointments = await _appointmentService.getAll();
+      totalSuccess.value = appointments.where((a) => a.status == 'ATTENDED').length;
+    } on DioException catch (e) {
+      // Tampilkan error jika gagal menghitung
+      showAppError('Gagal Mengambil Riwayat Donor', e);
     }
   }
 }
