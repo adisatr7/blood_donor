@@ -51,8 +51,13 @@ class PdfPrintController extends GetxController {
         return;
       }
 
-      final lastAttended = appointments
-          .where((a) => a.status == 'ATTENDED')
+      final attendedAppointments = appointments.where((a) => a.status == 'ATTENDED').toList();
+      if (attendedAppointments.isEmpty) {
+        lastDonorDate.value = 'Belum ada donor';
+        return;
+      }
+
+      final lastAttended = attendedAppointments
           .map((a) => a.location.time.start)
           .reduce((a, b) => a.isAfter(b) ? a : b);
 
