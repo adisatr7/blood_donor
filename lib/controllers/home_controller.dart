@@ -1,4 +1,3 @@
-import 'package:blood_donor/constants/appointment_status.dart';
 import 'package:get/get.dart';
 
 import 'package:blood_donor/services/appointment_service.dart';

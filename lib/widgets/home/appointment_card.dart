@@ -1,9 +1,10 @@
-import 'package:blood_donor/constants/appointment_status.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:blood_donor/models/db/appointment.dart';
 import 'package:blood_donor/core/theme.dart';
+import 'package:blood_donor/constants/appointment_status.dart';
+import 'package:blood_donor/widgets/popups/snackbar.dart';
 
 class AppointmentCard extends StatelessWidget {
   final Appointment appointment;
@@ -45,7 +46,7 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -54,10 +55,20 @@ class AppointmentCard extends StatelessWidget {
         boxShadow: [AppStyles.cardShadow],
       ),
       child: Material(
+        color: Colors.transparent,
         child: InkWell(
           onTap: () {
             onTap(appointment.id);
           },
+          onLongPress: () {
+            if (appointment.status == 'ATTENDED') {
+              showSnackbar(
+                title: 'Sudah 60 Hari Sejak Donor Terakhir Anda',
+                message: 'Yuk, jadwalkan donor darah Anda!',
+              );
+            }
+          },
+          borderRadius: BorderRadius.circular(8),
           child: IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
