@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
@@ -23,6 +26,21 @@ class PdfPrintController extends GetxController {
     global.refreshCurrentUser(); // Ambil data user terkini
     _fetchAppointment(); // Ambil data appointment
     _getCountAndLastDonorDate(); // Hitung jumlah sesi berhasil dan ambil tanggal terakhir donor
+  }
+
+  /// Method untuk mengupload PDF ke server
+  Future<void> uploadPdf(pw.Document pdfFile) async {
+    try {
+      // Simpan PDF ke file sementara
+      final tempDir = await getTemporaryDirectory();
+      final filePath = '${tempDir.path}/appointment_$appointmentId.pdf';
+      final file = File(filePath);
+      await file.writeAsBytes(await pdfFile.save());
+      // Upload PDF ke server
+      await _appointmentService.uploadPdf(appointmentId, filePath);
+    } on DioException catch (e) {
+      print("Upload failed: ${e.message}");
+    }
   }
 
   /// Method internal untuk mengabil data appointment

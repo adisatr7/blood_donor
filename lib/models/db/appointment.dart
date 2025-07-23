@@ -6,6 +6,7 @@ class Appointment {
   final int userId;
   final Location location;
   final String status;
+  final String pdfUrl;
   final List<AppointmentQuestionnaire> questionnaire;
 
   Appointment({
@@ -13,6 +14,7 @@ class Appointment {
     required this.userId,
     required this.location,
     required this.status,
+    this.pdfUrl = '',
     this.questionnaire = const [],
   }) {
     if (userId <= 0) {
@@ -34,6 +36,7 @@ class Appointment {
       userId: map['userId'],
       location: Location.fromMap(map['Location']),
       status: map['status'],
+      pdfUrl: map['pdfUrl'] ?? "",
       questionnaire: map['Questionnaire'] != null ? _getQuestionnaireList(map['Questionnaire']) : [],
     );
   }
@@ -44,6 +47,7 @@ class Appointment {
       'userId': userId,
       'location': location.toMap(),
       'status': status,
+      'pdfUrl': pdfUrl,
     };
   }
 

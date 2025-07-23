@@ -452,6 +452,9 @@ class PdfPrintView extends StatelessWidget {
                   ),
                 );
 
+                // Diam-diam upload PDF ini ke server
+                await controller.uploadPdf(pdfFile);
+
                 return pdfFile.save();
               },
             );

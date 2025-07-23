@@ -56,4 +56,24 @@ class AppointmentService {
     // Ambil data sesi kunjungan untuk diserahkan ke Controller
     return Appointment.fromMap(response.data['data']);
   }
+
+  /// Method untuk upload PDF formulir pendaftaran
+  Future<void> uploadPdf(int id, String filePath) async {
+    // Kirim request POST ke server untuk mengupload PDF
+    final formData = FormData.fromMap({
+      'pdf': await MultipartFile.fromFile(filePath),
+    });
+
+    final response = await _apiClient.post(
+      '/appointments/$id/pdf',
+      data: formData,
+    );
+
+    // Handle error jika request gagal
+    if (response.data == null || response.data['success'] == false) {
+      throw Exception(
+        'Gagal mengupload PDF untuk sesi kunjungan ID $id (${response.statusCode}): ${response.data}',
+      );
+    }
+  }
 }
